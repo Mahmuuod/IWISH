@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication5.SingInController">
+   <bottom>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="635.6666870117188" minWidth="10.0" prefWidth="368.3333435058594" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="730.0" minWidth="10.0" prefWidth="651.6666564941406" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="419.66668701171875" minWidth="10.0" prefWidth="419.66668701171875" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="512.0" minHeight="10.0" prefHeight="119.00000762939453" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="381.0" minHeight="10.0" prefHeight="215.33334350585938" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="381.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="381.0" minHeight="0.0" prefHeight="62.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="381.0" minHeight="0.0" prefHeight="72.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="381.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="381.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="381.0" minHeight="10.0" prefHeight="277.66668701171875" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="524.0" minHeight="10.0" prefHeight="127.66668701171875" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextArea fx:id="UserNameTa" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextArea fx:id="PasswordTa" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label prefHeight="62.0" prefWidth="159.0" text="User Name" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Label prefHeight="62.0" prefWidth="159.0" text="Password" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Button fx:id="SignInButton" mnemonicParsing="false" onAction="#handleSignInButtonAction" prefHeight="60.0" prefWidth="200.0" text="Sign In" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets left="225.0" />
+               </GridPane.margin>
+            </Button>
+            <Label text="New User?" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets left="250.0" top="120.0" />
+               </GridPane.margin>
+            </Label>
+            <Hyperlink fx:id="SignUpLink" text="Sign Up" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets left="330.0" top="120.0" />
+               </GridPane.margin>
+            </Hyperlink>
+            <Label prefHeight="93.0" prefWidth="191.0" text="I-Wish" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="230.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="64.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+   </bottom>
+</BorderPane>
