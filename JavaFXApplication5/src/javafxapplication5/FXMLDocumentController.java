@@ -40,12 +40,12 @@ public class FXMLDocumentController extends Thread implements Initializable {
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
+        // test for show friend list
         JSONObject data=new JSONObject();
-        data.put("header", "sign in");
-        data.put("Username", "mahmoud");
-        data.put("Password", "123");
+        data.put("header", "show friendlist");
+        data.put("user_id", 1);
         
-        ps.println(data.toString());
+        ps.println(data.toString());  
     }
 
     @Override

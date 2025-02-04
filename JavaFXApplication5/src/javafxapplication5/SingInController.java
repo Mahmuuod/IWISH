@@ -56,7 +56,7 @@ public class SingInController implements Initializable {
         data.put("header", "sign in");
         data.put("Username", UserNameTa.getText());
         data.put("Password", PasswordTa.getText());
-
+        
         try {
             s = new Socket("localhost", 5005);
             dis = new DataInputStream(s.getInputStream());
@@ -90,7 +90,7 @@ public class SingInController implements Initializable {
                                 }
 
                             });
-
+                        
                         } else {
                             JOptionPane.showMessageDialog(null, "User isnt exists", "Connection Error", JOptionPane.ERROR_MESSAGE);
 

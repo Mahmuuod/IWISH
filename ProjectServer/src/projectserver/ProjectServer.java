@@ -49,7 +49,7 @@ class HandelClients extends Thread {
 
     @Override
     public void run() {
-
+        
         while (true) {
             try {
                 String msg = dis.readLine();
@@ -65,18 +65,61 @@ class HandelClients extends Thread {
                         if (req.signIn(Username, Password)) {
                             String user = utility.getUsrData(Username, Password);
                             respond = new JSONObject(user);
-                            respond.put("header","user exists");
+                            respond.put("header", "user exists");
                             System.out.println(respond.toString());
                             ps.println(respond.toString());
                             respond.clear();
                         } else {
-                             respond=new JSONObject();
-                             respond.put("header","not exists");
-                             System.out.println(respond.toString());
-                             ps.println(respond.toString());
-                             respond.clear();
+                            respond = new JSONObject();
+                            respond.put("header", "not exists");
+                            System.out.println(respond.toString());
+                            ps.println(respond.toString());
+                            respond.clear();
                         }
-                     break;
+                        break;
+                    case "show friendlist":
+                        /* sends response containing friend list as:
+                        {
+                          "header": "friendlist",
+                          "friends": [
+                            {"friend_id" : id, "firstname": "fname", "lastname": "lname", "username": "username"},
+                            {"friend_id" : id, "firstname": "fname", "lastname": "lname", "username": "username"}
+                          ]
+                        }
+                        OR
+                        { "header": "no friends" }
+                         */
+
+                        int User_id = request.getInt("user_id");
+                        System.out.println(User_id);
+                        if (req.showFriendList(User_id)) {
+                            ArrayList<String> friends = utility.getUsrFriends(User_id);
+                            respond = new JSONObject();
+                            JSONArray friendsArray = new JSONArray();
+
+                            for (String friend : friends) {
+                                JSONObject friend_as_json = new JSONObject(friend);
+                                JSONObject friendObject = new JSONObject();
+                                friendObject.put("friend_id", friend_as_json.getInt("Friend_id"));
+                                friendObject.put("firstname", friend_as_json.getString("First_name"));
+                                friendObject.put("lastname", friend_as_json.getString("Last_name"));
+                                friendObject.put("username", friend_as_json.getString("Username"));
+                                friendsArray.put(friendObject);
+                            }
+
+                            respond.put("header", "friendlist");
+                            respond.put("friends", friendsArray);
+
+                        } else {
+                            respond = new JSONObject();
+                            respond.put("header", "no friends");
+                        }
+
+                        System.out.println(respond.toString());
+                        ps.println(respond.toString());
+                        respond.clear();
+                        break;
+
                 }
 
             } catch (SocketException sc) {
@@ -105,7 +148,7 @@ public class ProjectServer {
             while (true) {
                 Socket s = ss.accept();
                 new HandelClients(s);
-
+      
             }
         } catch (IOException ex) {
             Logger.getLogger(ProjectServer.class.getName()).log(Level.SEVERE, null, ex);
