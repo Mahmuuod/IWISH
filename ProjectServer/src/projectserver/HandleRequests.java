@@ -28,4 +28,21 @@ public class HandleRequests {
         return exists;
     }
     
+    public boolean showFriendList(int User_id)
+    /* 
+            returns true if user has friends 
+    */
+    {
+        boolean exists=false;
+        try {
+            if (DBA.getUserFriends(User_id).size()> 0){
+                exists=true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HandleRequests.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return exists;
+
+    }
+    
 }
