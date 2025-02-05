@@ -16,6 +16,9 @@ import org.json.*;
  *
  * @author osama
  */
+
+
+// handle try catch 
 public class Utilities {
 
     public String checkGetUsrData(int id) {

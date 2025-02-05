@@ -28,22 +28,22 @@ import projectserver.*;
  *
  * @author osama
  */
-class HandelClients extends Thread {
+class HandleClients extends Thread {
 
     HandleRequests req = new HandleRequests();
     Utilities utility = new Utilities();
     PrintStream ps;
     DataInputStream dis;
-    static Vector<HandelClients> usrs = new Vector<HandelClients>();
+    static Vector<HandleClients> usrs = new Vector<HandleClients>();
 
-    HandelClients(Socket s) {
+    HandleClients(Socket s) {
         try {
             ps = new PrintStream(s.getOutputStream());
             dis = new DataInputStream(s.getInputStream());
             usrs.add(this);
             start();
         } catch (IOException ex) {
-            Logger.getLogger(HandelClients.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HandleClients.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -53,42 +53,48 @@ class HandelClients extends Thread {
         while (true) {
             try {
                 String msg = dis.readLine();
-                System.out.println("Client sent");
-                JSONObject request = new JSONObject(msg);
-                String command = request.getString("header");
-                JSONObject respond;
-                switch (command) {
-                    case "sign in":
-                        String Username = request.getString("Username");
-                        String Password = request.getString("Password");
+                System.out.println(msg);
+                if (msg != null) {
+                    JSONObject request = new JSONObject(msg);
+                    String command = request.getString("header");
+                    JSONObject respond;
+                    switch (command) {
+                        case "sign in":
+                            String Username = request.getString("Username");
+                            String Password = request.getString("Password");
 
-                        if (req.signIn(Username, Password)) {
-                            String user = utility.getUsrData(Username, Password);
-                            respond = new JSONObject(user);
-                            respond.put("header","user exists");
-                            System.out.println(respond.toString());
-                            ps.println(respond.toString());
-                            respond.clear();
-                        } else {
-                             respond=new JSONObject();
-                             respond.put("header","not exists");
-                             System.out.println(respond.toString());
-                             ps.println(respond.toString());
-                             respond.clear();
-                        }
-                     break;
+                            if (req.signIn(Username, Password)) {
+                                String user = utility.getUsrData(Username, Password);
+                                respond = new JSONObject(user);
+                                respond.put("header", "user exists");
+                                System.out.println(respond.toString());
+                                ps.println(respond.toString());
+                                respond.clear();
+                            } else {
+                                respond = new JSONObject();
+                                respond.put("header", "not exists");
+                                System.out.println(respond.toString());
+                                ps.println(respond.toString());
+                                respond.clear();
+                            }
+                            break;
+                    }
+
+                } else {
+                    usrs.remove(this);
+                    stop();
+                    dis.close();
                 }
-
             } catch (SocketException sc) {
                 try {
                     usrs.remove(this);
                     stop();
                     dis.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(HandelClients.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(HandleClients.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } catch (IOException ex) {
-                Logger.getLogger(HandelClients.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HandleClients.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -104,7 +110,7 @@ public class ProjectServer {
             ServerSocket ss = new ServerSocket(5005);
             while (true) {
                 Socket s = ss.accept();
-                new HandelClients(s);
+                new HandleClients(s);
 
             }
         } catch (IOException ex) {
