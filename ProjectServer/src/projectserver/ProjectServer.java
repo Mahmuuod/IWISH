@@ -78,6 +78,47 @@ class HandleClients extends Thread {
                                 respond.clear();
                             }
                             break;
+                        case "show friendlist":
+                            /* sends response containing friend list as:
+                            {
+                              "header": "friendlist",
+                              "friends": 
+                                {{"friend_id" : id, "firstname": "fname", "lastname": "lname", "username": "username"},
+                                {"friend_id" : id, "firstname": "fname", "lastname": "lname", "username": "username"}}
+                            }
+                            OR
+                            { "header": "no friends" }
+                             */
+
+                            int User_id = request.getInt("user_id");
+                            System.out.println(User_id);
+                            if (req.showFriendList(User_id)) {
+                                ArrayList<String> friends = utility.getUsrFriends(User_id);
+                                respond = new JSONObject();
+                                JSONArray friendsArray = new JSONArray();
+
+                                for (String friend : friends) {
+                                    JSONObject friend_as_json = new JSONObject(friend);
+                                    JSONObject friendObject = new JSONObject();
+                                    friendObject.put("friend_id", friend_as_json.getInt("Friend_id"));
+                                    friendObject.put("firstname", friend_as_json.getString("First_name"));
+                                    friendObject.put("lastname", friend_as_json.getString("Last_name"));
+                                    friendObject.put("username", friend_as_json.getString("Username"));
+                                    friendsArray.put(friendObject);
+                                }
+
+                                respond.put("header", "friendlist");
+                                respond.put("friends", friendsArray);
+
+                            } else {
+                                respond = new JSONObject();
+                                respond.put("header", "no friends");
+                            }
+
+                            System.out.println(respond.toString());
+                            ps.println(respond.toString());
+                            respond.clear();
+                            break;
                     }
 
                 } else {

@@ -5,6 +5,7 @@
  */
 package DBA;
 
+import DAL.FriendInfo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -116,6 +117,27 @@ public class DBA {
         statement.close();
         con.close();
         return user;
+    }
+    
+    public static ArrayList<FriendInfo> getUserFriends(int User_id) throws SQLException {
+        /* 
+            this method takes user's id and returns their friends as an arraylist of FriendInfo objects 
+        */
+        ArrayList<FriendInfo> friends = new ArrayList<FriendInfo>();
+        FriendInfo friend = null;
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+        PreparedStatement statement = con.prepareStatement("select f.FRIEND_ID as FRIEND_ID, u.FIRST_NAME as FIRST_NAME, u.LAST_NAME as LAST_NAME, u.USERNAME as USERNAME, u.BIRTHDATE as BIRTHDATE, u.EMAIL as EMAIL from FRIENDLIST f JOIN USERS u ON f.friend_id = u.user_id where f.user_id = ?"); //edit
+        statement.setInt(1, User_id);
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            friend = new FriendInfo(rs.getInt("FRIEND_ID"), rs.getString("FIRST_NAME"),
+                    rs.getString("LAST_NAME"), rs.getString("USERNAME"), rs.getDate("BIRTHDATE"), rs.getString("EMAIL"));
+            friends.add(friend);
+        }
+
+        statement.close();
+        con.close();
+        return friends;
     }
     /*   public static int deleteContacts(int id) throws SQLException {
         DriverManager.registerDriver(new OracleDriver());
