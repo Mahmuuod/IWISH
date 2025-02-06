@@ -91,7 +91,6 @@ class HandleClients extends Thread {
                              */
 
                             int User_id = request.getInt("user_id");
-                            System.out.println(User_id);
                             if (req.showFriendList(User_id)) {
                                 ArrayList<String> friends = req.getUsrFriends(User_id);
                                 respond = new JSONObject();
@@ -121,6 +120,32 @@ class HandleClients extends Thread {
                             ps.println(respond.toString());
                             respond.clear();
                             break;
+                        case "remove friend":
+                            /* sends response containing friend list as:
+                            {
+                              "header": "friend removed"
+                            }
+                            OR
+                            { "header": "friend does not exist" }
+                             */
+
+                            int User_id1 = request.getInt("user_id");
+                            int Friend_id1 = request.getInt("friend_id");//user_id as the user_id is aleady taken in "show friend list"
+                            
+                            if (req.removeFriend(User_id1, Friend_id1)) {
+                                respond = new JSONObject();
+                                respond.put("header", "removed");
+
+                            } else {
+                                respond = new JSONObject();
+                                respond.put("header", "no friends");
+                            }
+
+                            System.out.println(respond.toString());
+                            ps.println(respond.toString());
+                            respond.clear();
+                            break;
+                    
                     }
 
                 } else {

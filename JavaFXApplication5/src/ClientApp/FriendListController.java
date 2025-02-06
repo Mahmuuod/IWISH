@@ -16,13 +16,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javax.swing.JOptionPane;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 
 /**
  * FXML Controller class
@@ -53,14 +53,17 @@ public class FriendListController implements Initializable {
     private TableColumn<?, ?> Item_action_col;
     private int currentUserId = 1;
     JSONObject response;
-    
-    
     @FXML
-    private void handleSignInButtonAction(ActionEvent event) {
+    private Tab info_tab;
+    @FXML
+    private Tab wishlist_tab;
+
+    @FXML
+    private void handleFriendListButtonAction(ActionEvent event) {
         JSONObject data = new JSONObject();
         ServerAccess SA = new ServerAccess();
         data.put("header", "show friendlist");
-        data.put("user_id", 1);
+        data.put("user_id", 2);
 
         SA.ServerInit();
         SA.ServerWrite(data);
@@ -70,39 +73,82 @@ public class FriendListController implements Initializable {
         //System.out.println(response);
 
     }
+
     private void setupTableColumns() {
         // binds objects to rows where each attribute is bound to a column
         /*item_name_col.setCellValueFactory(new PropertyValueFactory<>("name"));
         item_price_col.setCellValueFactory(new PropertyValueFactory<>("price"));
         item_collected_col.setCellValueFactory(new PropertyValueFactory<>("collected"));
         Item_action_col.setCellValueFactory(new PropertyValueFactory<>("action"));
-        */
+         */
     }
-    private void loadFriendsList() {
-        JSONArray friendsArray = new JSONArray(response.getJSONArray("friends"));
-        ObservableList<Hyperlink> friendLinks = FXCollections.observableArrayList();
-        
-        
-        for (int i = 0; i < friendsArray.length(); i++) {
-            JSONObject friend = friendsArray.getJSONObject(i);
-            String friendName = friend.getString("firstname") + " " + friend.getString("lastname");
-            int friendId = friend.getInt("friend_id");
 
-            Hyperlink friendLink = new Hyperlink(friendName);
-            //friendLink.setOnAction(event -> loadWishlist(friendId));
+    private void loadFriendsList() {
+        if (response.getString("header").equals("no friends")) {
+            Hyperlink noFriend = new Hyperlink("You don't have friends yet, Click here to add friends");
+            //TODO change scene to add friend scene
+            //noFriend.setOnAction(event -> handleAddFriendButtonAction());
+            ObservableList<Hyperlink> noFrinedsLink = FXCollections.observableArrayList();
+            noFrinedsLink.add(noFriend);
+            friends_list.setItems(noFrinedsLink);
+        } else {
+
+            JSONArray friendsArray = new JSONArray(response.getJSONArray("friends"));
+            ObservableList<Hyperlink> friendLinks = FXCollections.observableArrayList();
             
-            friendLinks.add(friendLink);
-           
+            for (int i = 0; i < friendsArray.length(); i++) {
+                JSONObject friend = friendsArray.getJSONObject(i);
+                String friendName = friend.getString("firstname") + " " + friend.getString("lastname");
+                int friendId = friend.getInt("friend_id");
+
+                Hyperlink friendLink = new Hyperlink(friendName);
+                //friendLink.setOnAction(event -> loadWishlist(friendId));
+
+                friendLinks.add(friendLink);
+
+            }
+
+            friends_list.setItems(friendLinks);
         }
-        
-        friends_list.setItems(friendLinks);
     }
+
+    private void reloadFriendsList() {
+        JSONObject data = new JSONObject();
+        ServerAccess SA = new ServerAccess();
+        data.put("header", "show friendlist");
+        data.put("user_id", 2);
+
+        SA.ServerInit();
+        SA.ServerWrite(data);
+        System.out.println(data);
+        response = SA.ServerRead();
+        loadFriendsList();
+
+    }
+
+    @FXML
+    private void handleRemoveFriendButtonAction(ActionEvent event) {
+        JSONObject data = new JSONObject();
+        ServerAccess SA = new ServerAccess();
+        data.put("header", "remove friend");
+        data.put("user_id", 2);
+        data.put("friend_id", 3);
+
+        SA.ServerInit();
+        SA.ServerWrite(data);
+        System.out.println(data);
+        response = SA.ServerRead();
+        reloadFriendsList();
+        //System.out.println(response);
+
+    }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //TODO
-    }    
-    
+    }
+
 }

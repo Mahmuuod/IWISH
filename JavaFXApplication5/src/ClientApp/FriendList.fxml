@@ -5,8 +5,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -42,7 +45,7 @@
                <Font name="System Bold" size="14.0" />
             </font>
          </Button>
-         <Button fx:id="FriendList_btn" layoutX="25.0" layoutY="84.0" mnemonicParsing="false" onAction="#handleSignInButtonAction" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Friend List" textFill="WHITE">
+         <Button fx:id="FriendList_btn" layoutX="25.0" layoutY="84.0" mnemonicParsing="false" onAction="#handleFriendListButtonAction" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Friend List" textFill="WHITE">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>
@@ -82,22 +85,35 @@
                </font>
             </Label>
                <ListView fx:id="friends_list" prefHeight="898.0" prefWidth="598.0" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.2), 10, 0.5, 0, 3);" />
-            <Button fx:id="remove_friend_btn" mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(to right, #FF1744, #D500F9); -fx-background-radius: 25; -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.5), 10, 0.5, 0, 3);" text="Remove Friend" textFill="WHITE">
+            <Button fx:id="remove_friend_btn" mnemonicParsing="false" onAction="#handleRemoveFriendButtonAction" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(to right, #FF1744, #D500F9); -fx-background-radius: 25; -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.5), 10, 0.5, 0, 3);" text="Remove Friend" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
            </VBox>
-      
-           <!-- Wishlist Table -->
-           <TableView fx:id="friend_wishlist_table" accessibleRole="TABLE_ROW" prefHeight="300" prefWidth="500" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-padding: 10;" GridPane.columnIndex="2">
-               <columns>
-                   <TableColumn fx:id="item_name_col" prefWidth="130.0" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Name" />
-                   <TableColumn fx:id="item_price_col" prefWidth="120.0" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Price" />
-                   <TableColumn fx:id="item_collected_col" minWidth="0.0" prefWidth="97.60009765625" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Collected" />
-                   <TableColumn fx:id="Item_action_col" prefWidth="128.0" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Action" />
-               </columns>
-           </TableView>
+         <TabPane GridPane.columnIndex="2">
+            <tabs>
+               <Tab fx:id="info_tab" text="Info">
+                  <content>
+                     <TextArea prefHeight="923.0" prefWidth="504.0" />
+                  </content>
+               </Tab>
+               <Tab fx:id="wishlist_tab" text="Wishlist">
+                  <content>
+                  
+                       <!-- Wishlist Table -->
+                       <TableView fx:id="friend_wishlist_table" accessibleRole="TABLE_ROW" prefHeight="300" prefWidth="500" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-padding: 10;">
+                           <columns>
+                               <TableColumn fx:id="item_name_col" prefWidth="130.0" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Name" />
+                               <TableColumn fx:id="item_price_col" prefWidth="120.0" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Price" />
+                               <TableColumn fx:id="item_collected_col" minWidth="0.0" prefWidth="97.60009765625" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Collected" />
+                               <TableColumn fx:id="Item_action_col" prefWidth="128.0" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Action" />
+                           </columns>
+                       </TableView>
+                  </content>
+               </Tab>
+            </tabs>
+         </TabPane>
          <columnConstraints>
             <ColumnConstraints />
             <ColumnConstraints />

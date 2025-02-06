@@ -84,6 +84,7 @@ public class DBA {
         return User_id;
     }
 // used in checkGetUserData
+
     public static UserInfo getUserData(int User_id) throws SQLException {
         UserInfo user = null;
         Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
@@ -118,11 +119,11 @@ public class DBA {
         con.close();
         return user;
     }
-    
+
     public static ArrayList<FriendInfo> getUserFriends(int User_id) throws SQLException {
         /* 
             this method takes user's id and returns their friends as an arraylist of FriendInfo objects 
-        */
+         */
         ArrayList<FriendInfo> friends = new ArrayList<FriendInfo>();
         FriendInfo friend = null;
         Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
@@ -139,6 +140,23 @@ public class DBA {
         con.close();
         return friends;
     }
+
+    public static boolean removeFriend(int user_id, int friend_id) throws SQLException {
+        // Returns true if at least one row was deleted
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+        String query = "DELETE FROM FRIENDLIST WHERE USER_ID = ? AND FRIEND_ID = ?";
+        PreparedStatement statement = con.prepareStatement(query);
+        statement.setInt(1, user_id);
+        statement.setInt(2, friend_id);
+
+        int rowsAffected = statement.executeUpdate(); 
+
+        statement.close();
+        con.close();
+
+        return rowsAffected > 0; 
+    }
+
     /*   public static int deleteContacts(int id) throws SQLException {
         DriverManager.registerDriver(new OracleDriver());
         Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");

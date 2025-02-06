@@ -60,4 +60,20 @@ public class HandleRequests {
         }
         return friends_as_string;
     }
+    public boolean removeFriend(int User_id, int Friend_id)
+    /* 
+            returns true if the friendship was deleted
+    */
+    {
+        boolean deleted=false;
+        try {
+            if (DBA.removeFriend(User_id, Friend_id)){
+                deleted=true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HandleRequests.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return deleted;
+
+    }
 }
