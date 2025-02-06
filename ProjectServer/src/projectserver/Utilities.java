@@ -5,11 +5,9 @@
  */
 package projectserver;
 
-import DAL.FriendInfo;
 import DAL.UserInfo;
 import DBA.DBA;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.*;
@@ -68,7 +66,6 @@ public class Utilities {
         }
         return user;
     }
-    
     
    /* public JSONObject getJSON(String massage)
     {

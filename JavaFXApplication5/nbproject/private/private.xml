@@ -3,12 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/ITI/Java%202/iwish/IWISH/JavaFXApplication5/src/ClientApp/UserInfo.java</file>
-            <file>file:/D:/ITI/Java%202/iwish/IWISH/JavaFXApplication5/src/ClientApp/SignInController.java</file>
-            <file>file:/D:/ITI/Java%202/iwish/IWISH/JavaFXApplication5/src/ClientApp/FriendList.fxml</file>
-            <file>file:/D:/ITI/Java%202/iwish/IWISH/JavaFXApplication5/src/ClientApp/TestController.java</file>
-            <file>file:/D:/ITI/Java%202/iwish/IWISH/JavaFXApplication5/src/ClientApp/FriendListController.java</file>
-            <file>file:/D:/ITI/Java%202/iwish/IWISH/JavaFXApplication5/src/ClientApp/ProjectClient.java</file>
+            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/Utilities.java</file>
+            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/ServerAccess.java</file>
+            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/SignInController.java</file>
+            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/UserInfo.java</file>
+            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/ProjectClient.java</file>
+            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/TestController.java</file>
+            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/SignUpController.java</file>
         </group>
     </open-files>
 </project-private>
