@@ -6,6 +6,7 @@
 package ClientApp;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +20,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javax.swing.JOptionPane;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -51,19 +53,24 @@ public class FriendListController implements Initializable {
     private TableColumn<?, ?> item_collected_col;
     @FXML
     private TableColumn<?, ?> Item_action_col;
-    private int currentUserId = 1;
-    JSONObject response;
     @FXML
     private Tab info_tab;
     @FXML
+    private TextArea friend_info_textarea; 
+    @FXML
     private Tab wishlist_tab;
+
+    private int currentUserId = 2;
+    JSONObject response;
+    private FriendInfo selectedFriend;
+    JSONObject data;
 
     @FXML
     private void handleFriendListButtonAction(ActionEvent event) {
         JSONObject data = new JSONObject();
         ServerAccess SA = new ServerAccess();
         data.put("header", "show friendlist");
-        data.put("user_id", 2);
+        data.put("user_id", currentUserId);
 
         SA.ServerInit();
         SA.ServerWrite(data);
@@ -95,14 +102,29 @@ public class FriendListController implements Initializable {
 
             JSONArray friendsArray = new JSONArray(response.getJSONArray("friends"));
             ObservableList<Hyperlink> friendLinks = FXCollections.observableArrayList();
-            
+
             for (int i = 0; i < friendsArray.length(); i++) {
-                JSONObject friend = friendsArray.getJSONObject(i);
-                String friendName = friend.getString("firstname") + " " + friend.getString("lastname");
-                int friendId = friend.getInt("friend_id");
+                JSONObject friendJson = friendsArray.getJSONObject(i);
+                // creating object to store info from JSON
+                FriendInfo friend = new FriendInfo(
+                        friendJson.getInt("friend_id"),
+                        friendJson.getString("firstname"),
+                        friendJson.getString("lastname"),
+                        friendJson.getString("username"),
+                        Date.valueOf(friendJson.getString("birthdate")),
+                        friendJson.getString("email")
+                );
+
+                String friendName = friendJson.getString("firstname") + " " + friendJson.getString("lastname");
 
                 Hyperlink friendLink = new Hyperlink(friendName);
-                //friendLink.setOnAction(event -> loadWishlist(friendId));
+
+                // Click event to select friend
+                friendLink.setOnAction(event -> {
+                    selectedFriend = friend;
+                    highlightSelectedFriend(friendLink);
+                    handleSelectFriend(selectedFriend);
+                });
 
                 friendLinks.add(friendLink);
 
@@ -112,11 +134,18 @@ public class FriendListController implements Initializable {
         }
     }
 
+    private void highlightSelectedFriend(Hyperlink selectedLink) {
+        for (Hyperlink node : friends_list.getItems()) {
+            node.setStyle(""); // Reset previous styles
+        }
+        selectedLink.setStyle("-fx-font-weight: bold; -fx-text-fill: blue;"); // Highlight selected friend
+    }
+
     private void reloadFriendsList() {
         JSONObject data = new JSONObject();
         ServerAccess SA = new ServerAccess();
         data.put("header", "show friendlist");
-        data.put("user_id", 2);
+        data.put("user_id", currentUserId);
 
         SA.ServerInit();
         SA.ServerWrite(data);
@@ -128,19 +157,44 @@ public class FriendListController implements Initializable {
 
     @FXML
     private void handleRemoveFriendButtonAction(ActionEvent event) {
-        JSONObject data = new JSONObject();
-        ServerAccess SA = new ServerAccess();
-        data.put("header", "remove friend");
-        data.put("user_id", 2);
-        data.put("friend_id", 3);
+        if (selectedFriend != null) {
+            JSONObject data = new JSONObject();
+            ServerAccess SA = new ServerAccess();
+            data.put("header", "remove friend");
+            data.put("user_id", currentUserId);
+            data.put("friend_id", selectedFriend.getFriend_id());
 
-        SA.ServerInit();
-        SA.ServerWrite(data);
-        System.out.println(data);
-        response = SA.ServerRead();
-        reloadFriendsList();
+            SA.ServerInit();
+            SA.ServerWrite(data);
+            System.out.println(data);
+            //remove friend from friendlist
+            friends_list.getItems().removeIf(node
+                    -> node instanceof Hyperlink && ((Hyperlink) node).getText().equals(selectedFriend.getFirst_name() + " " + selectedFriend.getLast_name())
+            );
+            selectedFriend = null; // Reset selection
+            friend_info_textarea.clear();
+            response = SA.ServerRead();
+            //reloadFriendsList();
+        } else {
+            System.out.println("No friend selected!");
+        }
         //System.out.println(response);
+    }
 
+    private void handleSelectFriend(FriendInfo friend) {
+        if (friend != null) {
+            // Format friend's information
+            String friendInfo = "Name: " + friend.getFirst_name() + " " + friend.getLast_name() + "\n"
+                    + "Username: " + friend.getUsername() + "\n"
+                    + "Email: " + friend.getEmail() + "\n"
+                    + "Birthdate: " + friend.getBirthdate();
+
+            // Set text in the info tab's TextArea
+            friend_info_textarea.setText(friendInfo);
+
+            // Switch to info_tab to show details
+            info_tab.getTabPane().getSelectionModel().select(info_tab);
+        }
     }
 
     /**

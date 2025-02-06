@@ -52,6 +52,7 @@ public class HandleRequests {
         ArrayList<String> friends_as_string = new ArrayList<>();
         try {
             ArrayList<FriendInfo> friends = DBA.getUserFriends(User_id);
+            //System.out.println("no of friends "+friends.size());
             for (FriendInfo friend : friends) {
                 friends_as_string.add(friend.toString()); 
             }

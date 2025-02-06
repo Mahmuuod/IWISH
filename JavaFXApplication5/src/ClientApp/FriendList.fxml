@@ -95,7 +95,7 @@
             <tabs>
                <Tab fx:id="info_tab" text="Info">
                   <content>
-                     <TextArea prefHeight="923.0" prefWidth="504.0" />
+                     <TextArea fx:id="friend_info_textarea" editable="false" prefHeight="923.0" prefWidth="504.0" />
                   </content>
                </Tab>
                <Tab fx:id="wishlist_tab" text="Wishlist">

@@ -130,12 +130,12 @@ public class DBA {
         PreparedStatement statement = con.prepareStatement("select f.FRIEND_ID as FRIEND_ID, u.FIRST_NAME as FIRST_NAME, u.LAST_NAME as LAST_NAME, u.USERNAME as USERNAME, u.BIRTHDATE as BIRTHDATE, u.EMAIL as EMAIL from FRIENDLIST f JOIN USERS u ON f.friend_id = u.user_id where f.user_id = ?"); //edit
         statement.setInt(1, User_id);
         ResultSet rs = statement.executeQuery();
-        if (rs.next()) {
+        while (rs.next()) {
             friend = new FriendInfo(rs.getInt("FRIEND_ID"), rs.getString("FIRST_NAME"),
                     rs.getString("LAST_NAME"), rs.getString("USERNAME"), rs.getDate("BIRTHDATE"), rs.getString("EMAIL"));
             friends.add(friend);
         }
-
+        //System.out.println("no of friends "+friends.size());
         statement.close();
         con.close();
         return friends;
@@ -145,11 +145,13 @@ public class DBA {
         // Returns true if at least one row was deleted
         Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
         //TODO remove row where user_id - friend_id and friend_id = user_id
-        String query = "DELETE FROM FRIENDLIST WHERE USER_ID = ? AND FRIEND_ID = ?";
+        String query = "DELETE FROM FRIENDLIST WHERE (USER_ID = ? AND FRIEND_ID = ?) OR (USER_ID = ? AND FRIEND_ID = ?)";
         PreparedStatement statement = con.prepareStatement(query);
         statement.setInt(1, user_id);
         statement.setInt(2, friend_id);
-
+        statement.setInt(3, friend_id);
+        statement.setInt(4, user_id);
+        
         int rowsAffected = statement.executeUpdate(); 
 
         statement.close();
