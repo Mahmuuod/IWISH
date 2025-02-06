@@ -5,6 +5,7 @@
  */
 package ClientApp;
 
+import Utilities.ServerAccess;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;

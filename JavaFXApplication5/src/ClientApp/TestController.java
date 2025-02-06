@@ -5,10 +5,11 @@
  */
 package ClientApp;
 
+import Utilities.UserInfo;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
-import ClientApp.UserInfo.*;
+import Utilities.UserInfo.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 

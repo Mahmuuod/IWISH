@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import oracle.jdbc.driver.OracleDriver;
 import javafx.scene.control.Alert;
 import DAL.UserInfo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -83,7 +85,27 @@ public class DBA {
         con.close();
         return User_id;
     }
+    public static int getUsersMAXID()  {
+        int User_id = -1;
+        try {
+            /* this works as a sequence in database */
+            
+            Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+            PreparedStatement statement = con.prepareStatement("select max(User_id)+1 as User_id from USERS"); //edit
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                User_id = rs.getInt("User_id");
+            }
+            
+            statement.close();
+            con.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DBA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   return User_id; }
 // used in checkGetUserData
+
     public static UserInfo getUserData(int User_id) throws SQLException {
         UserInfo user = null;
         Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
@@ -118,11 +140,11 @@ public class DBA {
         con.close();
         return user;
     }
-    
+
     public static ArrayList<FriendInfo> getUserFriends(int User_id) throws SQLException {
         /* 
             this method takes user's id and returns their friends as an arraylist of FriendInfo objects 
-        */
+         */
         ArrayList<FriendInfo> friends = new ArrayList<FriendInfo>();
         FriendInfo friend = null;
         Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
@@ -138,6 +160,25 @@ public class DBA {
         statement.close();
         con.close();
         return friends;
+    }
+
+    public static int newUser(UserInfo user) throws SQLException {
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+        PreparedStatement statement = con.prepareStatement("insert into USERS values(?,?,?,?,?,?,?,?,?,?)"); //edit
+        statement.setInt(1, user.getUser_id());
+        statement.setString(2, user.getFirst_name());
+        statement.setString(3, user.getLast_name());
+        statement.setString(4, user.getUsername());
+        statement.setString(5, user.getPassword());
+        statement.setDate(6, user.getBirthdate());
+        statement.setString(7, user.getEmail());
+        statement.setString(8, user.getPhone());
+        statement.setString(9, user.getBank_card());
+        statement.setInt(10, user.getUser_balance());
+        int us = statement.executeUpdate();
+        statement.close();
+        con.close();
+        return us;
     }
     /*   public static int deleteContacts(int id) throws SQLException {
         DriverManager.registerDriver(new OracleDriver());

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ClientApp;
+package Utilities;
 
+import ClientApp.TestController;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -14,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.json.JSONObject;
-import ClientApp.UserInfo.*;
+import Utilities.UserInfo.*;
 import java.sql.Date;
 
 /**
@@ -99,11 +100,14 @@ public class ServerAccess {
     {
         ps.println(msg.toString());
     }
+    
+    
      public void SetUserData(JSONObject data) {
-        userData=UserInfo.getUser();
-    userData.setUser(data.getInt("User_id"),data.getString("First_name"),data.getString("Last_name"),
-         data.getString("Username"),data.getString("Password"),Date.valueOf(data.getString("Birthdate")),
-        data.getString("Email"),data.getString("Phone"),String.valueOf(data.getInt("Bank_card")) ,data.getInt("User_balance"));       
+         /* this function takes jsonobject and creates the user instance  */
+         
+        userData=new UserInfo(data.getInt("User_id"),data.getString("First_name"),data.getString("Last_name"),
+         data.getString("Username"),String.valueOf(data.get("Password")),Date.valueOf(data.getString("Birthdate")),
+        data.getString("Email"),String.valueOf(data.getInt("Phone")),String.valueOf(data.getInt("Bank_card")) ,data.getInt("User_balance"));     
         
      }
           public UserInfo GetUserData() {

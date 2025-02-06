@@ -6,6 +6,7 @@
 package projectserver;
 
 import DAL.FriendInfo;
+import DAL.UserInfo;
 import DBA.DBA;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,6 +29,16 @@ public class HandleRequests {
             Logger.getLogger(HandleRequests.class.getName()).log(Level.SEVERE, null, ex);
         }
         return exists;
+    }
+    public boolean signUp(UserInfo user)
+    {
+boolean state=true;
+        try {
+            DBA.newUser(user);
+        } catch (SQLException ex) {
+            state=false;
+        }
+        return state;
     }
     
     public boolean showFriendList(int User_id)

@@ -5,6 +5,8 @@
  */
 package ClientApp;
 
+import Utilities.ServerAccess;
+import Utilities.Utilities;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -29,7 +31,9 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import org.json.JSONObject;
-import ClientApp.ServerAccess.*;
+import Utilities.ServerAccess.*;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -39,9 +43,9 @@ import ClientApp.ServerAccess.*;
 public class SignInController implements Initializable {
 
     @FXML
-    private TextArea UserNameTa;
+    private TextField UserNameTa;
     @FXML
-    private TextArea PasswordTa;
+    private PasswordField PasswordTa;
 
     @FXML
     private Button SignInButton;
@@ -65,7 +69,7 @@ public class SignInController implements Initializable {
         if (response.getString("header").equals("user exists")) {
             SA.SetUserData(response);
             Utilities.ChangeScene("Test.fxml", event);
-            SA.ServerKill();
+           // SA.ServerKill();
 
         } else {
             JOptionPane.showMessageDialog(null, "User doesn't exists", "Connection Error", JOptionPane.ERROR_MESSAGE);
@@ -78,6 +82,7 @@ public class SignInController implements Initializable {
     private void handleSignUpButtonAction(ActionEvent event) {
 
         Utilities.ChangeScene("SignUp.fxml", event);
+        
     }
 
     @Override

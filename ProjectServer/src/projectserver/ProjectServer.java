@@ -69,15 +69,28 @@ class HandleClients extends Thread {
                                 respond.put("header", "user exists");
                                 System.out.println(respond.toString());
                                 ps.println(respond.toString());
-                                respond.clear();
                             } else {
                                 respond = new JSONObject();
                                 respond.put("header", "not exists");
                                 System.out.println(respond.toString());
                                 ps.println(respond.toString());
-                                respond.clear();
+                               
                             }
+                             respond.clear();
                             break;
+                            case "sign up":
+                                UserInfo user=new UserInfo(DBA.getUsersMAXID(),request.getString("First_name"),request.getString("Last_name"),
+                                request.getString("Username"),String.valueOf(request.getInt("Password")),Date.valueOf(request.getString("Birthdate")),
+                                request.getString("Email"),String.valueOf(request.getInt("Phone")),String.valueOf(request.getInt("Bank_card")) ,request.getInt("User_balance")); 
+                               boolean state= req.signUp(user);
+                                respond=new JSONObject();
+                                if(state)respond.put("header", "added");
+                                else respond.put("header", "duplicated");
+
+
+                                ps.println(respond.toString());
+                                respond.clear();
+                                break;
                         case "show friendlist":
                             /* sends response containing friend list as:
                             {

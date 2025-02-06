@@ -56,8 +56,8 @@
         <Label text="Starting Balance" GridPane.columnIndex="0" GridPane.rowIndex="8" />
         <TextField fx:id="balanceField" GridPane.columnIndex="0" GridPane.rowIndex="9" />
 
-        <Label text="Payment Method" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-        <TextField fx:id="paymentMethodField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+        <Label text="Card Number" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+        <TextField fx:id="CardNumberField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
       <rowConstraints>
          <RowConstraints />
          <RowConstraints />
@@ -72,7 +72,7 @@
       </rowConstraints>
     </GridPane>
 
-    <Button fx:id="SignUpBTN" style="-fx-font-size: 16;" text="Sign Up" />
+    <Button fx:id="SignUpBTN" onAction="#handleSignUpnButtonAction" style="-fx-font-size: 16;" text="Sign Up" />
 
     <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="635.0" spacing="5">
         <Label alignment="BOTTOM_LEFT" contentDisplay="TOP" text="Already a Member?" />

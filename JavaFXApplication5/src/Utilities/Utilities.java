@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ClientApp;
+package Utilities;
 
+import ClientApp.SignInController;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,7 +31,7 @@ public class Utilities {
 
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     
-                    Parent root = FXMLLoader.load(getClass().getResource(url));
+                    Parent root = FXMLLoader.load(getClass().getResource("/ClientApp/"+url));
 
                     Scene scene = new Scene(root);
                         

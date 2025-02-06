@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ClientApp;
+package Utilities;
 
 import java.sql.Date;
 
@@ -31,27 +31,12 @@ public class UserInfo {
     public String toString() {
         return "{" + "User_id:" + User_id + ", First_name:" + First_name + ", Last_name:" + Last_name + ", Username:" + Username + ", Password:" + Password + ", Birthdate:" + Birthdate + ", Email:" + Email + ", Phone:" + Phone + ", Bank_card:" + Bank_card + ", User_balance:" + User_balance + "}";
     }
-    private UserInfo(){}
+   // private UserInfo(){}
     public static UserInfo getUser()
     {
-      if(instance==null)
-      {
-          instance=new UserInfo();
-      }
       return instance;
     }
-        public void setUser(int User_id, String First_name, String Last_name, String Username, String Password, Date Birthdate, String Email, String Phone, String Bank_card, int User_balance) {
-        this.User_id = User_id;
-        this.First_name = First_name;
-        this.Last_name = Last_name;
-        this.Username = Username;
-        this.Password = Password;
-        this.Birthdate = Birthdate;
-        this.Email = Email;
-        this.Phone = Phone;
-        this.Bank_card = Bank_card;
-        this.User_balance = User_balance;
-    }
+
     public void setUser_id(int User_id) {
         this.User_id = User_id;
     }
@@ -132,7 +117,7 @@ public class UserInfo {
         return User_balance;
     }
 
-    /*public UserInfo(int User_id, String First_name, String Last_name, String Username, String Password, Date Birthdate, String Email, String Phone, String Bank_card, int User_balance) {
+    public UserInfo(int User_id, String First_name, String Last_name, String Username, String Password, Date Birthdate, String Email, String Phone, String Bank_card, int User_balance) {
         this.User_id = User_id;
         this.First_name = First_name;
         this.Last_name = Last_name;
@@ -143,6 +128,19 @@ public class UserInfo {
         this.Phone = Phone;
         this.Bank_card = Bank_card;
         this.User_balance = User_balance;
-    }*/
-
+        instance=this;
+    }
+    public UserInfo( String First_name, String Last_name, String Username, String Password, Date Birthdate, String Email, String Phone, String Bank_card, int User_balance) {
+/* this constructor for signup and dont take user id */
+        this.First_name = First_name;
+        this.Last_name = Last_name;
+        this.Username = Username;
+        this.Password = Password;
+        this.Birthdate = Birthdate;
+        this.Email = Email;
+        this.Phone = Phone;
+        this.Bank_card = Bank_card;
+        this.User_balance = User_balance;
+        instance=this;
+    }
 }
