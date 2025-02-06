@@ -144,6 +144,7 @@ public class DBA {
     public static boolean removeFriend(int user_id, int friend_id) throws SQLException {
         // Returns true if at least one row was deleted
         Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+        //TODO remove row where user_id - friend_id and friend_id = user_id
         String query = "DELETE FROM FRIENDLIST WHERE USER_ID = ? AND FRIEND_ID = ?";
         PreparedStatement statement = con.prepareStatement(query);
         statement.setInt(1, user_id);
