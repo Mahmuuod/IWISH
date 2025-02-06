@@ -83,9 +83,9 @@ class HandleClients extends Thread {
                             {
                               "header": "friendlist",
                               "friends": 
-                                {{"friend_id" : id, "firstname": "fname", "lastname": "lname", "username": "username"},
-                                {"friend_id" : id, "firstname": "fname", "lastname": "lname", "username": "username"}}
-                            }
+                                [{"friend_id" : id, "firstname": "fname", "lastname": "lname", "username": "username"},
+                                {"friend_id" : id, "firstname": "fname", "lastname": "lname", "username": "username"}]
+                            
                             OR
                             { "header": "no friends" }
                              */
@@ -93,7 +93,7 @@ class HandleClients extends Thread {
                             int User_id = request.getInt("user_id");
                             System.out.println(User_id);
                             if (req.showFriendList(User_id)) {
-                                ArrayList<String> friends = utility.getUsrFriends(User_id);
+                                ArrayList<String> friends = req.getUsrFriends(User_id);
                                 respond = new JSONObject();
                                 JSONArray friendsArray = new JSONArray();
 
@@ -104,6 +104,8 @@ class HandleClients extends Thread {
                                     friendObject.put("firstname", friend_as_json.getString("First_name"));
                                     friendObject.put("lastname", friend_as_json.getString("Last_name"));
                                     friendObject.put("username", friend_as_json.getString("Username"));
+                                    friendObject.put("birthdate", friend_as_json.getString("Birthdate"));
+                                    friendObject.put("email", friend_as_json.getString("Email"));
                                     friendsArray.put(friendObject);
                                 }
 

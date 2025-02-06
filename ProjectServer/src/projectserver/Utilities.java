@@ -68,19 +68,7 @@ public class Utilities {
         }
         return user;
     }
-    public ArrayList<String> getUsrFriends(int User_id) { 
-
-        ArrayList<String> friends_as_string = new ArrayList<>();
-        try {
-            ArrayList<FriendInfo> friends = DBA.getUserFriends(User_id);
-            for (FriendInfo friend : friends) {
-                friends_as_string.add(friend.toString()); 
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProjectServer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return friends_as_string;
-    }
+    
     
    /* public JSONObject getJSON(String massage)
     {

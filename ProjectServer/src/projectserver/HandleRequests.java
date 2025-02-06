@@ -5,8 +5,10 @@
  */
 package projectserver;
 
+import DAL.FriendInfo;
 import DBA.DBA;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import projectserver.Utilities;
@@ -45,4 +47,17 @@ public class HandleRequests {
 
     }
     
+    public ArrayList<String> getUsrFriends(int User_id) { 
+
+        ArrayList<String> friends_as_string = new ArrayList<>();
+        try {
+            ArrayList<FriendInfo> friends = DBA.getUserFriends(User_id);
+            for (FriendInfo friend : friends) {
+                friends_as_string.add(friend.toString()); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return friends_as_string;
+    }
 }
