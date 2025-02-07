@@ -131,7 +131,7 @@ class HandleClients extends Thread {
 
                             int User_id1 = request.getInt("user_id");
                             int Friend_id1 = request.getInt("friend_id");//user_id as the user_id is aleady taken in "show friend list"
-                            
+
                             if (req.removeFriend(User_id1, Friend_id1)) {
                                 respond = new JSONObject();
                                 respond.put("header", "removed");
@@ -145,7 +145,48 @@ class HandleClients extends Thread {
                             ps.println(respond.toString());
                             respond.clear();
                             break;
-                    
+                        case "show friend wishlist":
+                            /* sends response containing friend list as:
+                            {
+                              "header": "friend wishlist",
+                              "wishes": 
+                                [{"friend_id" : id, "wish_id": "wid", "wish_date": "wdate", "name": "name", "price": "100", "collected":"50"},
+                                {{"friend_id" : id, "wish_id": "wid", "wish_date": "wdate", "name": "name", "price": "200", "collected":"50"}]
+                            
+                            OR
+                            { "header": "no wishes" }
+                             */
+
+                            int Friend_id = request.getInt("friend_id");
+                            if (req.showFriendList(Friend_id)) {
+                                ArrayList<String> wishes = req.getFriendWishes(Friend_id);
+                                respond = new JSONObject();
+                                JSONArray wishesArray = new JSONArray();
+
+                                for (String wish : wishes) {
+                                    JSONObject wish_as_json = new JSONObject(wish);
+                                    JSONObject wishObject = new JSONObject();
+                                    wishObject.put("friend_id", wish_as_json.getInt("Friend_id"));
+                                    wishObject.put("wish_id", wish_as_json.getInt("Wish_id"));
+                                    wishObject.put("wish_date", wish_as_json.getString("Wish_date"));
+                                    wishObject.put("name", wish_as_json.getString("Name"));
+                                    wishObject.put("price", wish_as_json.getDouble("Price"));
+                                    wishObject.put("collected", wish_as_json.getDouble("Collected"));
+                                    wishesArray.put(wishObject);
+                                }
+
+                                respond.put("header", "friend wishlist");
+                                respond.put("wishlist", wishesArray);
+
+                            } else {
+                                respond = new JSONObject();
+                                respond.put("header", "no wishes");
+                            }
+
+                            System.out.println(respond.toString());
+                            ps.println(respond.toString());
+                            respond.clear();
+                            break;
                     }
 
                 } else {

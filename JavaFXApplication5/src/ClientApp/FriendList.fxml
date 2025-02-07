@@ -76,22 +76,22 @@
             </font>
          </Button>
        </VBox>
-      <GridPane alignment="CENTER" hgap="10" prefHeight="1042.0" prefWidth="1196.0" style="-fx-background-color: linear-gradient(to right, #4A148C, #E1BEE7);" stylesheets="@../Documents/NetBeansProjects/IWish/src/iwish/style.css" vgap="10">
+      <GridPane alignment="CENTER" hgap="10.0" prefHeight="938.0" prefWidth="1032.0" style="-fx-background-color: linear-gradient(to right, #4A148C, #E1BEE7);" stylesheets="@../Documents/NetBeansProjects/IWish/src/iwish/style.css" vgap="5.0">
            <!-- Friends List -->
-           <VBox alignment="CENTER" prefHeight="962.0" prefWidth="620.0" spacing="5" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 20; -fx-padding: 10; -fx-border-color: rgba(255, 255, 255, 0.3);">
+           <VBox alignment="CENTER" prefHeight="921.0" prefWidth="508.0" spacing="5" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 20; -fx-padding: 10; -fx-border-color: rgba(255, 255, 255, 0.3);">
                <Label style="-fx-font-weight: bold;" text="Friends" textFill="#e0e0e0">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-               <ListView fx:id="friends_list" prefHeight="898.0" prefWidth="598.0" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.2), 10, 0.5, 0, 3);" />
+               <ListView fx:id="friends_list" prefHeight="875.0" prefWidth="596.0" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.2), 10, 0.5, 0, 3);" />
             <Button fx:id="remove_friend_btn" mnemonicParsing="false" onAction="#handleRemoveFriendButtonAction" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(to right, #FF1744, #D500F9); -fx-background-radius: 25; -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.5), 10, 0.5, 0, 3);" text="Remove Friend" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
            </VBox>
-         <TabPane GridPane.columnIndex="2">
+         <TabPane prefHeight="962.0" prefWidth="506.0" GridPane.columnIndex="1">
             <tabs>
                <Tab fx:id="info_tab" text="Info">
                   <content>
@@ -102,12 +102,13 @@
                   <content>
                   
                        <!-- Wishlist Table -->
-                       <TableView fx:id="friend_wishlist_table" accessibleRole="TABLE_ROW" prefHeight="300" prefWidth="500" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-padding: 10;">
+                       <TableView fx:id="friend_wishlist_table" accessibleRole="TABLE_ROW" prefHeight="923.0" prefWidth="312.0" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-padding: 10;">
                            <columns>
-                               <TableColumn fx:id="item_name_col" prefWidth="130.0" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Name" />
-                               <TableColumn fx:id="item_price_col" prefWidth="120.0" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Price" />
-                               <TableColumn fx:id="item_collected_col" minWidth="0.0" prefWidth="97.60009765625" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Collected" />
-                               <TableColumn fx:id="Item_action_col" prefWidth="128.0" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Action" />
+                           <TableColumn fx:id="item_date_col" prefWidth="139.66668701171875" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Added on" />
+                               <TableColumn fx:id="item_name_col" prefWidth="139.33331298828125" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Name" />
+                               <TableColumn fx:id="item_price_col" prefWidth="83.0" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Price" />
+                               <TableColumn fx:id="item_collected_col" minWidth="0.0" prefWidth="97.99993896484375" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Collected" />
+                               <TableColumn fx:id="Item_action_col" minWidth="0.0" prefWidth="136.3333740234375" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Action" />
                            </columns>
                        </TableView>
                   </content>
@@ -115,9 +116,8 @@
             </tabs>
          </TabPane>
          <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
+            <ColumnConstraints maxWidth="610.6666870117188" minWidth="343.66668701171875" prefWidth="343.66668701171875" />
+            <ColumnConstraints maxWidth="616.3333129882812" minWidth="430.6666259765625" prefWidth="616.3333129882812" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints />

@@ -18,6 +18,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -44,22 +45,23 @@ public class FriendListController implements Initializable {
     @FXML
     private Button remove_friend_btn;
     @FXML
-    private TableView<?> friend_wishlist_table;
+    private TableView<FriendWishInfo> friend_wishlist_table;
     @FXML
-    private TableColumn<?, ?> item_name_col;
+    private TableColumn<FriendWishInfo, ?> item_name_col;
     @FXML
-    private TableColumn<?, ?> item_price_col;
+    private TableColumn<FriendWishInfo, ?> item_price_col;
     @FXML
-    private TableColumn<?, ?> item_collected_col;
+    private TableColumn<FriendWishInfo, ?> item_collected_col;
     @FXML
-    private TableColumn<?, ?> Item_action_col;
+    private TableColumn<FriendWishInfo, ?> Item_action_col;
+    @FXML
+    private TableColumn<FriendWishInfo, ?> item_date_col;
     @FXML
     private Tab info_tab;
     @FXML
-    private TextArea friend_info_textarea; 
+    private TextArea friend_info_textarea;
     @FXML
     private Tab wishlist_tab;
-
     private int currentUserId = 2;
     JSONObject response;
     private FriendInfo selectedFriend;
@@ -83,11 +85,35 @@ public class FriendListController implements Initializable {
 
     private void setupTableColumns() {
         // binds objects to rows where each attribute is bound to a column
-        /*item_name_col.setCellValueFactory(new PropertyValueFactory<>("name"));
+        item_date_col.setCellValueFactory(new PropertyValueFactory<>("wish_date"));
+        item_name_col.setCellValueFactory(new PropertyValueFactory<>("name"));
         item_price_col.setCellValueFactory(new PropertyValueFactory<>("price"));
         item_collected_col.setCellValueFactory(new PropertyValueFactory<>("collected"));
         Item_action_col.setCellValueFactory(new PropertyValueFactory<>("action"));
-         */
+
+        centerAlignColumn(item_date_col);
+        centerAlignColumn(item_name_col);
+        centerAlignColumn(item_price_col);
+        centerAlignColumn(item_collected_col);
+        centerAlignColumn(item_date_col);
+
+    }
+    // Method to apply center alignment
+
+    private <T> void centerAlignColumn(TableColumn<FriendWishInfo, T> column) {
+        column.setCellFactory(tc -> new TableCell<FriendWishInfo, T>() {
+            @Override
+            protected void updateItem(T item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    setText(item.toString());
+                    setStyle("-fx-alignment: CENTER;"); // Center text
+                }
+            }
+        });
     }
 
     private void loadFriendsList() {
@@ -124,6 +150,7 @@ public class FriendListController implements Initializable {
                     selectedFriend = friend;
                     highlightSelectedFriend(friendLink);
                     handleSelectFriend(selectedFriend);
+                    handleShowFriendWishlist(selectedFriend);
                 });
 
                 friendLinks.add(friendLink);
@@ -197,12 +224,51 @@ public class FriendListController implements Initializable {
         }
     }
 
+    private void handleShowFriendWishlist(FriendInfo friend) {
+        if (friend == null) {
+            return;
+        }
+        JSONObject data = new JSONObject();
+        ServerAccess SA = new ServerAccess();
+        data.put("header", "show friend wishlist");
+        data.put("friend_id", friend.getFriend_id());
+
+        SA.ServerInit();
+        SA.ServerWrite(data);
+        JSONObject response = SA.ServerRead();
+
+        if (response.getString("header").equals("friend wishlist")) {
+            JSONArray wishlistArray = response.getJSONArray("wishlist");
+            ObservableList<FriendWishInfo> wishlistItems = FXCollections.observableArrayList();
+
+            for (int i = 0; i < wishlistArray.length(); i++) {
+                JSONObject itemJson = wishlistArray.getJSONObject(i);
+                FriendWishInfo item = new FriendWishInfo(
+                        itemJson.getInt("friend_id"),
+                        itemJson.getInt("wish_id"),
+                        Date.valueOf(itemJson.getString("wish_date")),
+                        itemJson.getString("name"),
+                        itemJson.getDouble("price"),
+                        itemJson.getDouble("collected"));
+                wishlistItems.add(item);
+            }
+
+            friend_wishlist_table.setItems(wishlistItems);
+        } else {
+            friend_wishlist_table.setItems(FXCollections.observableArrayList()); // Clear table if no items
+            System.out.println("No wishlist found.");
+        }
+
+        // Switch to wishlist tab
+        //wishlist_tab.getTabPane().getSelectionModel().select(wishlist_tab);
+    }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //TODO
+        setupTableColumns();
     }
 
 }

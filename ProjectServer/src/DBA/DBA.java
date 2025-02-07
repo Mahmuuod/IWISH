@@ -6,6 +6,7 @@
 package DBA;
 
 import DAL.FriendInfo;
+import DAL.FriendWishInfo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -159,7 +160,27 @@ public class DBA {
 
         return rowsAffected > 0; 
     }
-
+    
+    public static ArrayList<FriendWishInfo> getFriendWishes(int Friend_id) throws SQLException {
+        /* 
+            this method takes friend's id and returns their wishes with the collected amount as an arraylist of FriendInfo objects 
+         */
+        ArrayList<FriendWishInfo> wishes = new ArrayList<FriendWishInfo>();
+        FriendWishInfo friend_wish = null;
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+        PreparedStatement statement = con.prepareStatement("select w.user_id as Friend_id, w.WISH_ID as Wish_id, w.wish_date as Wish_date, i.NAME as Name, i.PRICE as Price, sum(contribution_amount) over (partition by c.wish_id)as Collected  from wish w join item i on w.item_id = i.item_id join CONTRIBUTION c on w.wish_id = c.wish_id where w.user_id = ?"); //edit
+        statement.setInt(1, Friend_id);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            friend_wish = new FriendWishInfo(rs.getInt("Friend_id"), rs.getInt("Wish_id"),
+                    rs.getDate("Wish_date"), rs.getString("Name"), rs.getDouble("Price"), rs.getDouble("Collected"));
+            wishes.add(friend_wish);
+        }
+        //System.out.println("no of wishes " + wishes.size());
+        statement.close();
+        con.close();
+        return wishes;
+    }
     /*   public static int deleteContacts(int id) throws SQLException {
         DriverManager.registerDriver(new OracleDriver());
         Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");

@@ -6,6 +6,7 @@
 package projectserver;
 
 import DAL.FriendInfo;
+import DAL.FriendWishInfo;
 import DBA.DBA;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -76,5 +77,20 @@ public class HandleRequests {
         }
         return deleted;
 
+    }
+    
+    public ArrayList<String> getFriendWishes(int Friend_id) { 
+
+        ArrayList<String> wishes_as_string = new ArrayList<>();
+        try {
+            ArrayList<FriendWishInfo> wishes = DBA.getFriendWishes(Friend_id);
+            //System.out.println("no of friends "+friends.size());
+            for (FriendWishInfo wish : wishes) {
+                wishes_as_string.add(wish.toString()); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return wishes_as_string;
     }
 }
