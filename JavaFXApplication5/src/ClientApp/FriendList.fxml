@@ -40,7 +40,7 @@
                <Insets left="10.0" right="10.0" />
             </padding>
          </GridPane>
-         <Button layoutX="25.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="WishList" textFill="WHITE">
+         <Button fx:id="WishList_btn" layoutX="25.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="WishList" textFill="WHITE">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>
@@ -50,27 +50,27 @@
                <Font name="System Bold" size="14.0" />
             </font>
          </Button>
-         <Button layoutX="25.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Add Friend" textFill="WHITE">
+         <Button fx:id="AddFriend_btn" layoutX="25.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Add Friend" textFill="WHITE">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>
          </Button>
-         <Button layoutX="59.0" layoutY="554.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Contribution List" textFill="WHITE">
+         <Button fx:id="ContributionList_btn" layoutX="59.0" layoutY="554.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Contribution List" textFill="WHITE">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>
          </Button>
-         <Button layoutX="25.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Add Balance" textFill="WHITE">
+         <Button fx:id="AddBalance_btn" layoutX="25.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Add Balance" textFill="WHITE">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>
          </Button>
-         <Button layoutX="25.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Notifications" textFill="WHITE">
+         <Button fx:id="Notifications_btn" layoutX="25.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Notifications" textFill="WHITE">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>
          </Button>
-         <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Logout" textFill="WHITE">
+         <Button fx:id="Logout_btn" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Logout" textFill="WHITE">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>
@@ -108,7 +108,7 @@
                                <TableColumn fx:id="item_name_col" prefWidth="139.33331298828125" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Name" />
                                <TableColumn fx:id="item_price_col" prefWidth="83.0" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Price" />
                                <TableColumn fx:id="item_collected_col" minWidth="0.0" prefWidth="97.99993896484375" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Collected" />
-                               <TableColumn fx:id="Item_action_col" minWidth="0.0" prefWidth="136.3333740234375" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Action" />
+                               <TableColumn fx:id="item_action_col" minWidth="0.0" prefWidth="136.3333740234375" style="-fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); -fx-border-color: #7E57C2; -fx-border-width: 1; -fx-border-radius: 8;" text="Action" />
                            </columns>
                        </TableView>
                   </content>

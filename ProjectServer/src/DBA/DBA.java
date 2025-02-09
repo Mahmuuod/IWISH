@@ -5,8 +5,10 @@
  */
 package DBA;
 
+import DAL.Contribution;
 import DAL.FriendInfo;
 import DAL.FriendWishInfo;
+import DAL.Notification;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,6 +18,8 @@ import java.util.ArrayList;
 import oracle.jdbc.driver.OracleDriver;
 import javafx.scene.control.Alert;
 import DAL.UserInfo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -145,22 +149,21 @@ public class DBA {
     public static boolean removeFriend(int user_id, int friend_id) throws SQLException {
         // Returns true if at least one row was deleted
         Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
-        //TODO remove row where user_id - friend_id and friend_id = user_id
         String query = "DELETE FROM FRIENDLIST WHERE (USER_ID = ? AND FRIEND_ID = ?) OR (USER_ID = ? AND FRIEND_ID = ?)";
         PreparedStatement statement = con.prepareStatement(query);
         statement.setInt(1, user_id);
         statement.setInt(2, friend_id);
         statement.setInt(3, friend_id);
         statement.setInt(4, user_id);
-        
-        int rowsAffected = statement.executeUpdate(); 
+
+        int rowsAffected = statement.executeUpdate();
 
         statement.close();
         con.close();
 
-        return rowsAffected > 0; 
+        return rowsAffected > 0;
     }
-    
+
     public static ArrayList<FriendWishInfo> getFriendWishes(int Friend_id) throws SQLException {
         /* 
             this method takes friend's id and returns their wishes with the collected amount as an arraylist of FriendInfo objects 
@@ -168,18 +171,276 @@ public class DBA {
         ArrayList<FriendWishInfo> wishes = new ArrayList<FriendWishInfo>();
         FriendWishInfo friend_wish = null;
         Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
-        PreparedStatement statement = con.prepareStatement("select w.user_id as Friend_id, w.WISH_ID as Wish_id, w.wish_date as Wish_date, i.NAME as Name, i.PRICE as Price, sum(contribution_amount) over (partition by c.wish_id)as Collected  from wish w join item i on w.item_id = i.item_id join CONTRIBUTION c on w.wish_id = c.wish_id where w.user_id = ?"); //edit
+        PreparedStatement statement = con.prepareStatement("SELECT "
+                + "    w.user_id AS Friend_id, "
+                + "    w.WISH_ID AS Wish_id, "
+                + "    w.wish_date AS Wish_date, "
+                + "    i.NAME AS Name, "
+                + "    i.PRICE AS Price, "
+                + "    w.STATUS AS Status, "
+                + "    w.COLLECTED AS Collected "
+                + "FROM "
+                + "    wish w "
+                + "JOIN "
+                + "    item i ON w.item_id = i.item_id "
+                + "WHERE "
+                + "    w.user_id = ? "
+                + "AND "
+                + "    (w.Status = 'New' OR w.Status = 'In progress')"); //edit
         statement.setInt(1, Friend_id);
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
             friend_wish = new FriendWishInfo(rs.getInt("Friend_id"), rs.getInt("Wish_id"),
-                    rs.getDate("Wish_date"), rs.getString("Name"), rs.getDouble("Price"), rs.getDouble("Collected"));
+                    rs.getDate("Wish_date"), rs.getString("Name"), rs.getDouble("Price"), rs.getDouble("Collected"), rs.getString("Status"));
             wishes.add(friend_wish);
         }
         //System.out.println("no of wishes " + wishes.size());
         statement.close();
         con.close();
         return wishes;
+    }
+
+    public static int getContributionMAXID() throws SQLException {
+        /* this works as a sequence in database */
+        int contribution_id = -1;
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+        PreparedStatement statement = con.prepareStatement("select max(contribution_id)+1 as contribution_id from Contribution"); //edit
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            contribution_id = rs.getInt("contribution_id");
+        }
+
+        statement.close();
+        con.close();
+        return contribution_id;
+    }
+
+    public static int contributeToWish(Contribution contribution) throws SQLException {
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+        PreparedStatement statement = con.prepareStatement("INSERT INTO CONTRIBUTION(contribution_id, wish_id, contribution_amount, CONTRIBUTION_DATE, CONTRIBUTION_TIME, CONTRIBUTOR_ID) VALUES (?, ?, ?, sysdate, systimestamp, ?)"); //edit
+        statement.setInt(1, contribution.getContribution_id());
+        statement.setInt(2, contribution.getWish_id());
+        statement.setDouble(3, contribution.getContribution_amount());
+        statement.setInt(4, contribution.getContributor_id());
+
+        int rowsAffected = statement.executeUpdate();
+        statement.close();
+        con.close();
+
+        if (reduceBalance(contribution.getContribution_amount(), contribution.getContributor_id())) {
+            System.out.println("Balance reduced");
+        } else {
+            System.out.println("Error occured while reducing balance!");
+        }
+
+        if (updateCollected(contribution.getContribution_amount(), contribution.getWish_id())) {
+            System.out.println("Collected amount updated");
+        } else {
+            System.out.println("Error occured while updating collected amount!");
+        }
+        if (updateWishStatus(contribution.getWish_id())) {
+            System.out.println("Collected amount updated");
+        } else {
+            System.out.println("Error occured while updating collected amount!");
+        }
+        return rowsAffected;
+    }
+
+    public static boolean reduceBalance(double Contribution_amount, int User_id) throws SQLException {
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+        PreparedStatement statement = con.prepareStatement("UPDATE USERS SET USER_BALANCE = USER_BALANCE - ? WHERE USER_ID = ?"); //edit
+
+        statement.setDouble(1, Contribution_amount);
+        statement.setInt(2, User_id);
+
+        int rowsAffected = statement.executeUpdate();
+        statement.close();
+        con.close();
+        return rowsAffected > 0;
+    }
+
+    public static boolean updateCollected(double Contribution_amount, int Wish_id) throws SQLException {
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+        PreparedStatement statement = con.prepareStatement("UPDATE WISH SET COLLECTED = COLLECTED + ? WHERE WISH_ID = ?"); //edit
+
+        statement.setDouble(1, Contribution_amount);
+        statement.setInt(2, Wish_id);
+
+        int rowsAffected = statement.executeUpdate();
+        statement.close();
+        con.close();
+        return rowsAffected > 0;
+    }
+
+    public static boolean updateWishStatus(int wishId) throws SQLException {
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+
+        String query = "SELECT w.status, i.price, w.collected FROM wish w "
+                + "JOIN item i ON w.item_id = i.item_id WHERE w.wish_id = ?";
+        
+        int rowsAffected = 0;
+        PreparedStatement statement = con.prepareStatement(query);
+        statement.setInt(1, wishId);
+        ResultSet rs = statement.executeQuery();
+
+        if (rs.next()) {
+            String wishStatus = rs.getString("status");
+            double wishPrice = rs.getDouble("price");
+            double collectedAmount = rs.getDouble("collected");
+
+            String updateQuery = null;
+            if ("New".equals(wishStatus) && collectedAmount > 0) {
+                updateQuery = "UPDATE wish SET status = 'In progress' WHERE wish_id = ?";
+            } else if ("In progress".equals(wishStatus) && collectedAmount >= wishPrice) {
+                updateQuery = "UPDATE wish SET status = 'Completed' WHERE wish_id = ?";
+            }
+
+            if (updateQuery != null) {
+                PreparedStatement updateStatement = con.prepareStatement(updateQuery);
+                updateStatement.setInt(1, wishId);
+                rowsAffected = updateStatement.executeUpdate();
+                updateStatement.close();
+            }
+        }
+
+        rs.close();
+        statement.close();
+        con.close();
+        
+        return rowsAffected > 0;
+    }
+
+    public static boolean checkUserBalance(int user_id, double contribution_amount) throws SQLException {
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+        PreparedStatement statement = con.prepareStatement("SELECT USER_BALANCE FROM USERS WHERE USER_ID = ?");
+
+        statement.setInt(1, user_id);
+        ResultSet resultSet = statement.executeQuery();
+
+        boolean canContribute = false;
+        if (resultSet.next()) {
+            double balance = resultSet.getDouble("USER_BALANCE");
+            canContribute = balance >= contribution_amount;
+        }
+
+        resultSet.close();
+        statement.close();
+        con.close();
+
+        return canContribute;
+    }
+
+    public static int getNotificationMAXID() throws SQLException {
+        /* this works as a sequence in database */
+        int Notification_id = -1;
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+        PreparedStatement statement = con.prepareStatement("select max(Notification_id)+1 as Notification_id from Notification"); //edit
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            Notification_id = rs.getInt("Notification_id");
+        }
+
+        statement.close();
+        con.close();
+        return Notification_id;
+    }
+
+    public static boolean insertNotification(Notification notification, int receiverId) throws SQLException {
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+
+        // Insert notification
+        String notificationQuery = "INSERT INTO Notification (Notification_id, Context, Is_read, Type) VALUES (?, ?, ?, ?)";
+        PreparedStatement notificationStmt = con.prepareStatement(notificationQuery);
+
+        notificationStmt.setInt(1, notification.getNotification_id());
+        notificationStmt.setString(2, notification.getContext());
+        notificationStmt.setString(3, "N"); // New notification is unread
+        notificationStmt.setString(4, notification.getType());
+
+        notificationStmt.executeUpdate();
+        notificationStmt.close();
+
+        // Insert into User_Notification
+        String userNotificationQuery = "INSERT INTO User_Notification (Reciever_id, Notification_id, Notification_Date, Notification_Time) VALUES (?, ?, SYSDATE, SYSTIMESTAMP)";
+        PreparedStatement userNotificationStmt = con.prepareStatement(userNotificationQuery);
+
+        userNotificationStmt.setInt(1, receiverId);
+        userNotificationStmt.setInt(2, notification.getNotification_id());
+
+        int rowsAffected = userNotificationStmt.executeUpdate();
+        userNotificationStmt.close();
+        con.close();
+        return rowsAffected > 0;
+    }
+
+    public static boolean insertNotification(Notification notification, ArrayList<Integer> receiverIds) throws SQLException {
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+
+        String notificationQuery = "INSERT INTO Notification (Notification_id, Context, Is_read, Type) VALUES (?, ?, ?, ?)";
+        PreparedStatement notificationStmt = con.prepareStatement(notificationQuery);
+
+        notificationStmt.setInt(1, notification.getNotification_id());
+        notificationStmt.setString(2, notification.getContext());
+        notificationStmt.setString(3, "N");
+        notificationStmt.setString(4, notification.getType());
+
+        notificationStmt.executeUpdate();
+        notificationStmt.close();
+
+        // insert notification for each user
+        String userNotificationQuery = "INSERT INTO User_Notification (Reciever_id, Notification_id, Notification_Date, Notification_Time) VALUES (?, ?, SYSDATE, SYSTIMESTAMP)";
+        PreparedStatement userNotificationStmt = con.prepareStatement(userNotificationQuery);
+
+        for (int receiverId : receiverIds) {
+            userNotificationStmt.setInt(1, receiverId);
+            userNotificationStmt.setInt(2, notification.getNotification_id());
+            userNotificationStmt.addBatch();
+        }
+
+        int[] rowsAffected = userNotificationStmt.executeBatch();
+        userNotificationStmt.close();
+        con.close();
+        for (int i : rowsAffected) {
+            if (i == 0) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    public static ArrayList<Integer> getContributors(int wishId) throws SQLException {
+        ArrayList<Integer> contributors = new ArrayList<>();
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+        PreparedStatement statement = con.prepareStatement(
+                "SELECT DISTINCT contributor_id FROM CONTRIBUTION WHERE wish_id = ?"
+        );
+        statement.setInt(1, wishId);
+        ResultSet rs = statement.executeQuery();
+
+        while (rs.next()) {
+            contributors.add(rs.getInt("contributor_id"));
+        }
+
+        rs.close();
+        statement.close();
+        con.close();
+        return contributors;
+    }
+
+    public static String getWishItem(int Wish_id) throws SQLException {
+        String itemName = "";
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+        PreparedStatement statement = con.prepareStatement("select i.name AS Name from Wish w JOIN Item i ON w.item_id = i.item_id where Wish_id=?"); //edit
+        statement.setInt(1, Wish_id);
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            itemName = rs.getString("Name");
+        }
+
+        statement.close();
+        con.close();
+        return itemName;
     }
     /*   public static int deleteContacts(int id) throws SQLException {
         DriverManager.registerDriver(new OracleDriver());

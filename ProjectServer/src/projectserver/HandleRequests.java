@@ -5,8 +5,10 @@
  */
 package projectserver;
 
+import DAL.Contribution;
 import DAL.FriendInfo;
 import DAL.FriendWishInfo;
+import DAL.Notification;
 import DBA.DBA;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,27 +21,24 @@ import projectserver.Utilities;
  * @author osama
  */
 public class HandleRequests {
-    
-    public boolean signIn(String Username, String Password)
-    {
-        boolean exists=false;
+
+    public boolean signIn(String Username, String Password) {
+        boolean exists = false;
         try {
-             exists=DBA.userCheck(Username, Password);
+            exists = DBA.userCheck(Username, Password);
         } catch (SQLException ex) {
             Logger.getLogger(HandleRequests.class.getName()).log(Level.SEVERE, null, ex);
         }
         return exists;
     }
-    
-    public boolean showFriendList(int User_id)
-    /* 
+
+    public boolean showFriendList(int User_id) /* 
             returns true if user has friends 
-    */
-    {
-        boolean exists=false;
+     */ {
+        boolean exists = false;
         try {
-            if (DBA.getUserFriends(User_id).size()> 0){
-                exists=true;
+            if (DBA.getUserFriends(User_id).size() > 0) {
+                exists = true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(HandleRequests.class.getName()).log(Level.SEVERE, null, ex);
@@ -47,30 +46,29 @@ public class HandleRequests {
         return exists;
 
     }
-    
-    public ArrayList<String> getUsrFriends(int User_id) { 
+
+    public ArrayList<String> getUsrFriends(int User_id) {
 
         ArrayList<String> friends_as_string = new ArrayList<>();
         try {
             ArrayList<FriendInfo> friends = DBA.getUserFriends(User_id);
             //System.out.println("no of friends "+friends.size());
             for (FriendInfo friend : friends) {
-                friends_as_string.add(friend.toString()); 
+                friends_as_string.add(friend.toString());
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProjectServer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return friends_as_string;
     }
-    public boolean removeFriend(int User_id, int Friend_id)
-    /* 
+
+    public boolean removeFriend(int User_id, int Friend_id) /* 
             returns true if the friendship was deleted
-    */
-    {
-        boolean deleted=false;
+     */ {
+        boolean deleted = false;
         try {
-            if (DBA.removeFriend(User_id, Friend_id)){
-                deleted=true;
+            if (DBA.removeFriend(User_id, Friend_id)) {
+                deleted = true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(HandleRequests.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,19 +76,96 @@ public class HandleRequests {
         return deleted;
 
     }
-    
-    public ArrayList<String> getFriendWishes(int Friend_id) { 
+
+    public ArrayList<String> getFriendWishes(int Friend_id) {
 
         ArrayList<String> wishes_as_string = new ArrayList<>();
         try {
             ArrayList<FriendWishInfo> wishes = DBA.getFriendWishes(Friend_id);
             //System.out.println("no of friends "+friends.size());
             for (FriendWishInfo wish : wishes) {
-                wishes_as_string.add(wish.toString()); 
+                wishes_as_string.add(wish.toString());
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProjectServer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return wishes_as_string;
+    }
+
+    public boolean addContribution(Contribution contribution) /* 
+            returns true if the contribution was added 
+     */ {
+        boolean added = false;
+        try {
+            if (DBA.contributeToWish(contribution) > 0) {
+                added = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HandleRequests.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return added;
+
+    }
+
+    public boolean canContribute(int user_id, double countribution_amount) {
+        boolean eligible = false;
+        try {
+            eligible = DBA.checkUserBalance(user_id, countribution_amount);
+            {
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return eligible;
+    }
+
+    public ArrayList<Integer> getContributors(int Wish_id) {
+
+        ArrayList<Integer> contributors = new ArrayList<>();
+        try {
+            contributors = DBA.getContributors(Wish_id);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return contributors;
+    }
+
+    public String getItemName(int wish_id) {
+        String itemName = "";
+        try {
+            itemName = DBA.getWishItem(wish_id);
+            {
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return itemName;
+    }
+
+    public boolean insertNotification(Notification notification, int recieverId) {
+        boolean result = false;
+        try {
+
+            result = DBA.insertNotification(notification, recieverId);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    public boolean insertNotification(Notification notification, ArrayList<Integer> receiverIds) {
+        boolean result = false;
+        try {
+
+            result = DBA.insertNotification(notification, receiverIds);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 }

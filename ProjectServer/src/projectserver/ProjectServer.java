@@ -5,6 +5,8 @@
  */
 package projectserver;
 
+import DAL.Contribution;
+import DAL.Notification;
 import DAL.UserInfo;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -121,7 +123,7 @@ class HandleClients extends Thread {
                             respond.clear();
                             break;
                         case "remove friend":
-                            /* sends response containing friend list as:
+                            /* sends response containing:
                             {
                               "header": "friend removed"
                             }
@@ -134,11 +136,11 @@ class HandleClients extends Thread {
 
                             if (req.removeFriend(User_id1, Friend_id1)) {
                                 respond = new JSONObject();
-                                respond.put("header", "removed");
+                                respond.put("header", "friend removed");
 
                             } else {
                                 respond = new JSONObject();
-                                respond.put("header", "no friends");
+                                respond.put("header", "friend does not exist");
                             }
 
                             System.out.println(respond.toString());
@@ -150,8 +152,8 @@ class HandleClients extends Thread {
                             {
                               "header": "friend wishlist",
                               "wishes": 
-                                [{"friend_id" : id, "wish_id": "wid", "wish_date": "wdate", "name": "name", "price": "100", "collected":"50"},
-                                {{"friend_id" : id, "wish_id": "wid", "wish_date": "wdate", "name": "name", "price": "200", "collected":"50"}]
+                                [{"friend_id" : id, "wish_id": "wid", "wish_date": "wdate", "name": "name", "price": "100", "collected":"50", "status":"New"},
+                                {{"friend_id" : id, "wish_id": "wid", "wish_date": "wdate", "name": "name", "price": "200", "collected":"50", "status":"New"}]
                             
                             OR
                             { "header": "no wishes" }
@@ -172,6 +174,7 @@ class HandleClients extends Thread {
                                     wishObject.put("name", wish_as_json.getString("Name"));
                                     wishObject.put("price", wish_as_json.getDouble("Price"));
                                     wishObject.put("collected", wish_as_json.getDouble("Collected"));
+                                    wishObject.put("status", wish_as_json.getString("Status"));
                                     wishesArray.put(wishObject);
                                 }
 
@@ -183,6 +186,101 @@ class HandleClients extends Thread {
                                 respond.put("header", "no wishes");
                             }
 
+                            System.out.println(respond.toString());
+                            ps.println(respond.toString());
+                            respond.clear();
+                            break;
+                        case "contribute":
+
+                            /* sends response containing:
+                            {
+                            "header": "contribution added"
+                            }
+                            OR
+                            { "header": "contribution duplicated" }
+                             */
+                            respond = new JSONObject();
+                            if (req.canContribute(request.getInt("contributor_id"), request.getDouble("contribution_amount"))) {
+                                int maxContributionId = 0;
+                                try {
+                                    maxContributionId = DBA.getContributionMAXID();
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(HandleClients.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+
+                                Contribution contribution = new Contribution(maxContributionId, request.getInt("wish_id"),
+                                        request.getDouble("contribution_amount"), request.getInt("contributor_id"));
+                                if (req.addContribution(contribution)) {
+                                    respond.put("header", "contribution added");
+
+                                } else {
+                                    respond.put("header", "contribution duplicated");
+                                }
+                            } else {
+                                respond.put("header", "not enough balance");
+                            }
+                            System.out.println(respond.toString());
+                            ps.println(respond.toString());
+                            respond.clear();
+                            break;
+                        case "wish completed":
+
+                            /* sends response containing:
+                            {
+                            "header": "notification sent"
+                            }
+                            OR
+                            { "header": "notification duplicated" }
+                             */
+                            respond = new JSONObject();
+                            // send to contributors
+                            int maxNotificationId = 0;
+                            int wish_id = request.getInt("wish_id");
+                            String itemName = req.getItemName(wish_id);
+                            JSONObject user = new JSONObject(utility.getUsrData(request.getInt("friend_id")));
+                            String userName = user.getString("First_name") +" "+ user.getString("Last_name");
+                            ArrayList<Integer> recieverIds = req.getContributors(wish_id);
+                            int recieverId = request.getInt("friend_id");
+
+                            try {
+                                maxNotificationId = DBA.getNotificationMAXID();
+                            } catch (SQLException ex) {
+                                Logger.getLogger(HandleClients.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+                            Notification notificationToContributors = new Notification(maxNotificationId,
+                                    "Great news! The wish for " + itemName + " by" + userName + " has been fully funded and is now completed. Thank you for your generous contribution!",
+                                    "N", "Wish Completion");
+                            if (req.insertNotification(notificationToContributors, recieverIds)) {
+                                respond.put("header", "notification sent to contributors");
+
+                            } else {
+                                respond.put("header", "notification to contributors duplicated");
+                            }
+                            
+                            System.out.println(respond.toString());
+                            ps.println(respond.toString());
+                            respond.clear();
+                            
+                            // send to wish owner
+                            
+                            maxNotificationId++;
+                            
+                            String notificationBody = "Congratulations! Your wish for " + itemName + " has been fully funded thanks to your friends: ";
+                            for (int i : recieverIds){
+                                JSONObject friend = new JSONObject(utility.getUsrData(i));
+                                String friendName = friend.getString("First_name") +" "+ user.getString("Last_name");
+                                notificationBody+= friendName+ "\n";
+                            }
+                            Notification notificationToWishOwner = new Notification(maxNotificationId,
+                                    notificationBody,
+                                    "N", "Wish Completion");
+                            if (req.insertNotification(notificationToContributors, recieverId)) {
+                                respond.put("header", "notification sent to wish owner");
+
+                            } else {
+                                respond.put("header", "notification to wish owner duplicated");
+                            }
                             System.out.println(respond.toString());
                             ps.println(respond.toString());
                             respond.clear();

@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -22,18 +23,18 @@ import javafx.stage.Stage;
  */
 public class Utilities {
 
-    public static void ChangeScene(String url,ActionEvent event) {
+    public static void ChangeScene(String url, ActionEvent event) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 try {
 
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    
+
                     Parent root = FXMLLoader.load(getClass().getResource(url));
 
                     Scene scene = new Scene(root);
-                        
+
                     stage.setScene(scene);
                     stage.centerOnScreen();
                     stage.show();
@@ -43,7 +44,29 @@ public class Utilities {
             }
         });
     }
-        /*public static void ChangeScene(String url,ActionEvent event) {
+
+    public static void ChangeScene(String url, MouseEvent event) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                    Parent root = FXMLLoader.load(getClass().getResource(url));
+
+                    Scene scene = new Scene(root);
+
+                    stage.setScene(scene);
+                    stage.centerOnScreen();
+                    stage.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+    /*public static void ChangeScene(String url,ActionEvent event) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
