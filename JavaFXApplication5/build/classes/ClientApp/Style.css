@@ -70,6 +70,23 @@ and open the template in the editor.
     -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.2), 10, 0.5, 0, 3);
 }
 
+.friend-list .list-cell {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.friend-list .list-cell:selected {
+    -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); /* Gradient for selected row */
+    -fx-text-fill: #FFFFFF; /* White text */
+}
+
+.friend-list .list-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Slightly brighter on hover */
+    -fx-cursor: hand;
+}
+
 .friend-list .button {
     -fx-background-color: linear-gradient(to right, #FF1744, #D500F9); /* Gradient for remove button */
     -fx-background-radius: 25;

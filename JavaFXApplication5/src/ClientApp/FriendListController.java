@@ -5,6 +5,8 @@
  */
 package ClientApp;
 
+import com.example.ContributionWindowController;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
@@ -12,7 +14,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -27,6 +32,8 @@ import javax.swing.JOptionPane;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -337,28 +344,32 @@ public class FriendListController implements Initializable {
     }
 
     private void handleContributeAction(FriendWishInfo wish) {
-        double remainingAmount = wish.getPrice() - wish.getCollected();
-        if (remainingAmount <= 0) {
-            return; // Wish is already completed
-        }
-
-        double contributionAmount;
         try {
-            contributionAmount = Double.parseDouble(JOptionPane.showInputDialog("Enter contribution amount:"));
-            if (contributionAmount <= 0) {
-                JOptionPane.showMessageDialog(null, "Invalid amount!");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Please enter a valid number!");
-            return;
-        }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ContributePopup.fxml"));
+            Parent root = loader.load();
 
-        // If the contribution exceeds the remaining amount, cap it at the remaining amount
-        if (contributionAmount > remainingAmount) {
-            contributionAmount = remainingAmount;
-        }
+            ContributePopupController controller = loader.getController();
+            controller.setWish(wish);
 
+            controller.setOnContributeCallback(() -> {
+                double contributionAmount = Double.parseDouble(controller.getAmountField().getText());
+                processContribution(wish, contributionAmount);
+            });
+
+            
+            Stage stage = new Stage();
+            stage.setTitle("Contribute to Wish");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL); 
+            stage.showAndWait(); 
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed to open the contribution window.");
+        }
+    }
+
+    private void processContribution(FriendWishInfo wish, double contributionAmount) {
         JSONObject contributionData = new JSONObject();
         contributionData.put("header", "contribute");
         contributionData.put("wish_id", wish.getWish_id());

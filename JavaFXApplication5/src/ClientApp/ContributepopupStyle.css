@@ -1,0 +1,107 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 10, 2025, 11:58:37 PM
+    Author     : randa
+*/
+
+
+/* Root styles for the contribution window */
+.root {
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-background-color: linear-gradient(to right, #4A148C, #E1BEE7); /* Gradient background */
+    -fx-text-fill: #FFFFFF; /* White text color */
+}
+
+/* Main container for the window */
+.vbox-container {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 0);
+    -fx-padding: 20;
+    -fx-spacing: 15;
+    -fx-alignment: CENTER;
+}
+
+/* Label styles */
+.label {
+    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Wish name label */
+#wishNameLabel {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFFFFF; /* White text */
+}
+
+/* Remaining amount label */
+#remainingAmountLabel {
+    -fx-font-size: 14px;
+    -fx-text-fill: #E0E0E0; /* Light gray text */
+}
+
+/* Error label */
+#errorLabel {
+    -fx-text-fill: #FF5252; /* Red text for errors */
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* Text field styles */
+.text-field {
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-border-radius: 10;
+    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-font-size: 14px;
+    -fx-padding: 8;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.5); /* Light gray placeholder text */
+}
+
+.text-field:focused {
+    -fx-border-color: #1DE9B6; /* Highlight border when focused */
+    -fx-effect: dropshadow(gaussian, rgba(29, 233, 182, 0.5), 10, 0.5, 0, 0);
+}
+
+/* Button styles */
+.button {
+    -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); /* Gradient buttons */
+    -fx-background-radius: 25;
+    -fx-border-color: transparent;
+    -fx-border-width: 2;
+    -fx-padding: 10 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);
+    -fx-text-fill: #FFFFFF; /* White text for buttons */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to right, #1A237E, #1DE9B6); /* Reverse gradient on hover */
+    -fx-cursor: hand;
+}
+
+/* Cancel button specific styles */
+#cancelButton {
+    -fx-background-color: linear-gradient(to right, #FF1744, #D500F9); /* Gradient for cancel button */
+}
+
+#cancelButton:hover {
+    -fx-background-color: linear-gradient(to right, #D500F9, #FF1744); /* Reverse gradient on hover */
+}
+
+/* Contribute button specific styles */
+#contributeButton {
+    -fx-background-color: linear-gradient(to right, #00E676, #00B0FF); /* Gradient for contribute button */
+}
+
+#contributeButton:hover {
+    -fx-background-color: linear-gradient(to right, #00B0FF, #00E676); /* Reverse gradient on hover */
+}
