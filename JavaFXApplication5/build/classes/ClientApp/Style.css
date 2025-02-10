@@ -1,0 +1,184 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 10, 2025, 3:49:12 PM
+    Author     : randa
+*/
+/* Apply general styles */
+/* General Styles */
+.root {
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-base: #4A148C; /* Base color for the app */
+    -fx-background-color: linear-gradient(to right, #4A148C, #E1BEE7); /* Gradient background */
+    -fx-text-fill: #FFFFFF; /* White text color */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 0);
+    -fx-padding: 15;
+}
+
+.sidebar .label {
+    -fx-text-fill: #FFFFFF; /* White text for labels */
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.sidebar .button {
+    -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); /* Gradient buttons */
+    -fx-background-radius: 25;
+    -fx-border-color: transparent;
+    -fx-border-width: 2;
+    -fx-padding: 10 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);
+    -fx-text-fill: #FFFFFF; /* White text for buttons */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.sidebar .button:hover {
+    -fx-background-color: linear-gradient(to right, #1A237E, #1DE9B6); /* Reverse gradient on hover */
+    -fx-cursor: hand;
+}
+
+/* Friend List Styles */
+.friend-list {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    -fx-background-radius: 20;
+    -fx-padding: 10;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.2), 10, 0.5, 0, 3);
+}
+
+.friend-list .label {
+    -fx-text-fill: #e0e0e0; /* Light gray text */
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.friend-list .list-view {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.2), 10, 0.5, 0, 3);
+}
+
+.friend-list .button {
+    -fx-background-color: linear-gradient(to right, #FF1744, #D500F9); /* Gradient for remove button */
+    -fx-background-radius: 25;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.5), 10, 0.5, 0, 3);
+    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.friend-list .button:hover {
+    -fx-background-color: linear-gradient(to right, #D500F9, #FF1744); /* Reverse gradient on hover */
+    -fx-cursor: hand;
+}
+
+/* Tab Pane Styles */
+.tab-pane {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-padding: 10;
+}
+
+.tab-pane .tab-header-area {
+    -fx-background-color: transparent;
+}
+
+.tab-pane .tab {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); /* Gradient for selected tab */
+    -fx-text-fill: #FFFFFF; /* White text */
+}
+
+.tab-pane .tab:hover {
+    -fx-background-color: linear-gradient(to right, #1A237E, #1DE9B6); /* Reverse gradient on hover */
+    -fx-cursor: hand;
+}
+
+/* Table View Styles */
+.table-view {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-padding: 10;
+}
+
+.table-view .column-header {
+    -fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); /* Gradient for column headers */
+    -fx-border-color: #7E57C2;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    -fx-text-fill: #FFFFFF; /* White text */
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: rgba(255, 255, 255, 0.05); /* Slightly darker for odd rows */
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); /* Gradient for selected row */
+    -fx-text-fill: #FFFFFF; /* White text */
+}
+
+/* Notifications Table Styles */
+.notifications-table {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-padding: 10;
+}
+
+.notifications-table .column-header {
+    -fx-background-color: linear-gradient(to right, #B39DDB, #9575CD); /* Gradient for column headers */
+    -fx-border-color: #7E57C2;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.notifications-table .table-row-cell {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    -fx-text-fill: #FFFFFF; /* White text */
+}
+
+.notifications-table .table-row-cell:odd {
+    -fx-background-color: rgba(255, 255, 255, 0.05); /* Slightly darker for odd rows */
+}
+
+.notifications-table .table-row-cell:selected {
+    -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); /* Gradient for selected row */
+    -fx-text-fill: #FFFFFF; /* White text */
+}

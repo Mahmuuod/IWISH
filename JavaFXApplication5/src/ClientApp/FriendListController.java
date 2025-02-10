@@ -81,20 +81,19 @@ public class FriendListController implements Initializable {
 
     @FXML
     private void handleFriendListButtonAction(ActionEvent event) {
-        JSONObject data = new JSONObject();
-        ServerAccess SA = new ServerAccess();
-        data.put("header", "show friendlist");
-        data.put("user_id", currentUserId);
-
-        SA.ServerInit();
-        SA.ServerWrite(data);
-        System.out.println(data);
-        JSONObject response = SA.ServerRead();
-        loadFriendsList(response);
-        //System.out.println(response);
+        Utilities.ChangeScene("FriendList.fxml", event);
 
     }
+    
+    @FXML
+    private void handleNotificationsButtonAction(ActionEvent event) {
+        
+        Utilities.ChangeScene("Notifications.fxml", event);
+        
 
+        
+    }
+    
     private void setupTableColumns() {
 
         // binds objects to rows where each attribute is bound to a column
@@ -434,6 +433,16 @@ public class FriendListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setupTableColumns();
+        JSONObject data = new JSONObject();
+        ServerAccess SA = new ServerAccess();
+        data.put("header", "show friendlist");
+        data.put("user_id", currentUserId);
+
+        SA.ServerInit();
+        SA.ServerWrite(data);
+        System.out.println(data);
+        JSONObject response = SA.ServerRead();
+        loadFriendsList(response);
     }
 
 }

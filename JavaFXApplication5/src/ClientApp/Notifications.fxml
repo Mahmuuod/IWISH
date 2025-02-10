@@ -17,106 +17,93 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.2211404728789986" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iwish.Home_notificationsController">
-   <items>
-      <VBox alignment="CENTER" prefHeight="1022.0" prefWidth="624.0" spacing="20.0" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 0); -fx-border-radius: 15;">
-         <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="username_lbl" text="Username" />
-            <GridPane hgap="10.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.6666717529297" minWidth="10.0" prefWidth="125.33332824707031" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="10.0" prefWidth="174.6666717529297" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Label fx:id="balance_lbl" prefHeight="21.0" prefWidth="71.0" scaleX="1.5" scaleY="1.5" text="Balance" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-               <padding>
-                  <Insets left="10.0" right="10.0" />
-               </padding>
-            </GridPane>
-            <Button layoutX="25.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="WishList" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="FriendList_btn" layoutX="25.0" layoutY="84.0" mnemonicParsing="false" onAction="#handleFriendListButtonAction" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Friend List" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <Button layoutX="25.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Add Friend" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <Button layoutX="59.0" layoutY="554.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Contribution List" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <Button layoutX="25.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Add Balance" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <Button layoutX="25.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Notifications" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Logout" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-         </children>
-      </VBox>
-      <BorderPane prefHeight="1024.0" prefWidth="1076.0">
-         <center>
-            <TableView fx:id="notifi_table" prefHeight="811.0" prefWidth="1058.0" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn fx:id="notifi_col" prefWidth="1078.0" text="Notifications" />
-              </columns>
-            </TableView>
-         </center>
-         <right>
-            <ScrollBar fx:id="notifi_scroll" orientation="VERTICAL" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets right="10.0" />
-               </BorderPane.margin>
-            </ScrollBar>
-         </right>
-         <bottom>
-            <GridPane BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets right="50.0" />
-               </BorderPane.margin>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Button fx:id="markasread_btn" mnemonicParsing="false" text="Mark As Read" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Button fx:id="delete_btn" mnemonicParsing="false" prefHeight="31.0" prefWidth="112.0" text="Delete" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Button fx:id="clearall_btn" mnemonicParsing="false" prefHeight="31.0" prefWidth="112.0" text="Clear All" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-               </children>
-            </GridPane>
-         </bottom>
-         <left>
-            <Separator orientation="VERTICAL" prefHeight="882.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
-         </left>
-         <top>
-            <Pane prefHeight="51.0" prefWidth="1076.0" BorderPane.alignment="CENTER" />
-         </top>
-      </BorderPane>
-   </items>
+<SplitPane dividerPositions="0.2211404728789986" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.NotificationsController">
+    <items>
+        <VBox alignment="CENTER" prefHeight="1022.0" prefWidth="624.0" spacing="20.0" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 0); -fx-border-radius: 15;">
+            <children>
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                <Label fx:id="username_lbl" text="Username" />
+                <GridPane hgap="10.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.6666717529297" minWidth="10.0" prefWidth="125.33332824707031" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="10.0" prefWidth="174.6666717529297" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label fx:id="balance_lbl" prefHeight="21.0" prefWidth="71.0" scaleX="1.5" scaleY="1.5" text="Balance" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                    </children>
+                    <padding>
+                        <Insets left="10.0" right="10.0" />
+                    </padding>
+                </GridPane>
+                <Button layoutX="25.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="WishList" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="FriendList_btn" layoutX="25.0" layoutY="84.0" mnemonicParsing="false" onAction="#handleFriendListButtonAction" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Friend List" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button layoutX="25.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Add Friend" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button layoutX="59.0" layoutY="554.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Contribution List" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button layoutX="25.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Add Balance" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="NotificatioList_btn" layoutX="25.0" layoutY="84.0" mnemonicParsing="false" onAction="#handleNotificationsButtonAction" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Notifications" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 25; -fx-background-color: linear-gradient(to right, #1DE9B6, #1A237E); -fx-border-color: transparent; -fx-border-width: 2; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Logout" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+        <BorderPane prefHeight="1024.0" prefWidth="1076.0">
+            <center>
+                <TableView fx:id="notifi_table" prefHeight="933.0" prefWidth="1074.0" BorderPane.alignment="CENTER">
+                    <columns>
+                        <TableColumn fx:id="date_col" prefWidth="178.0" text="Date" />
+                        <TableColumn fx:id="notifi_col" prefWidth="882.0" text="Notifications" />
+                    </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+                </TableView>
+            </center>
+            <right>
+                <ScrollBar fx:id="notifi_scroll" orientation="VERTICAL" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets right="10.0" />
+                    </BorderPane.margin>
+                </ScrollBar>
+            </right>
+            <left>
+                <Separator orientation="VERTICAL" prefHeight="882.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+            </left>
+            <top>
+                <Pane prefHeight="51.0" prefWidth="1076.0" BorderPane.alignment="CENTER" />
+            </top>
+            <bottom>
+                <Pane prefHeight="56.0" prefWidth="1116.0" BorderPane.alignment="CENTER" />
+            </bottom>
+        </BorderPane>
+    </items>
 </SplitPane>

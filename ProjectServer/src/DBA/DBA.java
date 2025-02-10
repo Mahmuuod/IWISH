@@ -8,7 +8,7 @@ package DBA;
 import DAL.Contribution;
 import DAL.FriendInfo;
 import DAL.FriendWishInfo;
-import DAL.Notification;
+import DAL.NotificationInfo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -345,7 +345,7 @@ public class DBA {
         return Notification_id;
     }
 
-    public static boolean insertNotification(Notification notification, int receiverId) throws SQLException {
+    public static boolean insertNotification(NotificationInfo notification, int receiverId) throws SQLException {
         Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
 
         // Insert notification
@@ -373,7 +373,7 @@ public class DBA {
         return rowsAffected > 0;
     }
 
-    public static boolean insertNotification(Notification notification, ArrayList<Integer> receiverIds) throws SQLException {
+    public static boolean insertNotification(NotificationInfo notification, ArrayList<Integer> receiverIds) throws SQLException {
         Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
 
         String notificationQuery = "INSERT INTO Notification (Notification_id, Context, Is_read, Type) VALUES (?, ?, ?, ?)";
@@ -441,6 +441,26 @@ public class DBA {
         statement.close();
         con.close();
         return itemName;
+    }
+    
+     public static ArrayList<NotificationInfo> getUserNotifications(int User_id) throws SQLException {
+        /* 
+            this method takes user's id and returns their Notifications as an arraylist of Notification objects 
+         */
+        ArrayList<NotificationInfo> notifications = new ArrayList<NotificationInfo>();
+        NotificationInfo notification = null;
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+        PreparedStatement statement = con.prepareStatement("SELECT n.notification_id as Notification_id, n.CONTEXT as Context, n.IS_READ as IsRead, u.Notification_date as Notification_date FROM NOTIFICATION n JOIN USER_NOTIFICATION u ON n.notification_id = u.notification_id WHERE u.RECIEVER_ID = ?"); //edit
+        statement.setInt(1, User_id);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            notification = new NotificationInfo(rs.getInt("Notification_id"), rs.getString("Context"), rs.getString("IsRead"), rs.getDate("Notification_date"));
+            notifications.add(notification);
+        }
+        //System.out.println("no of notifications "+notifications.size());
+        statement.close();
+        con.close();
+        return notifications;
     }
     /*   public static int deleteContacts(int id) throws SQLException {
         DriverManager.registerDriver(new OracleDriver());

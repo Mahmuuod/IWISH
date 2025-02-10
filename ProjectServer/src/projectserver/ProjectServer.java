@@ -6,7 +6,7 @@
 package projectserver;
 
 import DAL.Contribution;
-import DAL.Notification;
+import DAL.NotificationInfo;
 import DAL.UserInfo;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -248,7 +248,7 @@ class HandleClients extends Thread {
                                 Logger.getLogger(HandleClients.class.getName()).log(Level.SEVERE, null, ex);
                             }
 
-                            Notification notificationToContributors = new Notification(maxNotificationId,
+                            NotificationInfo notificationToContributors = new NotificationInfo(maxNotificationId,
                                     "Great news! The wish for " + itemName + " by" + userName + " has been fully funded and is now completed. Thank you for your generous contribution!",
                                     "N", "Wish Completion");
                             if (req.insertNotification(notificationToContributors, recieverIds)) {
@@ -272,7 +272,7 @@ class HandleClients extends Thread {
                                 String friendName = friend.getString("First_name") +" "+ user.getString("Last_name");
                                 notificationBody+= friendName+ "\n";
                             }
-                            Notification notificationToWishOwner = new Notification(maxNotificationId,
+                            NotificationInfo notificationToWishOwner = new NotificationInfo(maxNotificationId,
                                     notificationBody,
                                     "N", "Wish Completion");
                             if (req.insertNotification(notificationToContributors, recieverId)) {
@@ -281,6 +281,46 @@ class HandleClients extends Thread {
                             } else {
                                 respond.put("header", "notification to wish owner duplicated");
                             }
+                            System.out.println(respond.toString());
+                            ps.println(respond.toString());
+                            respond.clear();
+                            break;
+                        case "show notifications":
+                            /* sends response containing friend list as:
+                            {
+                              "header": "notification list",
+                              "notifications": 
+                                [{"notification_id" : id, "context": "context", "isread": "isread", "notification_date": "notification_date"},
+                                {"notification_id" : id, "context": "context", "isread": "isread", "notification_date": "notification_date"}]
+                            
+                            OR
+                            { "header": "no notifications" }
+                             */
+
+                            int User_id2 = request.getInt("user_id");
+                            if (req.checkNotifications(User_id2)) {
+                                ArrayList<String> notifications = req.getUsrNotifications(User_id2);
+                                respond = new JSONObject();
+                                JSONArray notificationArray = new JSONArray();
+
+                                for (String notification : notifications) {
+                                    JSONObject notification_as_json = new JSONObject(notification);
+                                    JSONObject notificationObject = new JSONObject();
+                                    notificationObject.put("notification_id", notification_as_json.getInt("Notification_id"));
+                                    notificationObject.put("context", notification_as_json.getString("Context"));
+                                    notificationObject.put("isread", notification_as_json.getString("IsRead"));
+                                    notificationObject.put("notification_date", notification_as_json.getString("Notification_date"));
+                                    notificationArray.put(notificationObject);
+                                }
+
+                                respond.put("header", "notification list");
+                                respond.put("notifications", notificationArray);
+
+                            } else {
+                                respond = new JSONObject();
+                                respond.put("header", "no notifications");
+                            }
+
                             System.out.println(respond.toString());
                             ps.println(respond.toString());
                             respond.clear();

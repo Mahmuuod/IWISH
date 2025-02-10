@@ -8,7 +8,7 @@ package projectserver;
 import DAL.Contribution;
 import DAL.FriendInfo;
 import DAL.FriendWishInfo;
-import DAL.Notification;
+import DAL.NotificationInfo;
 import DBA.DBA;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -145,7 +145,7 @@ public class HandleRequests {
         return itemName;
     }
 
-    public boolean insertNotification(Notification notification, int recieverId) {
+    public boolean insertNotification(NotificationInfo notification, int recieverId) {
         boolean result = false;
         try {
 
@@ -157,7 +157,7 @@ public class HandleRequests {
         return result;
     }
 
-    public boolean insertNotification(Notification notification, ArrayList<Integer> receiverIds) {
+    public boolean insertNotification(NotificationInfo notification, ArrayList<Integer> receiverIds) {
         boolean result = false;
         try {
 
@@ -167,5 +167,35 @@ public class HandleRequests {
             Logger.getLogger(ProjectServer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
+    }
+    
+    public boolean checkNotifications(int User_id) /* 
+            returns true if user has notifications 
+     */ {
+        boolean exists = false;
+        try {
+            if (DBA.getUserNotifications(User_id).size() > 0) {
+                exists = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HandleRequests.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return exists;
+
+    }
+    
+    public ArrayList<String> getUsrNotifications(int User_id) {
+
+        ArrayList<String> notification_as_string = new ArrayList<>();
+        try {
+            ArrayList<NotificationInfo> notifications = DBA.getUserNotifications(User_id);
+            //System.out.println("no of friends "+friends.size());
+            for (NotificationInfo notification : notifications) {
+                notification_as_string.add(notification.toString());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return notification_as_string;
     }
 }
