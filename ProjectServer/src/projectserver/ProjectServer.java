@@ -249,7 +249,7 @@ class HandleClients extends Thread {
                             }
 
                             NotificationInfo notificationToContributors = new NotificationInfo(maxNotificationId,
-                                    "Great news! The wish for " + itemName + " by" + userName + " has been fully funded and is now completed. Thank you for your generous contribution!",
+                                    "Great news! The wish for " + itemName + " by " + userName + " has been fully funded and is now completed. Thank you for your generous contribution!",
                                     "N", "Wish Completion");
                             if (req.insertNotification(notificationToContributors, recieverIds)) {
                                 respond.put("header", "notification sent to contributors");
