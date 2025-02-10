@@ -275,7 +275,7 @@ class HandleClients extends Thread {
                             NotificationInfo notificationToWishOwner = new NotificationInfo(maxNotificationId,
                                     notificationBody,
                                     "N", "Wish Completion");
-                            if (req.insertNotification(notificationToContributors, recieverId)) {
+                            if (req.insertNotification(notificationToWishOwner, recieverId)) {
                                 respond.put("header", "notification sent to wish owner");
 
                             } else {
