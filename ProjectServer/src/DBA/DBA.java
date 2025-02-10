@@ -291,6 +291,8 @@ public class DBA {
             String updateQuery = null;
             if ("New".equals(wishStatus) && collectedAmount > 0) {
                 updateQuery = "UPDATE wish SET status = 'In progress' WHERE wish_id = ?";
+            }else if ("New".equals(wishStatus) && collectedAmount >= wishPrice) {
+                updateQuery = "UPDATE wish SET status = 'Completed' WHERE wish_id = ?";
             } else if ("In progress".equals(wishStatus) && collectedAmount >= wishPrice) {
                 updateQuery = "UPDATE wish SET status = 'Completed' WHERE wish_id = ?";
             }
