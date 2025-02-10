@@ -119,7 +119,8 @@ public class DBA {
                     rs.getString("Last_name"), rs.getString("Username"), rs.getString("Password"), rs.getDate("Birthdate"), rs.getString("Email"),
                     rs.getString("Phone"), rs.getString("Bank_card"), rs.getInt("User_balance"));
         }
-
+        
+        rs.close();
         statement.close();
         con.close();
         return user;
@@ -195,6 +196,7 @@ public class DBA {
             wishes.add(friend_wish);
         }
         //System.out.println("no of wishes " + wishes.size());
+        rs.close();
         statement.close();
         con.close();
         return wishes;
@@ -209,7 +211,8 @@ public class DBA {
         if (rs.next()) {
             contribution_id = rs.getInt("contribution_id");
         }
-
+        
+        rs.close();
         statement.close();
         con.close();
         return contribution_id;
@@ -239,9 +242,9 @@ public class DBA {
             System.out.println("Error occured while updating collected amount!");
         }
         if (updateWishStatus(contribution.getWish_id())) {
-            System.out.println("Collected amount updated");
+            System.out.println("Wish Status updated");
         } else {
-            System.out.println("Error occured while updating collected amount!");
+            System.out.println("Error occured while updating Wish Status!");
         }
         return rowsAffected;
     }
@@ -289,10 +292,10 @@ public class DBA {
             double collectedAmount = rs.getDouble("collected");
 
             String updateQuery = null;
-            if ("New".equals(wishStatus) && collectedAmount > 0) {
-                updateQuery = "UPDATE wish SET status = 'In progress' WHERE wish_id = ?";
-            }else if ("New".equals(wishStatus) && collectedAmount >= wishPrice) {
+            if ("New".equals(wishStatus) && collectedAmount >= wishPrice) {
                 updateQuery = "UPDATE wish SET status = 'Completed' WHERE wish_id = ?";
+            }else if ("New".equals(wishStatus) && collectedAmount > 0) {
+                updateQuery = "UPDATE wish SET status = 'In progress' WHERE wish_id = ?";
             } else if ("In progress".equals(wishStatus) && collectedAmount >= wishPrice) {
                 updateQuery = "UPDATE wish SET status = 'Completed' WHERE wish_id = ?";
             }
@@ -342,6 +345,7 @@ public class DBA {
             Notification_id = rs.getInt("Notification_id");
         }
 
+        rs.close();
         statement.close();
         con.close();
         return Notification_id;
@@ -439,7 +443,8 @@ public class DBA {
         if (rs.next()) {
             itemName = rs.getString("Name");
         }
-
+        
+        rs.close();
         statement.close();
         con.close();
         return itemName;
@@ -460,6 +465,7 @@ public class DBA {
             notifications.add(notification);
         }
         //System.out.println("no of notifications "+notifications.size());
+        rs.close();
         statement.close();
         con.close();
         return notifications;

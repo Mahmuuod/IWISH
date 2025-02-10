@@ -84,16 +84,14 @@ public class FriendListController implements Initializable {
         Utilities.ChangeScene("FriendList.fxml", event);
 
     }
-    
+
     @FXML
     private void handleNotificationsButtonAction(ActionEvent event) {
-        
-        Utilities.ChangeScene("Notifications.fxml", event);
-        
 
-        
+        Utilities.ChangeScene("Notifications.fxml", event);
+
     }
-    
+
     private void setupTableColumns() {
 
         // binds objects to rows where each attribute is bound to a column
@@ -300,25 +298,35 @@ public class FriendListController implements Initializable {
 
             friend_wishlist_table.setItems(wishlistItems);
 
-            // Add "Contribute" button in the action column
+            // Set the cell factory for the action column
             item_action_col.setCellFactory(tc -> new TableCell<FriendWishInfo, Void>() {
                 private final Button contributeButton = new Button("Contribute");
+                private final Label completedLabel = new Label("Completed");
 
                 {
                     contributeButton.setOnAction(event -> {
                         FriendWishInfo wish = getTableView().getItems().get(getIndex());
                         handleContributeAction(wish);
                     });
+
+                    completedLabel.setStyle("-fx-alignment: CENTER; -fx-text-fill: green; -fx-font-weight: bold;");
                 }
 
                 @Override
                 protected void updateItem(Void item, boolean empty) {
                     super.updateItem(item, empty);
-                    if (empty) {
+
+                    if (empty || getTableRow() == null || getTableRow().getItem() == null) {
                         setGraphic(null);
                     } else {
-                        setGraphic(contributeButton);
-                        // Center-align the button inside the cell
+                        FriendWishInfo wish = (FriendWishInfo) getTableRow().getItem();
+                        if (wish.getCollected() >= wish.getPrice()) {
+                            // Show "Completed" label if the wish is fully funded
+                            setGraphic(completedLabel);
+                        } else {
+                            // Show "Contribute" button if the wish is not yet completed
+                            setGraphic(contributeButton);
+                        }
                         setStyle("-fx-alignment: CENTER;");
                     }
                 }
@@ -328,16 +336,12 @@ public class FriendListController implements Initializable {
             friend_wishlist_table.setItems(FXCollections.observableArrayList()); // Clear table if no items
             System.out.println("No wishlist found.");
         }
-
-        // Switch to wishlist tab
-        //wishlist_tab.getTabPane().getSelectionModel().select(wishlist_tab);
     }
 
     private void handleContributeAction(FriendWishInfo wish) {
         double remainingAmount = wish.getPrice() - wish.getCollected();
         if (remainingAmount <= 0) {
-            updateActionColumnForCompletedWish(wish);
-            return;
+            return; // Wish is already completed
         }
 
         double contributionAmount;
@@ -352,7 +356,7 @@ public class FriendListController implements Initializable {
             return;
         }
 
-        // if the contribution less than the remaining amount then only reduce the remaining amount from balance 
+        // If the contribution exceeds the remaining amount, cap it at the remaining amount
         if (contributionAmount > remainingAmount) {
             contributionAmount = remainingAmount;
         }
@@ -371,17 +375,16 @@ public class FriendListController implements Initializable {
         JSONObject response = SA.ServerRead();
 
         if (response.getString("header").equals("contribution added")) {
-
+            // Update the collected amount
             wish.setCollected(wish.getCollected() + contributionAmount);
+
+            // Refresh the table to reflect the updated state
             friend_wishlist_table.refresh();
 
-            // If wish is fully funded, notify the server and replace the button with label
+            // If the wish is fully funded, notify the server
             if (wish.getCollected() >= wish.getPrice()) {
                 sendWishCompletedRequest(wish);
-                
-                updateActionColumnForCompletedWish(wish);
             }
-
         } else if (response.getString("header").equals("not enough balance")) {
             JOptionPane.showMessageDialog(null, "Not enough balance! Add balance and try again.");
         } else {
@@ -401,30 +404,6 @@ public class FriendListController implements Initializable {
         System.out.println("Sent wish completion request: " + data);
 
         JSONObject response = SA.ServerRead();
-
-    }
-
-    private void updateActionColumnForCompletedWish(FriendWishInfo wish) {
-        item_action_col.setCellFactory(tc -> new TableCell<FriendWishInfo, Void>() {
-            private final Label completedLabel = new Label("Completed");
-
-            {
-                completedLabel.setStyle("-fx-alignment: CENTER; -fx-text-fill: green; -fx-font-weight: bold;");
-            }
-
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || wish.getCollected() < wish.getPrice()) {
-                    setGraphic(null);
-                } else {
-                    setGraphic(completedLabel);
-                    setStyle("-fx-alignment: CENTER;");
-                }
-            }
-        });
-
-        friend_wishlist_table.refresh();
     }
 
     /**
