@@ -42,8 +42,6 @@ public class FriendListController implements Initializable {
     @FXML
     private Button AddFriend_btn;
     @FXML
-    private Button ContributionList_btn;
-    @FXML
     private Button AddBalance_btn;
     @FXML
     private Button Notifications_btn;
