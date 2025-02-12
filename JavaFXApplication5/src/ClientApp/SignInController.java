@@ -83,11 +83,11 @@ public class SignInController implements Initializable {
     }
  private void switchToFriendRequestScene(ActionEvent event, UserInfo loggedInUser) {
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Friendrequest.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("WishList.fxml"));
         Parent root = loader.load();
 
         // Pass user data to FriendrequestController
-        FriendrequestController controller = loader.getController();
+        WishListController controller = loader.getController();
         controller.setUserData(loggedInUser);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -333,7 +333,7 @@ private void handleDeclineBtn(ActionEvent event) {
      @FXML
      public void handleWishList(ActionEvent event) throws IOException {
 
-       FXMLLoader loader = new FXMLLoader(getClass().getResource("wishlistxml.fxml"));
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("WishList.fxml"));
         Parent root = loader.load();
         
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

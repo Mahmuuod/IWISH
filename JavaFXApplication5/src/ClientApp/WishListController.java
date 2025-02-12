@@ -64,8 +64,7 @@ ServerAccess SA=new ServerAccess();
     private Button refreshbtn;
     @FXML
     private TableColumn<WishInfo, Date> wishdateCol;
-    @FXML
-    private TableColumn<WishInfo, Integer> WishId;
+    private UserInfo userData;
   
  @FXML
  public void deleteWish (ActionEvent event) throws IOException {
@@ -94,6 +93,10 @@ ServerAccess SA=new ServerAccess();
  @FXML
 public void refreshWish(ActionEvent event) throws IOException {
     Utilities.ChangeScene("WishList.fxml", event);
+}
+ @FXML
+public void friendlistbtn(ActionEvent event) throws IOException {
+    Utilities.ChangeScene("FriendList.fxml", event);
 }
  @FXML
 public void itemsBtn (ActionEvent event) throws IOException {
@@ -150,4 +153,10 @@ LeftCol.setCellValueFactory(new PropertyValueFactory<>("contribution_amount"));
    }
     }    
     WishInfo info;
+    
+ public void setUserData(UserInfo user) {
+    this.userData = user;
+    System.out.println("Requester ID (Logged-in user): " + userData.getUser_id());
+   
+}
 }

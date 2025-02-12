@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F9EDED;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.SignInController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F9EDED;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.SignInController">
    <children>
       <!-- Right-side panel -->
       <Pane layoutX="960.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="480.0" style="-fx-background-color: #3F418D;" AnchorPane.rightAnchor="0.0">
@@ -51,7 +51,7 @@
       
       <Hyperlink fx:id="forgetPasswordLink" layoutX="202.0" layoutY="579.0" onAction="#handleForgetPassword" style="-fx-font-size: 16; -fx-font-family: &quot;Arial&quot;; -fx-text-fill: #3F418D; -fx-border-color: transparent; -fx-underline: false;" text="Forget Password?" />
       
-      <Button fx:id="SignInButton" layoutX="200.0" layoutY="648.0" mnemonicParsing="false" onAction="#handleSignInButtonAction" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #3F418D; -fx-font-weight: bold; -fx-background-radius: 25px; -fx-border-color: transparent; -fx-background-radius: 25px; -fx-font-size: 20; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-text-fill: white;" text="Sign In" textFill="WHITE">
+      <Button fx:id="SignInButton" defaultButton="true" layoutX="200.0" layoutY="648.0" mnemonicParsing="false" onAction="#handleSignInButtonAction" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #3F418D; -fx-font-weight: bold; -fx-background-radius: 25px; -fx-border-color: transparent; -fx-background-radius: 25px; -fx-font-size: 20; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-text-fill: white;" text="Sign In" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
