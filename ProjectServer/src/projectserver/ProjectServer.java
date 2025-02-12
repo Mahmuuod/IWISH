@@ -184,6 +184,167 @@ class HandleClients extends Thread {
                             ps.println(respond.toString());
                             respond.clear();
                             break;
+                            
+                            
+                             case "change password":
+                            String email = request.getString("Email");
+                            String newPassword = request.getString("Password");
+                            respond = new JSONObject();
+                            if (req.checkEmail(email)) {
+                               if( DBA.changePassword(email, newPassword)){
+                                
+                                respond.put("header", "email changed");
+                                System.out.println(respond.toString());
+                                ps.println(respond.toString());
+                                respond.clear();}
+                            } else {
+                                
+                                respond.put("header", "not exists");
+                                System.out.println(respond.toString());
+                                ps.println(respond.toString());
+                                respond.clear();
+                            }
+                            break;
+                            
+                            case "search user":
+                                  String query = request.getString("query");
+                                int userID = request.getInt("userID");
+                              
+                                JSONArray users = req.searchUser(userID,query);
+
+                                respond = new JSONObject();
+                                if (users.length() > 0) {
+                                    respond.put("header", "search result");
+                                    respond.put("users", users);
+                                } else {
+                                    respond.put("header", "no users found");
+                                }
+
+                                System.out.println("Sending response to client: " + respond.toString()); // Debugging
+
+                                ps.println(respond.toString());
+                                respond.clear();
+                                break;
+                                
+                                
+                            case "send friend request":
+                                try {
+                                    int requester_id = request.getInt("requester_id");
+                                    int receiver_id = request.getInt("receiver_id");
+                                    String requester_name = request.optString("requester_name"); 
+
+                                    System.out.println("Received Friend Request from " + requester_id + " to " + receiver_id); // Debugging
+
+                                    respond = new JSONObject();
+                                    if (DBA.areFriends(requester_id, receiver_id)) {
+                                        respond.put("header", "friend request failed");
+                                        respond.put("status", "already friends");
+                                    }
+                                    else if (DBA.isFriendRequestExists(requester_id, receiver_id)) {
+                                        respond.put("header", "friend request failed");
+                                        respond.put("status", "duplicate");
+                                    } else {
+                                        boolean success = DBA.sendFriendRequest(requester_id, receiver_id, requester_name);
+                                        respond.put("header", "friend request sent");
+                                        respond.put("status", success ? "success" : "failed");
+                                    }
+
+                                    System.out.println("Sending response to client: " + respond.toString()); // Debugging
+                                    ps.println(respond.toString());
+
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(HandleClients.class.getName()).log(Level.SEVERE, null, ex);
+
+                                    JSONObject errorResponse = new JSONObject();
+                                    errorResponse.put("header", "error");
+                                    errorResponse.put("status", "server error");
+
+                                    ps.println(errorResponse.toString());
+                                }
+                                break;
+
+                            case "accept friend request":
+                                int requester_id = request.getInt("requester_id");
+                                int receiver_id = request.getInt("receiver_id");
+                                String receiver_name = request.optString("receiver_name");        
+                                System.out.println(receiver_id + " accepted friend request sent from " + requester_id); // Debugging
+
+                                respond = new JSONObject();
+                                try {
+                                    boolean success = DBA.acceptFriendRequest(requester_id, receiver_id,receiver_name);
+                                    respond.put("header", "accept friend request");
+                                    respond.put("status", success ? "success" : "failed");
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(HandleClients.class.getName()).log(Level.SEVERE, null, ex);
+                                    respond.put("status", "error");
+                                }
+
+                                System.out.println("Sending response to client: " + respond.toString()); // Debugging
+                                ps.println(respond.toString());
+                                respond.clear();
+                                break;
+                                
+                                case "decline friend request":
+                                    try {
+                                         requester_id = request.getInt("requester_id");
+                                         receiver_id = request.getInt("receiver_id");
+
+                                        System.out.println(receiver_id + " declined friend request from " + requester_id); // Debugging
+
+                                        boolean success = DBA.declineFriendRequest(requester_id, receiver_id);
+
+                                        respond = new JSONObject();
+                                        respond.put("header", "decline friend request");
+
+                                        if (success) {
+                                            respond.put("status", "success");
+                                            System.out.println(" Friend request successfully declined.");
+                                        } else {
+                                            respond.put("status", "error");
+                                            System.out.println(" ERROR: Failed to decline friend request.");
+                                        }
+
+                                                System.out.println("Sending response to client: " + respond.toString()); // Debugging
+
+                                        ps.println(respond.toString());
+                                        ps.flush();
+                                    } catch (SQLException ex) {
+                                        Logger.getLogger(HandleClients.class.getName()).log(Level.SEVERE, " Database Error in declining friend request", ex);
+                                        respond = new JSONObject();
+                                        respond.put("header", "decline friend request");
+                                        respond.put("status", "error");
+                                        respond.put("message", "Database error occurred while declining the friend request.");
+                                        ps.println(respond.toString());
+                                        ps.flush();
+                                    } catch (Exception ex) {
+                                        Logger.getLogger(HandleClients.class.getName()).log(Level.SEVERE, " Unexpected Error in declining friend request", ex);
+                                        respond = new JSONObject();
+                                        respond.put("header", "decline friend request");
+                                        respond.put("status", "error");
+                                        respond.put("message", "Unexpected error occurred while declining the friend request.");
+                                        ps.println(respond.toString());
+                                        ps.flush();
+                                    }
+                                    break;
+
+
+
+                            
+                        case "fetch pending requests":
+                            userID = request.getInt("userID");
+
+                    System.out.println("UserID received in fetch request: " + request.getInt("userID"));// Debugging
+
+                           JSONObject response = new JSONObject();
+                           response.put("header", "fetch pending requests");
+
+                           JSONArray pendingUsers = DBA.fetchPendingRequests(userID);
+                           response.put("users", pendingUsers);
+
+                           System.out.println("Sending response to client: " + response.toString()); // Debugging
+                           ps.println(response.toString());
+                           response.clear();
+                           break;
                     }
 
                 } else {
@@ -200,6 +361,8 @@ class HandleClients extends Thread {
                     Logger.getLogger(HandleClients.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } catch (IOException ex) {
+                Logger.getLogger(HandleClients.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
                 Logger.getLogger(HandleClients.class.getName()).log(Level.SEVERE, null, ex);
             }
 

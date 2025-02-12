@@ -66,7 +66,38 @@ public class ServerAccess {
             Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+ public JSONObject ServerReadSearch() {
+            final  CountDownLatch latch = new CountDownLatch(1);
+            JSONObject jsonResponse = new JSONObject();
+        
+            t = new Thread(new Runnable() {
+                public void run() {
 
+                    try {
+                        String msg = dis.readLine();
+                        System.out.println(msg);
+                        JsonData = new JSONObject(msg);
+                          if (msg != null) {
+                jsonResponse.put("response", new JSONObject(msg));
+            }
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(TestController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    finally {
+                    latch.countDown(); 
+                       }
+                }
+            });
+            
+            t.start();
+    try {
+        latch.await(); // Wait for the thread to finish
+    } catch (InterruptedException ex) {
+        Logger.getLogger(TestController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        return jsonResponse;
+    }
     public  JSONObject ServerRead() {
         final  CountDownLatch latch = new CountDownLatch(1);
 

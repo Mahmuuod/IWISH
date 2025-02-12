@@ -32,6 +32,7 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import org.json.JSONObject;
 import Utilities.ServerAccess.*;
+import Utilities.UserInfo;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -50,7 +51,9 @@ public class SignInController implements Initializable {
     @FXML
     private Button SignInButton;
     @FXML
-    private Hyperlink SignUpLink;
+    private Hyperlink forgetPasswordLink;
+    @FXML
+    private Button SignUpButton;
 
     @FXML
     private void handleSignInButtonAction(ActionEvent event) {
@@ -68,8 +71,9 @@ public class SignInController implements Initializable {
 
         if (response.getString("header").equals("user exists")) {
             SA.SetUserData(response);
-            Utilities.ChangeScene("WishList.fxml", event);
+            //Utilities.ChangeScene("Friendrequest.fxml", event);
             SA.ServerKill();
+            switchToFriendRequestScene(event,UserInfo.getInstance());
 
         } else {
             JOptionPane.showMessageDialog(null, "User doesn't exists", "Sign In Error", JOptionPane.ERROR_MESSAGE);
@@ -77,7 +81,22 @@ public class SignInController implements Initializable {
         }
 
     }
+ private void switchToFriendRequestScene(ActionEvent event, UserInfo loggedInUser) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Friendrequest.fxml"));
+        Parent root = loader.load();
 
+        // Pass user data to FriendrequestController
+        FriendrequestController controller = loader.getController();
+        controller.setUserData(loggedInUser);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
     @FXML
     private void handleSignUpButtonAction(ActionEvent event) {
 
@@ -87,6 +106,12 @@ public class SignInController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+    }
+
+    @FXML
+    private void handleForgetPassword(ActionEvent event) {
+        Utilities.ChangeScene("ForgetPassword.fxml", event);
 
     }
 

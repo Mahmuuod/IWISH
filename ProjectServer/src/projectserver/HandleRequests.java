@@ -155,5 +155,39 @@ boolean state=true;
         }
     
     }
-    //{Item_id:5, Name:Backpack, Price:100.0, Category:Fashion}
+    
+     public boolean checkEmail(String email)
+    {
+        boolean exists=false;
+        try {
+             exists=DBA.checkEmail(email);
+        } catch (SQLException ex) {
+            Logger.getLogger(HandleRequests.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return exists;
+    }
+ public JSONArray searchUser(int userID,String query) {
+    System.out.println("Searching for users: " + query); // Debugging
+    
+    JSONArray usersArray = new JSONArray();
+    try {
+        ArrayList<UserInfo> users = DBA.searchUsers(userID,query); 
+        System.out.println("Users found in database: " + users.size()); // Debugging
+
+        for (UserInfo user : users) {
+            JSONObject userJson = new JSONObject();
+            userJson.put("User_id", user.getUser_id());
+            userJson.put("Username", user.getUsername());
+            userJson.put("Email", user.getEmail());
+            userJson.put("Birthdate", user.getBirthdate().toString());
+            usersArray.put(userJson);
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(HandleRequests.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return usersArray;
+}
+ 
+
+
 }
