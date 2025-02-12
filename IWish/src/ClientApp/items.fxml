@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F9EDED;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.ItemController">
+   <left>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="320.0" style="-fx-background-color: #3F418D;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="MyWishlistbtn" contentDisplay="CENTER" layoutX="65.0" layoutY="510.0" mnemonicParsing="false" onAction="#MyWishListBtn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="WishList">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="itemsbtn" contentDisplay="CENTER" layoutX="65.0" layoutY="750.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Items">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="CENTER" layoutX="65.0" layoutY="350.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Home">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="CENTER" layoutX="65.0" layoutY="590.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Add Friend">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="CENTER" layoutX="65.0" layoutY="430.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Notifications">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="CENTER" layoutX="65.0" layoutY="670.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Friend List">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="CENTER" layoutX="65.0" layoutY="874.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Log out">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Label alignment="CENTER" layoutX="35.0" layoutY="210.0" prefHeight="82.0" prefWidth="234.0" style="-fx-text-fill: #F9EDED; -fx-font-weight: bold; -fx-font-size: 56;" text="i-Wish" textAlignment="RIGHT" />
+            <ImageView fitHeight="133.0" fitWidth="144.0" layoutX="88.0" layoutY="77.0" style="color: white;">
+               <image>
+                  <Image url="@../../../../../Downloads/gd2UOJ01.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane fx:id="Item_id" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="itemTable" layoutX="165.0" layoutY="247.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="802.0">
+               <columns>
+                  <TableColumn fx:id="ItemId" prefWidth="82.66668701171875" text="Item ID" />
+                  <TableColumn fx:id="Name" prefWidth="262.933349609375" text="Name" />
+                  <TableColumn fx:id="Category" prefWidth="247.7333984375" text="Category" />
+                  <TableColumn fx:id="Price" prefWidth="205.86669921875" text="Price" />
+               </columns>
+               <columnResizePolicy>
+               
+               </columnResizePolicy>
+            </TableView>
+            <Button fx:id="AddItembtn" layoutX="488.0" layoutY="920.0" mnemonicParsing="false" onAction="#addItemToWishList" prefHeight="56.0" prefWidth="160.0" style="-fx-background-color: #3F418D; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-border-color: transparent; -fx-border-width: 2; -fx-background-radius: 25; -fx-background-radius: 25; -fx-font-size: 24; -fx-font-family: &quot;Arial&quot;;" text="Add Item" />
+            <Label alignment="CENTER" layoutX="211.0" layoutY="101.0" prefHeight="83.0" prefWidth="676.0" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 56;" text="Choose What You Wish !" textAlignment="RIGHT" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

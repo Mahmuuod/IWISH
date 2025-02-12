@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="18.0" layoutY="15.0" prefHeight="369.0" prefWidth="564.0" style="-fx-background-color: #d1dffa;">
+         <children>
+            <JFXTextField focusColor="#09e2ea" labelFloat="true" layoutX="125.0" layoutY="48.0" prefHeight="38.0" prefWidth="315.0" promptText="Username" unFocusColor="#058f94" />
+            <JFXPasswordField focusColor="#09e2ea" labelFloat="true" layoutX="125.0" layoutY="160.0" prefHeight="38.0" prefWidth="315.0" promptText="Password" unFocusColor="#058f94" />
+            <JFXButton buttonType="RAISED" layoutX="136.0" layoutY="247.0" prefHeight="47.0" prefWidth="118.0" style="-fx-background-color: #76a0ef; -fx-background-radius: 45;" text="Login" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="336.0" layoutY="247.0" prefHeight="47.0" prefWidth="118.0" ripplerFill="#bda0eb" style="-fx-background-color: #76a0ef; -fx-background-radius: 45;" text="Register" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <FontAwesomeIcon iconName="KEY" layoutX="157.0" layoutY="276.0" wrappingWidth="18.60003662109375" />
+         </children>
+         <effect>
+            <ColorAdjust />
+         </effect>
+      </Pane>
+   </children>
+</AnchorPane>

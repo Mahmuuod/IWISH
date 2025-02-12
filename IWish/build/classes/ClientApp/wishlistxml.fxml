@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F9EDED;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iwish.FXMLController">
+    <children>
+        <AnchorPane prefHeight="1024.0" prefWidth="320.0" style="-fx-background-color: #3F418D;">
+            <children>
+                <Label alignment="CENTER" layoutX="108.0" layoutY="468.0">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+            <Button contentDisplay="CENTER" layoutX="65.0" layoutY="590.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Add Friend">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="CENTER" layoutX="65.0" layoutY="430.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Notifications">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="CENTER" layoutX="65.0" layoutY="670.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Friend List">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="CENTER" layoutX="65.0" layoutY="874.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Log out">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Label alignment="CENTER" layoutX="35.0" layoutY="210.0" prefHeight="82.0" prefWidth="234.0" style="-fx-text-fill: #F9EDED; -fx-font-weight: bold; -fx-font-size: 56;" text="i-Wish" textAlignment="RIGHT" />
+            <ImageView fitHeight="133.0" fitWidth="144.0" layoutX="88.0" layoutY="77.0" style="color: white;">
+               <image>
+                  <Image url="@../../../../../Downloads/gd2UOJ01.png" />
+               </image>
+            </ImageView>
+            </children>
+        </AnchorPane>
+        
+        <!-- Corrected TableView -->
+        <TableView fx:id="wishlisttable" layoutX="500.0" layoutY="252.0" prefHeight="610.0" prefWidth="790.0">
+            <columns>
+                <TableColumn fx:id="itemNameColumn" prefWidth="236.7999267578125" text="Item Name" />
+                <TableColumn fx:id="priceColumn" prefWidth="240.800048828125" text="Price" />
+                <TableColumn fx:id="categoryColumn" prefWidth="312.79986572265625" text="Category" />
+            </columns>
+        </TableView>
+      <Button contentDisplay="CENTER" layoutX="65.0" layoutY="350.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Home">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="itemsbtn" contentDisplay="CENTER" layoutX="65.0" layoutY="750.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Items">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="MyWishlistbtn" contentDisplay="CENTER" layoutX="65.0" layoutY="510.0" mnemonicParsing="false" onAction="#MyWishListBtn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="WishList">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" layoutX="427.0" layoutY="111.0" prefHeight="83.0" prefWidth="921.0" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 56;" text="Wishlist Today, Reality Tomorrow!" textAlignment="RIGHT" />
+      <Button fx:id="updatebtn" layoutX="629.0" layoutY="890.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" style="-fx-background-color: #3F418D; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-border-color: transparent; -fx-border-width: 2; -fx-background-radius: 25; -fx-background-radius: 25; -fx-font-size: 24; -fx-font-family: &quot;Arial&quot;;" text="Update" />
+      <Button fx:id="deletebtn" layoutX="1029.0" layoutY="890.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" style="-fx-background-color: #3F418D; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-border-color: transparent; -fx-border-width: 2; -fx-background-radius: 25; -fx-background-radius: 25; -fx-font-size: 24; -fx-font-family: &quot;Arial&quot;;" text="Delete" />
+    </children>
+</AnchorPane>

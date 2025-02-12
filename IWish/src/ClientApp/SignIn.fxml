@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F9EDED;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.SignInController">
+   <children>
+      <!-- Right-side panel -->
+      <Pane layoutX="960.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="480.0" style="-fx-background-color: #3F418D;" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="180.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Desktop/Hania/Data%20Management/Java2/Java%202%20Project/iWishGUI/src/img/iwish_Logo-removebg-preview_1.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="120.0" layoutY="200.0" prefHeight="100.0" prefWidth="240.0" style="-fx-text-fill: #F9EDED; -fx-font-weight: bold;" text="i-Wish" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Bold" size="64.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      
+      <!-- Login Form -->
+      <Label layoutX="234.0" layoutY="100.0" prefHeight="55.0" prefWidth="565.0" text="Welcome to i-Wish" textFill="#3f418d">
+         <font>
+            <Font name="Arial Bold" size="48.0" />
+         </font>
+      </Label>
+      
+      <Label layoutX="282.0" layoutY="189.0" text="Login into your account to continue">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      
+      <Label layoutX="200.0" layoutY="320.0" style="-fx-font-size: 20; -fx-font-weight: bold;" text="Username" textFill="#3f418d" />
+      <TextField fx:id="UserNameTa" layoutX="200.0" layoutY="370.0" prefHeight="50.0" prefWidth="450.0" promptText="Username" style="-fx-background-radius: 10px; -fx-border-color: #ccc; -fx-padding: 10px; -fx-font-size: 18px; -fx-border-radius: 10; -fx-background-color: #f8f9fa; -fx-font-family: &quot;Arial&quot;; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.3, 0, 2);;" />
+      
+      <Label layoutX="200.0" layoutY="450.0" style="-fx-font-size: 20; -fx-font-weight: bold;" text="Password" textFill="#3f418d" />
+      <PasswordField fx:id="PasswordTa" layoutX="200.0" layoutY="500.0" prefHeight="50.0" prefWidth="450.0" promptText="Password" style="-fx-background-radius: 10px; -fx-border-color: #ccc; -fx-padding: 10px; -fx-font-size: 18px; -fx-border-radius: 10; -fx-background-color: #f8f9fa; fam: &quot;Arial&quot;; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.3, 0, 2);;" />
+      
+      <Hyperlink fx:id="forgetPasswordLink" layoutX="202.0" layoutY="579.0" onAction="#handleForgetPassword" style="-fx-font-size: 16; -fx-font-family: &quot;Arial&quot;; -fx-text-fill: #3F418D; -fx-border-color: transparent; -fx-underline: false;" text="Forget Password?" />
+      
+      <Button fx:id="SignInButton" layoutX="200.0" layoutY="648.0" mnemonicParsing="false" onAction="#handleSignInButtonAction" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #3F418D; -fx-font-weight: bold; -fx-background-radius: 25px; -fx-border-color: transparent; -fx-background-radius: 25px; -fx-font-size: 20; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-text-fill: white;" text="Sign In" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      
+      <Label layoutX="392.0" layoutY="742.0" text="OR" textFill="#b2b2b2">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      
+      <Line endX="130.0" layoutX="541.0" layoutY="753.0" startX="-100.0" stroke="#bcbcbc" strokeWidth="0.5" />
+      <Line endX="30.0" layoutX="341.0" layoutY="753.0" startX="-200.0" stroke="#bcbcbc" strokeWidth="0.5" />
+      
+      <Button fx:id="SignUpButton" layoutX="203.0" layoutY="800.0" mnemonicParsing="false" onAction="#handleSignUpButtonAction" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #DADADA; -fx-background-radius: 25px; -fx-border-color: transparent; -fx-font-size: 20; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2);" text="Create New Account">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

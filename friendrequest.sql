@@ -1,0 +1,15 @@
+CREATE SEQUENCE FriendRequest_seq 
+START WITH 1 
+INCREMENT BY 1 
+NOCACHE 
+NOCYCLE;
+=================
+CREATE SEQUENCE FriendRequestnotification_seq 
+START WITH 100
+INCREMENT BY 1 
+NOCACHE 
+NOCYCLE;
+ALTER TABLE FriendRequest ADD MinID GENERATED ALWAYS AS (LEAST(Requester_id, Reciever_id)) VIRTUAL;
+ALTER TABLE FriendRequest ADD MaxID GENERATED ALWAYS AS (GREATEST(Requester_id, Reciever_id)) VIRTUAL;
+
+ALTER TABLE FriendRequest ADD CONSTRAINT unique_friend_request UNIQUE (MinID, MaxID);

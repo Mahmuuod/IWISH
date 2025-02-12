@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.Icon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<SplitPane dividerPositions="0.22322670375521558" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iwish.FXMLDocumentController">
+   <items>
+      <GridPane maxHeight="1024.0" maxWidth="317.0" minHeight="1024.0" minWidth="244.0" prefHeight="995.0" prefWidth="200.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="mywishlist_btn" mnemonicParsing="false" prefHeight="40.0" prefWidth="138.0" text="My Wish List" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Button fx:id="friendslist_btn" mnemonicParsing="false" prefHeight="40.0" prefWidth="138.0" text="Friends List" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Button fx:id="friendrequest_btn" mnemonicParsing="false" prefHeight="40.0" prefWidth="138.0" text="Friend Requests" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <Button fx:id="contrib_btn" mnemonicParsing="false" prefHeight="40.0" prefWidth="138.0" text="Contribution List" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+            <Button fx:id="addbalance_btn" mnemonicParsing="false" prefHeight="40.0" prefWidth="138.0" text="Add Balance" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+            <Button fx:id="notifi_btn" mnemonicParsing="false" prefHeight="40.0" prefWidth="138.0" text="Notifications" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
+            <Button fx:id="logout_btn" mnemonicParsing="false" prefHeight="40.0" prefWidth="138.0" text="Log out" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
+            <GridPane hgap="10.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.6666717529297" minWidth="10.0" prefWidth="125.33332824707031" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="10.0" prefWidth="174.6666717529297" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Icon fx:id="coin_icn" content="HELP_OUTLINE" prefHeight="72.0" prefWidth="113.0" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                  <Label fx:id="balance_lbl" prefHeight="21.0" prefWidth="71.0" scaleX="1.5" scaleY="1.5" text="Balance" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </GridPane>
+            <Icon fx:id="logo_icn" content="HELP_OUTLINE" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label fx:id="username_lbl" scaleX="2.0" scaleY="2.0" text="Username" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+         </children>
+         <padding>
+            <Insets bottom="200.0" left="50.0" right="50.0" top="100.0" />
+         </padding>
+      </GridPane>
+      <BorderPane prefHeight="1024.0" prefWidth="1076.0">
+         <center>
+            <TableView fx:id="notifi_table" prefHeight="811.0" prefWidth="1058.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="notifi_col" prefWidth="1078.0" text="Notifications" />
+              </columns>
+            </TableView>
+         </center>
+         <right>
+            <ScrollBar fx:id="notifi_scroll" orientation="VERTICAL" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets right="10.0" />
+               </BorderPane.margin>
+            </ScrollBar>
+         </right>
+         <bottom>
+            <GridPane BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets right="50.0" />
+               </BorderPane.margin>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button fx:id="markasread_btn" mnemonicParsing="false" text="Mark As Read" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Button fx:id="delete_btn" mnemonicParsing="false" prefHeight="31.0" prefWidth="112.0" text="Delete" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Button fx:id="clearall_btn" mnemonicParsing="false" prefHeight="31.0" prefWidth="112.0" text="Clear All" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+               </children>
+            </GridPane>
+         </bottom>
+         <left>
+            <Separator orientation="VERTICAL" prefHeight="882.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+         </left>
+         <top>
+            <Pane prefHeight="51.0" prefWidth="1076.0" BorderPane.alignment="CENTER" />
+         </top>
+      </BorderPane>
+   </items>
+</SplitPane>
