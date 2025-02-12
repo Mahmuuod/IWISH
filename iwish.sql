@@ -111,7 +111,10 @@ ALTER TABLE FriendList ADD CONSTRAINT pk_friendlist PRIMARY KEY (User_id, Friend
 ALTER TABLE FriendList ADD CONSTRAINT fk_friendlist_user1 FOREIGN KEY (User_id) REFERENCES Users(User_id);
 ALTER TABLE FriendList ADD CONSTRAINT fk_friendlist_user2 FOREIGN KEY (Friend_id) REFERENCES Users(User_id);
 
-
+-- contibution amount default 0
+ALTER TABLE Contribution 
+MODIFY Contribution_amount DEFAULT 0;
+commit
 -----inserts-----
 
 
@@ -171,3 +174,5 @@ INSERT INTO FriendList VALUES (2, 3, TO_DATE('2023-12-02', 'YYYY-MM-DD'));
 INSERT INTO FriendList VALUES (3, 2, TO_DATE('2023-12-03', 'YYYY-MM-DD'));
 INSERT INTO FriendList VALUES (4, 5, TO_DATE('2023-12-04', 'YYYY-MM-DD'));
 INSERT INTO FriendList VALUES (5, 1, TO_DATE('2023-12-05', 'YYYY-MM-DD'));
+
+commit

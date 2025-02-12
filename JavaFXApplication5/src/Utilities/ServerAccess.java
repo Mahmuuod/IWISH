@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import org.json.JSONObject;
 import Utilities.UserInfo.*;
 import java.sql.Date;
+import org.json.JSONArray;
 
 /**
  *
@@ -97,6 +98,10 @@ public class ServerAccess {
     }
     
     public  void ServerWrite(JSONObject msg)
+    {
+        ps.println(msg.toString());
+    }
+   public  void ServerWrite(JSONArray msg)
     {
         ps.println(msg.toString());
     }

@@ -57,7 +57,7 @@
                   <Insets left="250.0" top="120.0" />
                </GridPane.margin>
             </Label>
-            <Hyperlink fx:id="SignUpLink" focusTraversable="false" onAction="#handleSignUpButtonAction" text="Sign Up" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <Hyperlink fx:id="SignUpLink" onAction="#handleSignUpButtonAction" text="Sign Up" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <GridPane.margin>
                   <Insets left="330.0" top="120.0" />
                </GridPane.margin>

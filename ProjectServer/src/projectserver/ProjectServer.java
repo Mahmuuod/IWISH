@@ -55,6 +55,7 @@ class HandleClients extends Thread {
                 String msg = dis.readLine();
                 System.out.println(msg);
                 if (msg != null) {
+                    int User_id;
                     JSONObject request = new JSONObject(msg);
                     String command = request.getString("header");
                     JSONObject respond;
@@ -78,19 +79,68 @@ class HandleClients extends Thread {
                             }
                              respond.clear();
                             break;
-                            case "sign up":
-                                UserInfo user=new UserInfo(DBA.getUsersMAXID(),request.getString("First_name"),request.getString("Last_name"),
-                                request.getString("Username"),String.valueOf(request.getInt("Password")),Date.valueOf(request.getString("Birthdate")),
-                                request.getString("Email"),String.valueOf(request.getInt("Phone")),String.valueOf(request.getInt("Bank_card")) ,request.getInt("User_balance")); 
-                               boolean state= req.signUp(user);
-                                respond=new JSONObject();
-                                if(state)respond.put("header", "added");
-                                else respond.put("header", "duplicated");
+                        case "sign up":
+                            UserInfo user = new UserInfo(req.getMaxId(), request.getString("First_name"), request.getString("Last_name"),
+                                    request.getString("Username"), String.valueOf(request.getInt("Password")), Date.valueOf(request.getString("Birthdate")),
+                                    request.getString("Email"), String.valueOf(request.getInt("Phone")), String.valueOf(request.getInt("Bank_card")), request.getInt("User_balance"));
+                            boolean state = req.signUp(user);
+                            respond = new JSONObject();
+                            if (state) {
+                                respond.put("header", "added");
+                            } else {
+                                respond.put("header", "duplicated");
+                            }
 
-
-                                ps.println(respond.toString());
-                                respond.clear();
-                                break;
+                            ps.println(respond.toString());
+                            respond.clear();
+                            break;
+                        case "add balance":
+                           int balance=request.getInt("value");
+                           int id=request.getInt("user id");
+                            
+                          int result= req.updateBalance(id,balance );
+                            respond = new JSONObject();
+                                respond.put("header","added");
+                                    respond.put("value", result);
+                            ps.println(respond.toString());
+                            respond.clear();
+                            break;
+      /*    public WishInfo(int wish_id, int User_id, int ITEM_ID, Timestamp Wish_Time, String Status, Date WISH_DATE) {
+        this.wish_id = wish_id;
+        this.User_id = User_id;
+        this.ITEM_ID = ITEM_ID;
+        this.Wish_Time = Wish_Time;
+        this.Status = Status;
+        this.WISH_DATE = WISH_DATE;
+    }*/                      
+                        case "wishlist":
+                            User_id = request.getInt("user_id");
+                            JSONArray wishes=req.wishlisht(User_id);
+                            System.out.println(wishes);
+                            respond=new JSONObject();
+                            respond.put("header", "wishlist");
+                            respond.put("wishes", wishes);
+                            System.out.println(respond);
+                            ps.println(respond.toString());
+                            respond.clear();
+                            break;
+                        case "items":
+                            JSONArray items=req.ItemsList();
+                            System.out.println(items);
+                            respond=new JSONObject();
+                            respond.put("header", "items");
+                            respond.put("items", items);
+                            System.out.println(respond);
+                            ps.println(respond.toString());
+                            respond.clear();
+                            break;
+                        case "add item":
+                            req.insertWish(request);
+                            break;
+                        case "deletewish":
+                            req.deleteWish(request);
+                            ps.println("{header:deleted}");
+                            break;     
                         case "show friendlist":
                             /* sends response containing friend list as:
                             {
@@ -103,7 +153,7 @@ class HandleClients extends Thread {
                             { "header": "no friends" }
                              */
 
-                            int User_id = request.getInt("user_id");
+                             User_id = request.getInt("user_id");
                             System.out.println(User_id);
                             if (req.showFriendList(User_id)) {
                                 ArrayList<String> friends = req.getUsrFriends(User_id);

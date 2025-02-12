@@ -68,11 +68,11 @@ public class SignInController implements Initializable {
 
         if (response.getString("header").equals("user exists")) {
             SA.SetUserData(response);
-            Utilities.ChangeScene("Test.fxml", event);
-           // SA.ServerKill();
+            Utilities.ChangeScene("WishList.fxml", event);
+            SA.ServerKill();
 
         } else {
-            JOptionPane.showMessageDialog(null, "User doesn't exists", "Connection Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "User doesn't exists", "Sign In Error", JOptionPane.ERROR_MESSAGE);
 
         }
 
