@@ -482,12 +482,13 @@ class HandleClients extends Thread {
                             
                             maxNotificationId++;
                             
-                            String notificationBody = "Congratulations! Your wish for " + itemName + " has been fully funded thanks to your friends ";
+                            String notificationBody = "Congratulations! Your wish for " + itemName + " has been fully funded thanks to ";
                             for (int i : recieverIds){
                                 JSONObject friend = new JSONObject(utility.getUsrData(i));
-                                String friendName = friend.getString("First_name") +" "+ user2.getString("Last_name");
+                                String friendName = friend.getString("First_name") +" "+ friend.getString("Last_name");
                                 notificationBody+= friendName+ " and ";
                             }
+                            notificationBody=notificationBody.substring(1, notificationBody.length()-4);
                             NotificationInfo notificationToWishOwner = new NotificationInfo(maxNotificationId,
                                     notificationBody,
                                     "N", "Wish Completion");
