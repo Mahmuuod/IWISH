@@ -577,7 +577,7 @@ public static boolean areFriends(int requester_id, int receiver_id) throws SQLEx
         PreparedStatement statement = con.prepareStatement("select f.FRIEND_ID as FRIEND_ID, u.FIRST_NAME as FIRST_NAME, u.LAST_NAME as LAST_NAME, u.USERNAME as USERNAME, u.BIRTHDATE as BIRTHDATE, u.EMAIL as EMAIL from FRIENDLIST f JOIN USERS u ON f.friend_id = u.user_id where f.user_id = ?"); //edit
         statement.setInt(1, User_id);
         ResultSet rs = statement.executeQuery();
-        if (rs.next()) {
+        while (rs.next()) {
             friend = new FriendInfo(rs.getInt("FRIEND_ID"), rs.getString("FIRST_NAME"),
                     rs.getString("LAST_NAME"), rs.getString("USERNAME"), rs.getDate("BIRTHDATE"), rs.getString("EMAIL"));
             friends.add(friend);
