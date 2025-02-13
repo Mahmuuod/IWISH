@@ -88,7 +88,7 @@ public class FriendrequestController implements Initializable {
        
           
     }
-    @FXML
+        @FXML
 private void fetchPendingRequests() {
     System.out.println("Fetching pending friend requests...");
 
@@ -153,7 +153,7 @@ private void fetchPendingRequests() {
 
             data.put("header", "search user");
             data.put("query", searchlabel.getText());
-            data.put("userID", userData.getUser_id());
+            data.put("userID", UserInfo.getUser().getUser_id());
 
             System.out.println("Sending request: " + data);
 

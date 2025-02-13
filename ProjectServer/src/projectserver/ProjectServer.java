@@ -81,8 +81,8 @@ class HandleClients extends Thread {
                             break;
                         case "sign up":
                             UserInfo user = new UserInfo(req.getMaxId(), request.getString("First_name"), request.getString("Last_name"),
-                                    request.getString("Username"), String.valueOf(request.getInt("Password")), Date.valueOf(request.getString("Birthdate")),
-                                    request.getString("Email"), String.valueOf(request.getInt("Phone")), String.valueOf(request.getInt("Bank_card")), request.getInt("User_balance"));
+                                    request.getString("Username"), String.valueOf(request.get("Password")), Date.valueOf(request.getString("Birthdate")),
+                                    request.getString("Email"), String.valueOf(request.get("Phone")), String.valueOf(request.get("Bank_card")), request.getInt("User_balance"));
                             boolean state = req.signUp(user);
                             respond = new JSONObject();
                             if (state) {

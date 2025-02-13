@@ -89,6 +89,11 @@ ServerAccess SA=new ServerAccess();
    // System.out.println("Server Response: " + response.getString("message"));
 }
 
+    @FXML
+private void friendrequestbtn(ActionEvent event) {
+
+            switchToFriendRequestScene(event,UserInfo.getInstance());
+}
 
  @FXML
 public void refreshWish(ActionEvent event) throws IOException {
@@ -103,7 +108,22 @@ public void itemsBtn (ActionEvent event) throws IOException {
     Utilities.ChangeScene("Item.fxml", event);
     
 }
+ private void switchToFriendRequestScene(ActionEvent event, UserInfo loggedInUser) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Friendrequest.fxml"));
+        Parent root = loader.load();
 
+        // Pass user data to FriendrequestController
+        FriendrequestController controller = loader.getController();
+        controller.setUserData(loggedInUser);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
     @Override
 public void initialize(URL url, ResourceBundle rb) {
         
