@@ -1,6 +1,7 @@
 package ClientApp;
 import Utilities.ServerAccess;
 import Utilities.UserInfo;
+import Utilities.Utilities;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -93,13 +94,13 @@ private void fetchPendingRequests() {
     System.out.println("Fetching pending friend requests...");
 
   
-    System.out.println("Requester ID (Logged-in user): " + userData.getUser_id());//Debugging   
+    System.out.println("Requester ID (Logged-in user): " + UserInfo.getUser().getUser_id());//Debugging   
     JSONObject data = new JSONObject();
     ServerAccess SA = new ServerAccess();
     SA.ServerInit();
 
     data.put("header", "fetch pending requests");
-    data.put("userID", userData.getUser_id());
+    data.put("userID", UserInfo.getUser().getUser_id());
 
     SA.ServerWrite(data);
     JSONObject response = SA.ServerReadSearch();
@@ -195,11 +196,11 @@ private void fetchPendingRequests() {
     }
    
     
- public void setUserData(UserInfo user) {
+ /*public void setUserData(UserInfo user) {
     this.userData = user;
     System.out.println("Requester ID (Logged-in user): " + userData.getUser_id());
     fetchPendingRequests();
-}
+}*/
   @FXML private void handleRefreshBtn(ActionEvent event) {
         
         fetchPendingRequests();
@@ -217,9 +218,9 @@ private void fetchPendingRequests() {
 
         JSONObject data = new JSONObject();
         data.put("header", "send friend request");
-        data.put("requester_id", userData.getUser_id());
+        data.put("requester_id", UserInfo.getUser().getUser_id());
         data.put("receiver_id", selectedUser.getUser_id());
-        data.put("requester_name", userData.getUsername());
+        data.put("requester_name", UserInfo.getUser().getUsername());
 
         System.out.println("Sending request: " + data);
 
@@ -253,18 +254,18 @@ private void handleAcceptBtn(ActionEvent event) {
         return;
     }
 
-    if (userData == null) {
+  /*  if (userData == null) {
         System.out.println("ERROR: userData is null!");
         return;
-    }
+    }*/
 
     JSONObject data = new JSONObject();
     data.put("header", "accept friend request");
-    data.put("receiver_id", userData.getUser_id());
+    data.put("receiver_id", UserInfo.getUser().getUser_id());
     data.put("requester_id", selectedUser.getUser_id());
-    data.put("receiver_name", userData.getUsername());
+    data.put("receiver_name", UserInfo.getUser().getUsername());
 
-    System.out.println(userData.getUsername() + " accepted " + selectedUser.getUsername());
+    System.out.println(UserInfo.getUser().getUsername() + " accepted " + selectedUser.getUsername());
     System.out.println("Sending request: " + data.toString()); // Debugging
 
     ServerAccess SA = new ServerAccess();
@@ -299,9 +300,9 @@ private void handleDeclineBtn(ActionEvent event) {
     JSONObject data = new JSONObject();
     data.put("header", "decline friend request");
     data.put("requester_id", selectedUser.getUser_id()); 
-    data.put("receiver_id", userData.getUser_id());
+    data.put("receiver_id", UserInfo.getUser().getUser_id());
 
-    System.out.println(userData.getUsername() + " Declined friend request from " + selectedUser.getUsername());
+    System.out.println(UserInfo.getUser().getUsername() + " Declined friend request from " + selectedUser.getUsername());
     System.out.println("Sending request: " + data.toString()); // Debugging
 
     ServerAccess SA = new ServerAccess();
@@ -319,28 +320,43 @@ private void handleDeclineBtn(ActionEvent event) {
         JOptionPane.showMessageDialog(null, "Failed to decline friend request!", "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
-@FXML
-     public void handleItem(ActionEvent event) throws IOException {
+    @FXML
+    private void addbalancefn(ActionEvent event) {
+        Utilities.ChangeScene("Addbalance.fxml",event);
 
-       FXMLLoader loader = new FXMLLoader(getClass().getResource("items.fxml"));
-        Parent root = loader.load();
-        
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    
     }
-     @FXML
-     public void handleWishList(ActionEvent event) throws IOException {
 
-       FXMLLoader loader = new FXMLLoader(getClass().getResource("WishList.fxml"));
-        Parent root = loader.load();
-        
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    
+    @FXML
+    private void notificationfn(ActionEvent event) {
+       Utilities.ChangeScene("Notifications.fxml",event);
+
     }
+
+    @FXML
+    private void logoutfn(ActionEvent event) {
+      Utilities.ChangeScene("SignIn.fxml",event);
+
+    }
+            @FXML
+    private void friendrequestbtn(ActionEvent event) {
+
+                Utilities.ChangeScene("Friendrequest.fxml",event);
+    }
+
+    @FXML
+   public void refreshWish(ActionEvent event) throws IOException {
+       Utilities.ChangeScene("WishList.fxml", event);
+   }
+    @FXML
+   public void friendlistbtn(ActionEvent event) throws IOException {
+       Utilities.ChangeScene("FriendList.fxml", event);
+   }
+    @FXML
+   public void itemsBtn (ActionEvent event) throws IOException {
+       Utilities.ChangeScene("Item.fxml", event);
+
+   }
+     
 
     
 }

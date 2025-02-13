@@ -5,7 +5,7 @@
  */
 package Utilities;
 
-import ClientApp.TestController;
+import ClientApp.ProjectClient;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -82,7 +82,7 @@ public class ServerAccess {
             }
 
                     } catch (IOException ex) {
-                        Logger.getLogger(TestController.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(ProjectClient.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     finally {
                     latch.countDown(); 
@@ -94,7 +94,7 @@ public class ServerAccess {
     try {
         latch.await(); // Wait for the thread to finish
     } catch (InterruptedException ex) {
-        Logger.getLogger(TestController.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(ProjectClient.class.getName()).log(Level.SEVERE, null, ex);
     }
         return jsonResponse;
     }
@@ -111,7 +111,7 @@ public class ServerAccess {
                         JsonData = new JSONObject(msg);
 
                     } catch (IOException ex) {
-                        Logger.getLogger(TestController.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(ProjectClient.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     finally {
                     latch.countDown(); 
@@ -123,7 +123,7 @@ public class ServerAccess {
     try {
         latch.await(); // Wait for the thread to finish
     } catch (InterruptedException ex) {
-        Logger.getLogger(TestController.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(ProjectClient.class.getName()).log(Level.SEVERE, null, ex);
     }
         return JsonData;
     }

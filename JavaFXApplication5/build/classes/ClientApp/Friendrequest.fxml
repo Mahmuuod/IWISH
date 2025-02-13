@@ -11,40 +11,36 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F9EDED;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.FriendrequestController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F9EDED;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.FriendrequestController">
     <left>
         <AnchorPane prefHeight="1024.0" prefWidth="320.0" style="-fx-background-color: #3F418D;" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="wishlistbtn" contentDisplay="CENTER" layoutX="65.0" layoutY="350.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Home">
-               <font>
-                  <Font size="15.0" />
-               </font></Button>
-            <Button fx:id="wishlistbtn1" contentDisplay="CENTER" layoutX="65.0" layoutY="430.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Notifications">
+            <Button fx:id="notificationbtn" contentDisplay="CENTER" layoutX="65.0" layoutY="430.0" mnemonicParsing="false" onAction="#notificationfn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Notifications">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="wishlistbtn11" contentDisplay="CENTER" layoutX="65.0" layoutY="510.0" mnemonicParsing="false" onAction="#handleWishList" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="WishList">
+            <Button fx:id="wishlistbtn" contentDisplay="CENTER" layoutX="65.0" layoutY="510.0" mnemonicParsing="false" onAction="#refreshWish" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="WishList">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="wishlistbtn111" contentDisplay="CENTER" layoutX="65.0" layoutY="670.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Friend List">
+            <Button fx:id="friendlistbtn" contentDisplay="CENTER" layoutX="65.0" layoutY="670.0" mnemonicParsing="false" onAction="#friendlistbtn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Friend List">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="wishlistbtn1111" contentDisplay="CENTER" layoutX="65.0" layoutY="590.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Add Friend">
+            <Button fx:id="friendrequestbtn" contentDisplay="CENTER" layoutX="65.0" layoutY="590.0" mnemonicParsing="false" onAction="#friendrequestbtn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Add Friend">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="wishlistbtn11111" contentDisplay="CENTER" layoutX="65.0" layoutY="874.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Log out">
+            <Button fx:id="logoutbtn" contentDisplay="CENTER" layoutX="65.0" layoutY="874.0" mnemonicParsing="false" onAction="#logoutfn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Log out">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="wishlistbtn11112" contentDisplay="CENTER" layoutX="65.0" layoutY="750.0" mnemonicParsing="false" onAction="#handleItem" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Items">
+            <Button fx:id="addbalancebtn" contentDisplay="CENTER" layoutX="65.0" layoutY="750.0" mnemonicParsing="false" onAction="#addbalancefn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Add Balance">
                <font>
                   <Font size="15.0" />
                </font>

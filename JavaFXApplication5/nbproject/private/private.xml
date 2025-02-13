@@ -3,26 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/ForgetPasswordController.java</file>
-            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/Utilities/FriendWishInfo.java</file>
             <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/SignInController.java</file>
-            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/FriendrequestController.java</file>
-            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/ContributePopupController.java</file>
+            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/SignIn.fxml</file>
             <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/Utilities/UserInfo.java</file>
-            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/ForgetPassword.fxml</file>
-            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/Utilities/ItemsInfo.java</file>
+            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/Utilities/Utilities.java</file>
             <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/FriendList.fxml</file>
             <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/Utilities/ServerAccess.java</file>
             <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/FriendListController.java</file>
-            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/WishListController.java</file>
-            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/NotificationsController.java</file>
-            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/SignIn.fxml</file>
-            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/ContributePopup.fxml</file>
-            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/Friendrequest.fxml</file>
-            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/Utilities/FriendInfo.java</file>
-            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/Utilities/Utilities.java</file>
-            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/ClientApp/Notifications.fxml</file>
-            <file>file:/D:/study/iti/Java/java2/Project/JavaFXApplication5/src/Utilities/NotificationInfo.java</file>
         </group>
     </open-files>
 </project-private>

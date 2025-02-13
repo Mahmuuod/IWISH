@@ -33,6 +33,7 @@ import javax.swing.JOptionPane;
 import org.json.JSONObject;
 import Utilities.ServerAccess.*;
 import Utilities.UserInfo;
+import java.sql.Date;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -68,12 +69,16 @@ public class SignInController implements Initializable {
         // System.out.println(data);
         JSONObject response = SA.ServerRead();
         //System.out.println(response);
+//    public UserInfo(int User_id, String First_name, String Last_name, String Username, String Password, Date Birthdate, String Email, String Phone, String Bank_card, int User_balance) {
 
         if (response.getString("header").equals("user exists")) {
-            SA.SetUserData(response);
-            //Utilities.ChangeScene("Friendrequest.fxml", event);
-            SA.ServerKill();
-            switchToFriendRequestScene(event,UserInfo.getInstance());
+            UserInfo.setInstance(new UserInfo(response.getInt("User_id"), response.getString("First_name"), response.getString("Last_name"), response.getString("Username"),
+                   String.valueOf( response.get("Password")), Date.valueOf(response.getString("Birthdate")), response.getString("Email"),
+                     String.valueOf(response.get("Phone")),
+                     String.valueOf(response.get("Bank_card")),
+                     response.getInt("User_balance")
+            ));
+            Utilities.ChangeScene("WishList.fxml", event);
 
         } else {
             JOptionPane.showMessageDialog(null, "User doesn't exists", "Sign In Error", JOptionPane.ERROR_MESSAGE);
@@ -81,7 +86,8 @@ public class SignInController implements Initializable {
         }
 
     }
- private void switchToFriendRequestScene(ActionEvent event, UserInfo loggedInUser) {
+
+    /*private void switchToFriendRequestScene(ActionEvent event, UserInfo loggedInUser) {
     try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("WishList.fxml"));
         Parent root = loader.load();
@@ -96,12 +102,12 @@ public class SignInController implements Initializable {
     } catch (IOException e) {
         e.printStackTrace();
     }
-}
+}*/
     @FXML
     private void handleSignUpButtonAction(ActionEvent event) {
 
         Utilities.ChangeScene("SignUp.fxml", event);
-        
+
     }
 
     @Override

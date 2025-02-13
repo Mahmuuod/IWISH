@@ -38,14 +38,12 @@
                         <Image url="@../../../../../../../Downloads/100_Homemade_Gifts_hero-4ae166376b9748098fe29d06f3ba3e22.jpg" />
                     </image>
                 </ImageView>
-                <Button fx:id="wishlistbtn" layoutX="93.0" layoutY="463.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="142.0" text="My Wish List" AnchorPane.leftAnchor="93.0" />
-                <Button fx:id="friendrequestbtn" layoutX="86.0" layoutY="633.0" mnemonicParsing="false" onAction="#friendrequestbtn" prefHeight="31.0" prefWidth="149.0" text="Friend Request" AnchorPane.leftAnchor="86.0" />
-                <Button fx:id="friendlistbtn" layoutX="89.0" layoutY="564.0" mnemonicParsing="false" onAction="#friendlistbtn" prefHeight="31.0" prefWidth="144.0" text="Freinds List " AnchorPane.leftAnchor="89.0" />
-                <Button fx:id="contributionlistbtn" layoutX="85.0" layoutY="706.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Contribution List " AnchorPane.leftAnchor="85.0" />
-                <Button fx:id="addbalancebtn" layoutX="86.0" layoutY="782.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="151.0" text="Add Balance" AnchorPane.leftAnchor="86.0" />
-                <Button fx:id="notificationbtn" layoutX="97.0" layoutY="868.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="128.0" text="Notification" AnchorPane.leftAnchor="97.0" />
-                <Button fx:id="logoutbtn" layoutX="128.0" layoutY="926.0" mnemonicParsing="false" text="Log Out" AnchorPane.leftAnchor="128.0" />
-            <Button fx:id="items" layoutX="128.0" layoutY="512.0" mnemonicParsing="false" onAction="#itemsBtn" text="items" />
+                <Button fx:id="wishlistbtn" layoutX="79.0" layoutY="504.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="142.0" text="My Wish List" AnchorPane.leftAnchor="79.0" />
+                <Button fx:id="friendrequestbtn" layoutX="76.0" layoutY="632.0" mnemonicParsing="false" onAction="#friendrequestbtn" prefHeight="31.0" prefWidth="149.0" text="Friend Request" AnchorPane.leftAnchor="76.0" />
+                <Button fx:id="friendlistbtn" layoutX="78.0" layoutY="568.0" mnemonicParsing="false" onAction="#friendlistbtn" prefHeight="31.0" prefWidth="144.0" text="Freinds List " AnchorPane.leftAnchor="78.0" />
+                <Button fx:id="addbalancebtn" layoutX="75.0" layoutY="697.0" mnemonicParsing="false" onAction="#addbalancefn" prefHeight="31.0" prefWidth="151.0" text="Add Balance" AnchorPane.leftAnchor="75.0" />
+                <Button fx:id="notificationbtn" layoutX="78.0" layoutY="758.0" mnemonicParsing="false" onAction="#notificationfn" prefHeight="31.0" prefWidth="128.0" text="Notification" AnchorPane.leftAnchor="78.0" />
+                <Button fx:id="logoutbtn" layoutX="93.0" layoutY="820.0" mnemonicParsing="false" onAction="#logoutfn" text="Log Out" AnchorPane.leftAnchor="93.0" />
             </children>
         </AnchorPane>
         <TableView fx:id="wishlisttable" layoutX="597.0" layoutY="219.0" prefHeight="558.0" prefWidth="464.0">
@@ -59,7 +57,8 @@
                 
             </columnResizePolicy>
         </TableView>
-        <Button fx:id="refreshbtn" layoutX="697.0" layoutY="835.0" mnemonicParsing="false" onAction="#refreshWish" text="Refresh" />
-        <Button fx:id="Deletebtn" layoutX="903.0" layoutY="835.0" mnemonicParsing="false" onAction="#deleteWish" text="Delete" />
+        <Button fx:id="refreshbtn" layoutX="487.0" layoutY="835.0" mnemonicParsing="false" onAction="#refreshWish" text="Refresh" />
+        <Button fx:id="Deletebtn" layoutX="1137.0" layoutY="835.0" mnemonicParsing="false" onAction="#deleteWish" text="Delete" />
+      <Button fx:id="items" layoutX="801.0" layoutY="835.0" mnemonicParsing="false" onAction="#itemsBtn" text="items" />
     </children>
 </AnchorPane>

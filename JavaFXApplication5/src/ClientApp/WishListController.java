@@ -41,8 +41,6 @@ ServerAccess SA=new ServerAccess();
     @FXML
     private Button friendlistbtn;
     @FXML
-    private Button contributionlistbtn;
-    @FXML
     private Button addbalancebtn;
     @FXML
     private Button notificationbtn;
@@ -89,26 +87,8 @@ ServerAccess SA=new ServerAccess();
    // System.out.println("Server Response: " + response.getString("message"));
 }
 
-    @FXML
-private void friendrequestbtn(ActionEvent event) {
 
-            switchToFriendRequestScene(event,UserInfo.getInstance());
-}
-
- @FXML
-public void refreshWish(ActionEvent event) throws IOException {
-    Utilities.ChangeScene("WishList.fxml", event);
-}
- @FXML
-public void friendlistbtn(ActionEvent event) throws IOException {
-    Utilities.ChangeScene("FriendList.fxml", event);
-}
- @FXML
-public void itemsBtn (ActionEvent event) throws IOException {
-    Utilities.ChangeScene("Item.fxml", event);
-    
-}
- private void switchToFriendRequestScene(ActionEvent event, UserInfo loggedInUser) {
+ /*private void switchToFriendRequestScene(ActionEvent event, UserInfo loggedInUser) {
     try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Friendrequest.fxml"));
         Parent root = loader.load();
@@ -123,7 +103,7 @@ public void itemsBtn (ActionEvent event) throws IOException {
     } catch (IOException e) {
         e.printStackTrace();
     }
-}
+}*/
     @Override
 public void initialize(URL url, ResourceBundle rb) {
         
@@ -174,9 +154,51 @@ LeftCol.setCellValueFactory(new PropertyValueFactory<>("contribution_amount"));
     }    
     WishInfo info;
     
- public void setUserData(UserInfo user) {
+/* public void setUserData(UserInfo user) {
     this.userData = user;
     System.out.println("Requester ID (Logged-in user): " + userData.getUser_id());
    
-}
+}*/
+
+    private void contributionlistfn(ActionEvent event) {
+                    Utilities.ChangeScene("Friendrequest.fxml",event);
+
+    }
+
+    @FXML
+    private void addbalancefn(ActionEvent event) {
+        Utilities.ChangeScene("Addbalance.fxml",event);
+
+    }
+
+    @FXML
+    private void notificationfn(ActionEvent event) {
+       Utilities.ChangeScene("Notifications.fxml",event);
+
+    }
+
+    @FXML
+    private void logoutfn(ActionEvent event) {
+      Utilities.ChangeScene("SignIn.fxml",event);
+
+    }
+            @FXML
+    private void friendrequestbtn(ActionEvent event) {
+
+                Utilities.ChangeScene("Friendrequest.fxml",event);
+    }
+
+    @FXML
+   public void refreshWish(ActionEvent event) throws IOException {
+       Utilities.ChangeScene("WishList.fxml", event);
+   }
+    @FXML
+   public void friendlistbtn(ActionEvent event) throws IOException {
+       Utilities.ChangeScene("FriendList.fxml", event);
+   }
+    @FXML
+   public void itemsBtn (ActionEvent event) throws IOException {
+       Utilities.ChangeScene("Item.fxml", event);
+
+   }
 }

@@ -21,6 +21,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
 import Utilities.*;
+import java.io.IOException;
 import org.json.JSONObject;
 /**
  * FXML Controller class
@@ -102,5 +103,42 @@ public class AddbalanceController implements Initializable {
         balanceLabel.setText("Current Balance: $"+String.valueOf(UserInfo.getUser().getUser_balance()));
         
     }    
+    
+        @FXML
+    private void addbalancefn(ActionEvent event) {
+        Utilities.ChangeScene("Addbalance.fxml",event);
+
+    }
+
+    @FXML
+    private void notificationfn(ActionEvent event) {
+       Utilities.ChangeScene("Notifications.fxml",event);
+
+    }
+
+    @FXML
+    private void logoutfn(ActionEvent event) {
+      Utilities.ChangeScene("SignIn.fxml",event);
+
+    }
+            @FXML
+    private void friendrequestbtn(ActionEvent event) {
+
+                Utilities.ChangeScene("Friendrequest.fxml",event);
+    }
+
+    @FXML
+   public void refreshWish(ActionEvent event) throws IOException {
+       Utilities.ChangeScene("WishList.fxml", event);
+   }
+    @FXML
+   public void friendlistbtn(ActionEvent event) throws IOException {
+       Utilities.ChangeScene("FriendList.fxml", event);
+   }
+    @FXML
+   public void itemsBtn (ActionEvent event) throws IOException {
+       Utilities.ChangeScene("Item.fxml", event);
+
+   }
     
 }
