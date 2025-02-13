@@ -324,7 +324,21 @@ boolean state=true;
         }
         return notification_as_string;
     }
- 
+     
+    public ArrayList<String> searchFriends(int User_id, String query) { 
+
+        ArrayList<String> friends_as_string = new ArrayList<>();
+        try {
+            ArrayList<FriendInfo> friends = DBA.searchFriends(User_id, query);
+            for (FriendInfo friend : friends) {
+                friends_as_string.add(friend.toString()); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return friends_as_string;
+    }
+
 
 
 }
