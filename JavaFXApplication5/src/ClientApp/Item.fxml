@@ -11,7 +11,7 @@
    <left>
       <AnchorPane prefHeight="1024.0" prefWidth="278.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="itemsbtn" layoutX="111.0" layoutY="504.0" mnemonicParsing="false" text="items" />
+            <Button fx:id="itemsbtn" layoutX="111.0" layoutY="504.0" mnemonicParsing="false" onAction="#handleItemsBtn" text="items" />
             <Button fx:id="MyWishlistbtn" layoutX="99.0" layoutY="409.0" mnemonicParsing="false" onAction="#MyWishListBtn" text="my wish list " />
          </children>
       </AnchorPane>

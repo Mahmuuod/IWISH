@@ -1068,6 +1068,22 @@ public static boolean areFriends(int requester_id, int receiver_id) throws SQLEx
             return friends;
 }
     
-    
+    public static ArrayList<ItemsInfo> searchItems(String query) throws SQLException {
+        ArrayList<ItemsInfo> Items = new ArrayList<ItemsInfo>();
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+        String sql = "select ITEM_ID,NAME,PRICE,CATEGORY from Item where lower(NAME)  LIKE lower(?)  OR lower(CATEGORY) LIKE lower(?)"; //edit
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setString(1, "%"+ query + "%");
+        statement.setString(2,  "%"+ query + "%");
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            Items.add(new ItemsInfo(rs.getInt("Item_id"), rs.getString("NAME"),
+                    rs.getInt("PRICE"), rs.getString("CATEGORY")));
+        }
+
+        statement.close();
+        con.close();
+        return Items;
+    }
 
 }

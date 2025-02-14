@@ -296,7 +296,7 @@ class HandleClients extends Thread {
                             ps.println(response.toString());
                             response.clear();
                             break;
-                                          case "show friendlist":
+                        case "show friendlist":
                             /* sends response containing friend list as:
                             {
                               "header": "friendlist",
@@ -308,7 +308,7 @@ class HandleClients extends Thread {
                             { "header": "no friends" }
                              */
 
-                             User_id = request.getInt("user_id");
+                            User_id = request.getInt("user_id");
                             if (req.showFriendList(User_id)) {
                                 ArrayList<String> friends = req.getUsrFriends(User_id);
                                 respond = new JSONObject();
@@ -454,7 +454,7 @@ class HandleClients extends Thread {
                             int wish_id = request.getInt("wish_id");
                             String itemName = req.getItemName(wish_id);
                             JSONObject user2 = new JSONObject(utility.getUsrData(request.getInt("friend_id")));
-                            String userName = user2.getString("First_name") +" "+ user2.getString("Last_name");
+                            String userName = user2.getString("First_name") + " " + user2.getString("Last_name");
                             ArrayList<Integer> recieverIds = req.getContributors(wish_id);
                             int recieverId = request.getInt("friend_id");
 
@@ -473,22 +473,21 @@ class HandleClients extends Thread {
                             } else {
                                 respond.put("header", "notification to contributors duplicated");
                             }
-                            
+
                             System.out.println(respond.toString());
                             ps.println(respond.toString());
                             respond.clear();
-                            
+
                             // send to wish owner
-                            
                             maxNotificationId++;
-                            
+
                             String notificationBody = "Congratulations! Your wish for " + itemName + " has been fully funded thanks to ";
-                            for (int i : recieverIds){
+                            for (int i : recieverIds) {
                                 JSONObject friend = new JSONObject(utility.getUsrData(i));
-                                String friendName = friend.getString("First_name") +" "+ friend.getString("Last_name");
-                                notificationBody+= friendName+ " and ";
+                                String friendName = friend.getString("First_name") + " " + friend.getString("Last_name");
+                                notificationBody += friendName + " and ";
                             }
-                            notificationBody=notificationBody.substring(1, notificationBody.length()-4);
+                            notificationBody = notificationBody.substring(1, notificationBody.length() - 4);
                             NotificationInfo notificationToWishOwner = new NotificationInfo(maxNotificationId,
                                     notificationBody,
                                     "N", "Wish Completion");
@@ -517,12 +516,12 @@ class HandleClients extends Thread {
                             int User_id2 = request.getInt("user_id");
                             if (req.checkNotifications(User_id2)) {
                                 ArrayList<String> notifications = req.getUsrNotifications(User_id2);
-                                
+
                                 respond = new JSONObject();
                                 JSONArray notificationArray = new JSONArray();
 
                                 for (String notification : notifications) {
-                                        System.out.println(notification);
+                                    System.out.println(notification);
                                     JSONObject notification_as_json = new JSONObject(notification);
                                     JSONObject notificationObject = new JSONObject();
                                     notificationObject.put("notification_id", notification_as_json.getInt("Notification_id"));
@@ -544,8 +543,8 @@ class HandleClients extends Thread {
                             ps.println(respond.toString());
                             respond.clear();
                             break;
-                            
-                         case "search friend":
+
+                        case "search friend":
                             String friendquery = request.getString("query");
                             int user_id = request.getInt("userID");
 
@@ -570,6 +569,24 @@ class HandleClients extends Thread {
                             } else {
                                 respond = new JSONObject();
                                 respond.put("header", "no friends found");
+                            }
+
+                            System.out.println("Sending response to client: " + respond.toString()); // Debugging
+
+                            ps.println(respond.toString());
+                            respond.clear();
+                            break;
+                        case "search item":
+                            String query3 = request.getString("query");
+
+                            JSONArray items2 = req.searchItems(query3);
+
+                            respond = new JSONObject();
+                            if (items2.length() > 0) {
+                                respond.put("header", "item search result");
+                                respond.put("items", items2);
+                            } else {
+                                respond.put("header", "no items found");
                             }
 
                             System.out.println("Sending response to client: " + respond.toString()); // Debugging
