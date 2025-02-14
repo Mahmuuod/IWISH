@@ -125,16 +125,13 @@ public class WishListController implements Initializable {
                 super.updateItem(wish, empty);
                 if (empty || wish == null) {
                     setStyle(""); // Reset style for empty rows
-                }
-                else
-                { 
+                } else {
                     if (wish.getContribution_amount() == wish.getItem_Price()) {
                         setStyle("-fx-background-color: #98FF98;");
 
+                    } else {
+                        setStyle(""); // Reset style for empty rows
                     }
-                    else
-                    {                    setStyle(""); // Reset style for empty rows
-}
                 }
             }
         });
