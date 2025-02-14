@@ -448,6 +448,8 @@ public class FriendListController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+       username_lbl.setText(UserInfo.getUser().getUsername());
+       balance_lbl.setText(String.valueOf(UserInfo.getUser().getUser_balance()));
         setupTableColumns();
         JSONObject data = new JSONObject();
         ServerAccess SA = new ServerAccess();

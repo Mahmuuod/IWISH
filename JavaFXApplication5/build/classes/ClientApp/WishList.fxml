@@ -13,12 +13,12 @@
     <children>
         <AnchorPane prefHeight="1024.0" prefWidth="320.0" style="-fx-background-color: #C0B8CA;">
             <children>
-                <Label alignment="CENTER" layoutX="112.0" layoutY="379.0" text="balance" AnchorPane.leftAnchor="112.0">
+                <Label fx:id="balancelbl" alignment="CENTER" layoutX="112.0" layoutY="379.0" text="balance" AnchorPane.leftAnchor="112.0">
                     <font>
                         <Font name="System Bold" size="24.0" />
                     </font>
                 </Label>
-                <Label alignment="CENTER" layoutX="99.0" layoutY="315.0" text="Username" AnchorPane.leftAnchor="99.0">
+                <Label fx:id="usernamelbl" alignment="CENTER" layoutX="99.0" layoutY="315.0" text="Username" AnchorPane.leftAnchor="99.0">
                     <font>
                         <Font name="System Bold" size="24.0" />
                     </font>

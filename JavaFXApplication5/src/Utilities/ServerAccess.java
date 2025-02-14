@@ -16,7 +16,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.json.JSONObject;
 import Utilities.UserInfo.*;
+import java.net.SocketException;
 import java.sql.Date;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import org.json.JSONArray;
 
 /**
@@ -40,7 +43,11 @@ public class ServerAccess {
             ps = new PrintStream(s.getOutputStream());
             dis = new DataInputStream(s.getInputStream());
             JsonData = new JSONObject();
-        } catch (IOException ex) {
+        }catch(SocketException sa)
+                    {
+                JOptionPane.showMessageDialog(null, "Please try to re-open the app", "Server Error", JOptionPane.ERROR_MESSAGE);
+                                System.exit(0);
+                    } catch (IOException ex) {
             Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -81,7 +88,13 @@ public class ServerAccess {
                 jsonResponse.put("response", new JSONObject(msg));
             }
 
-                    } catch (IOException ex) {
+                    }catch(SocketException sa)
+                    {
+                JOptionPane.showMessageDialog(null, "Please try to re-open the app", "Server Error", JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
+
+                    }
+                    catch (IOException ex) {
                         Logger.getLogger(ProjectClient.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     finally {
@@ -130,10 +143,13 @@ public class ServerAccess {
     
     public  void ServerWrite(JSONObject msg)
     {
+        if(ps!=null)
         ps.println(msg.toString());
+
     }
    public  void ServerWrite(JSONArray msg)
     {
+                if(ps!=null)
         ps.println(msg.toString());
     }
     

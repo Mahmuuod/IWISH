@@ -22,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -63,6 +64,10 @@ ServerAccess SA=new ServerAccess();
     @FXML
     private TableColumn<WishInfo, Date> wishdateCol;
     private UserInfo userData;
+    @FXML
+    private Label balancelbl;
+    @FXML
+    private Label usernamelbl;
   
  @FXML
  public void deleteWish (ActionEvent event) throws IOException {
@@ -106,7 +111,9 @@ ServerAccess SA=new ServerAccess();
 }*/
     @Override
 public void initialize(URL url, ResourceBundle rb) {
-        
+       usernamelbl.setText(UserInfo.getUser().getUsername());
+       balancelbl.setText(String.valueOf(UserInfo.getUser().getUser_balance()));
+
 ObservableList<WishInfo> wishesTable=FXCollections.observableArrayList();
 ItemName.setCellValueFactory(new PropertyValueFactory<>("Item_Name"));
 PriceCol.setCellValueFactory(new PropertyValueFactory<>("Item_Price"));
