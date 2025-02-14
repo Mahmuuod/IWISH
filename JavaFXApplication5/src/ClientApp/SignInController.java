@@ -60,29 +60,34 @@ public class SignInController implements Initializable {
     private void handleSignInButtonAction(ActionEvent event) {
         JSONObject data = new JSONObject();
         ServerAccess SA = new ServerAccess();
-        data.put("header", "sign in");
-        data.put("Username", UserNameTa.getText());
-        data.put("Password", PasswordTa.getText());
-
-        SA.ServerInit();
-        SA.ServerWrite(data);
-        // System.out.println(data);
-        JSONObject response = SA.ServerRead();
-        //System.out.println(response);
-//    public UserInfo(int User_id, String First_name, String Last_name, String Username, String Password, Date Birthdate, String Email, String Phone, String Bank_card, int User_balance) {
-
-        if (response.getString("header").equals("user exists")) {
-            UserInfo.setInstance(new UserInfo(response.getInt("User_id"), response.getString("First_name"), response.getString("Last_name"), response.getString("Username"),
-                   String.valueOf( response.get("Password")), Date.valueOf(response.getString("Birthdate")), response.getString("Email"),
-                     String.valueOf(response.get("Phone")),
-                     String.valueOf(response.get("Bank_card")),
-                     response.getInt("User_balance")
-            ));
-            Utilities.ChangeScene("WishList.fxml", event);
+        if (UserNameTa.getText().equals("") || PasswordTa.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please Enter Username and Password", "Sign In Error", JOptionPane.ERROR_MESSAGE);
 
         } else {
-            JOptionPane.showMessageDialog(null, "User doesn't exists", "Sign In Error", JOptionPane.ERROR_MESSAGE);
+            data.put("header", "sign in");
+            data.put("Username", UserNameTa.getText());
+            data.put("Password", PasswordTa.getText());
 
+            SA.ServerInit();
+            SA.ServerWrite(data);
+            // System.out.println(data);
+            JSONObject response = SA.ServerRead();
+            //System.out.println(response);
+//    public UserInfo(int User_id, String First_name, String Last_name, String Username, String Password, Date Birthdate, String Email, String Phone, String Bank_card, int User_balance) {
+
+            if (response.getString("header").equals("user exists")) {
+                UserInfo.setInstance(new UserInfo(response.getInt("User_id"), response.getString("First_name"), response.getString("Last_name"), response.getString("Username"),
+                        String.valueOf(response.get("Password")), Date.valueOf(response.getString("Birthdate")), response.getString("Email"),
+                        String.valueOf(response.get("Phone")),
+                        String.valueOf(response.get("Bank_card")),
+                        response.getInt("User_balance")
+                ));
+                Utilities.ChangeScene("WishList.fxml", event);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "User doesn't exists", "Sign In Error", JOptionPane.ERROR_MESSAGE);
+
+            }
         }
 
     }

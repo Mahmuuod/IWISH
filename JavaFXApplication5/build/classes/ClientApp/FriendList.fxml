@@ -7,10 +7,12 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -74,12 +76,18 @@
       <GridPane alignment="CENTER" hgap="10.0" prefHeight="938.0" prefWidth="1032.0" style="-fx-background-color: linear-gradient(to right, #4A148C, #E1BEE7);" stylesheets="@../Documents/NetBeansProjects/IWish/src/iwish/style.css" vgap="5.0">
            <!-- Friends List -->
            <VBox alignment="CENTER" prefHeight="921.0" prefWidth="508.0" spacing="5" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 20; -fx-padding: 10; -fx-border-color: rgba(255, 255, 255, 0.3);">
-               <Label style="-fx-font-weight: bold;" text="Friends" textFill="#e0e0e0">
+               <Label style="-fx-font-weight: bold;" text="Your Friends" textFill="#e0e0e0">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-               <ListView fx:id="friends_list" prefHeight="875.0" prefWidth="596.0" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.2), 10, 0.5, 0, 3);" />
+            <FlowPane prefHeight="90.0" prefWidth="322.0">
+               <children>
+                  <TextField fx:id="searchlabel" prefHeight="31.0" prefWidth="235.0" promptText="Search by username or email." />
+                  <Button fx:id="searchbtn" mnemonicParsing="false" onAction="#handleSearchBtn" prefHeight="35.0" prefWidth="82.0" style="-fx-background-color: #3F418D; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-border-color: transparent; -fx-border-width: 2; -fx-border-radius: 25; -fx-background-radius: 25;" text="Search" />
+               </children>
+            </FlowPane>
+               <ListView fx:id="friends_list" prefHeight="874.0" prefWidth="322.0" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.2), 10, 0.5, 0, 3);" />
             <Button fx:id="remove_friend_btn" mnemonicParsing="false" onAction="#handleRemoveFriendButtonAction" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(to right, #FF1744, #D500F9); -fx-background-radius: 25; -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.5), 10, 0.5, 0, 3);" text="Remove Friend" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -95,6 +103,7 @@
                </Tab>
                <Tab fx:id="wishlist_tab" text="Wishlist">
                   <content>
+                  
                   
                        <!-- Wishlist Table -->
                        <TableView fx:id="friend_wishlist_table" accessibleRole="TABLE_ROW" prefHeight="923.0" prefWidth="312.0" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-padding: 10;">
