@@ -6,6 +6,8 @@
 package ClientApp;
 
 import Utilities.FriendWishInfo;
+import Utilities.UserInfo;
+import Utilities.Utilities;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -20,7 +22,8 @@ import javafx.stage.Stage;
  * @author randa
  */
 public class ContributePopupController implements Initializable {
-
+    Utilities u=new Utilities();
+    UserInfo user;
     @FXML
     private Label wishNameLabel;
 
@@ -92,5 +95,14 @@ public class ContributePopupController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+    }
+
+public void setData(UserInfo user2) {
+    this.user = user2;
+    updateUI();  // Now update UI after user is set
+}
+
+    private void updateUI() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

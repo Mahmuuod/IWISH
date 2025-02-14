@@ -255,10 +255,12 @@ public class DBA {
         System.out.println("Second row inserted into FriendList successfully!");
 
         PreparedStatement statement3 = con.prepareStatement(
-            "INSERT INTO notification (Notification_ID, Context, is_read, Type) VALUES (FriendRequestnotification_seq.NEXTVAL, ?, 'N', 'accepted friend request')"
+            "INSERT INTO notification (Notification_ID, Context, is_read, Type) VALUES (?, ?, 'N', 'accepted friend request')"
         );
+        int notification_id=getNotificationMAXID();
         String notificationMessage = receiver_name + " has accepted your friend request";
-        statement3.setString(1, notificationMessage);
+        statement3.setString(2, notificationMessage);
+        statement3.setInt(1,notification_id);
         int us3 = statement3.executeUpdate();
 
         if (us3 <= 0) {
@@ -270,9 +272,11 @@ public class DBA {
         System.out.println("Accepted friend request notification inserted successfully!");
 
         PreparedStatement statement4 = con.prepareStatement(
-            "INSERT INTO user_notification (reciever_ID, Notification_ID, Notification_Date, Notification_Time) VALUES (?, FriendRequestnotification_seq.CURRVAL, sysdate,  sysdate)"
+            "INSERT INTO user_notification (reciever_ID, Notification_ID, Notification_Date, Notification_Time) VALUES (?, ?, sysdate,  sysdate)"
         );
         statement4.setInt(1, requester_id);
+        statement4.setInt(2, notification_id);
+        
         int us4 = statement4.executeUpdate();
 
         if (us4 <= 0) {

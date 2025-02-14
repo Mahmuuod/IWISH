@@ -13,7 +13,7 @@ import java.sql.Date;
  */
 public class UserInfo {
 
-    private static UserInfo instance;
+    private  UserInfo instance;
     private int User_id;
     private String First_name;
     private String Last_name;
@@ -31,7 +31,7 @@ public class UserInfo {
     }
     // private UserInfo(){}
 
-    public static UserInfo getUser() {
+    public  UserInfo getUser() {
         return instance;
     }
 
@@ -151,12 +151,12 @@ public class UserInfo {
         instance=this;
     }
 
-    public static UserInfo getInstance() {
+    public  UserInfo getInstance() {
         return instance;
     }
 
-    public static void setInstance(UserInfo instance) {
-        UserInfo.instance = instance;
+    public  void setInstance(UserInfo instance) {
+        this.instance = instance;
     }
 
      public void setUser(int User_id, String First_name, String Last_name, String Username, 

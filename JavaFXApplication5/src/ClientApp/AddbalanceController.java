@@ -29,7 +29,8 @@ import org.json.JSONObject;
  * @author osama
  */
 public class AddbalanceController implements Initializable {
-
+    Utilities u=new Utilities();
+    UserInfo user;
     @FXML
     private Button homeButton;
     @FXML
@@ -57,7 +58,7 @@ public class AddbalanceController implements Initializable {
                 String textField=amountField.getText();
                 JSONObject request=new JSONObject() ;
                 JSONObject respond=new JSONObject() ;
-                int user_balance=UserInfo.getUser().getUser_balance();
+                int user_balance=user.getUser_balance();
                try {
             if(Integer.parseInt(amountField.getText())<10000)
             amount=Integer.parseInt(amountField.getText());
@@ -68,14 +69,14 @@ public class AddbalanceController implements Initializable {
                 {
                     request.put("header", "add balance");
                     request.put("value",amount );
-                    request.put("user id",UserInfo.getUser().getUser_id() );
+                    request.put("user id",user.getUser_id() );
 
                     ServerAccess SA=new ServerAccess();
                     SA.ServerInit();
                     SA.ServerWrite(request);
                     respond=SA.ServerRead();
-                    UserInfo.getUser().setUser_balance(respond.getInt("value"));
-                    user_balance=UserInfo.getUser().getUser_balance();
+                    user.setUser_balance(respond.getInt("value"));
+                    user_balance=user.getUser_balance();
                     balanceLabel.setText("Current Balance: $"+user_balance);
                     SA.ServerKill();
                     
@@ -96,49 +97,64 @@ public class AddbalanceController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ObservableList<String> items = FXCollections.observableArrayList("Credit Card", "Phone Wallet");
-        PaymenChoice.setItems(items);
-        PaymenChoice.setValue("Credit Card");
-        
-        balanceLabel.setText("Current Balance: $"+String.valueOf(UserInfo.getUser().getUser_balance()));
+        if(user != null)
+            updateUI();
         
     }    
     
-        @FXML
+    private void contributionlistfn(ActionEvent event) {
+        u.switchToContributePopupScene(event, user);
+
+    }
+
+    @FXML
     private void addbalancefn(ActionEvent event) {
-        Utilities.ChangeScene("Addbalance.fxml",event);
+        u.switchToAddbalanceScene(event, user);
 
     }
 
     @FXML
     private void notificationfn(ActionEvent event) {
-       Utilities.ChangeScene("Notifications.fxml",event);
+        u.switchToNotificationScene(event, user);
 
     }
 
     @FXML
     private void logoutfn(ActionEvent event) {
-      Utilities.ChangeScene("SignIn.fxml",event);
+        Utilities.ChangeScene("SignIn.fxml", event);
 
     }
-            @FXML
+
+    @FXML
     private void friendrequestbtn(ActionEvent event) {
 
-                Utilities.ChangeScene("Friendrequest.fxml",event);
+        u.switchToFriendrequestScene(event, user);
     }
 
     @FXML
-   public void refreshWish(ActionEvent event) throws IOException {
-       Utilities.ChangeScene("WishList.fxml", event);
-   }
-    @FXML
-   public void friendlistbtn(ActionEvent event) throws IOException {
-       Utilities.ChangeScene("FriendList.fxml", event);
-   }
-    @FXML
-   public void itemsBtn (ActionEvent event) throws IOException {
-       Utilities.ChangeScene("Item.fxml", event);
+    public void refreshWish(ActionEvent event) throws IOException {
+        u.switchToWishListScene(event, user);
+    }
 
-   }
+    @FXML
+    public void friendlistbtn(ActionEvent event) throws IOException {
+        u.switchToFriendListScene(event, user);
+    }
+
+    @FXML
+    public void itemsBtn(ActionEvent event) throws IOException {
+        u.switchToItemsScene(event, user);
+
+    }
+
+public void setData(UserInfo user2) {
+    this.user = user2;
+    updateUI();  // Now update UI after user is set
+}
+
+    private void updateUI() {
+    }
+
+
     
 }

@@ -49,51 +49,55 @@ public class NotificationsController implements Initializable {
     private Button FriendList_btn;
     @FXML
     private TableColumn<NotificationInfo, ?> date_col;
-    private int currentUserId = UserInfo.getUser().getUser_id();
+    UserInfo user;
+    private int currentUserId ;
     @FXML
     private Button NotificatioList_btn;
-    
+    Utilities u=new Utilities();
     private void contributionlistfn(ActionEvent event) {
-                    Utilities.ChangeScene("Friendrequest.fxml",event);
+        u.switchToContributePopupScene(event, user);
 
     }
 
     @FXML
     private void addbalancefn(ActionEvent event) {
-        Utilities.ChangeScene("Addbalance.fxml",event);
+        u.switchToAddbalanceScene(event, user);
 
     }
 
     @FXML
     private void notificationfn(ActionEvent event) {
-       Utilities.ChangeScene("Notifications.fxml",event);
+        u.switchToNotificationScene(event, user);
 
     }
 
     @FXML
     private void logoutfn(ActionEvent event) {
-      Utilities.ChangeScene("SignIn.fxml",event);
+        Utilities.ChangeScene("SignIn.fxml", event);
 
     }
-            @FXML
+
+    @FXML
     private void friendrequestbtn(ActionEvent event) {
 
-                Utilities.ChangeScene("Friendrequest.fxml",event);
+        u.switchToFriendrequestScene(event, user);
     }
 
     @FXML
-   public void refreshWish(ActionEvent event) throws IOException {
-       Utilities.ChangeScene("WishList.fxml", event);
-   }
-    @FXML
-   public void friendlistbtn(ActionEvent event) throws IOException {
-       Utilities.ChangeScene("FriendList.fxml", event);
-   }
-    @FXML
-   public void itemsBtn (ActionEvent event) throws IOException {
-       Utilities.ChangeScene("Item.fxml", event);
+    public void refreshWish(ActionEvent event) throws IOException {
+        u.switchToWishListScene(event, user);
+    }
 
-   }
+    @FXML
+    public void friendlistbtn(ActionEvent event) throws IOException {
+        u.switchToFriendListScene(event, user);
+    }
+
+    @FXML
+    public void itemsBtn(ActionEvent event) throws IOException {
+        u.switchToItemsScene(event, user);
+
+    }
     private void setupTableColumns() {
 
         // binds objects to rows where each attribute is bound to a column
@@ -155,18 +159,29 @@ public class NotificationsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       username_lbl.setText(UserInfo.getUser().getUsername());
-       balance_lbl.setText(String.valueOf(UserInfo.getUser().getUser_balance()));
+if(user!=null)
+{
+        System.out.println(user.toString());
+    updateUI();}
+    }
+public void setData(UserInfo user2) {
+    this.user = user2;
+    updateUI();  // Now update UI after user is set
+}
+
+    private void updateUI() {
+       username_lbl.setText(user.getUsername());
+       balance_lbl.setText(String.valueOf(user.getUser_balance()));
         setupTableColumns();
         JSONObject data = new JSONObject();
         ServerAccess SA = new ServerAccess();
         data.put("header", "show notifications");
-        data.put("user_id", currentUserId);
+        data.put("user_id", user.getUser_id());
 
         SA.ServerInit();
         SA.ServerWrite(data);
         JSONObject response = SA.ServerRead();
-        loadNotificationsList(response);
-    }
+        loadNotificationsList(response);    }
+
 
 }

@@ -31,7 +31,8 @@ import org.json.JSONObject;
  * @author ascom
  */
 public class FriendrequestController implements Initializable {
-
+    Utilities u=new Utilities();
+    UserInfo user;
     @FXML
     private Button wishlistbtn;
     @FXML
@@ -79,14 +80,9 @@ public class FriendrequestController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        addfriendtableUsernameColumn.setCellValueFactory(new PropertyValueFactory<>("Username"));
-        addfriendtableEmailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
-        addfriendtableBirthDateColumn.setCellValueFactory(new PropertyValueFactory<>("Birthdate"));
-        addfriendtable.setItems(searchResults);
-        pendingNameColumn.setCellValueFactory(new PropertyValueFactory<>("Username"));
-        pendingEmailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
-        pendinglist.setItems(pendingRequests); // Bind the list to TableView
-       
+
+       if(user!=null)
+           updateUI();
           
     }
         @FXML
@@ -94,13 +90,13 @@ private void fetchPendingRequests() {
     System.out.println("Fetching pending friend requests...");
 
   
-    System.out.println("Requester ID (Logged-in user): " + UserInfo.getUser().getUser_id());//Debugging   
+    System.out.println("Requester ID (Logged-in user): " + user.getUser_id());//Debugging   
     JSONObject data = new JSONObject();
     ServerAccess SA = new ServerAccess();
     SA.ServerInit();
 
     data.put("header", "fetch pending requests");
-    data.put("userID", UserInfo.getUser().getUser_id());
+    data.put("userID", user.getUser_id());
 
     SA.ServerWrite(data);
     JSONObject response = SA.ServerReadSearch();
@@ -154,7 +150,7 @@ private void fetchPendingRequests() {
 
             data.put("header", "search user");
             data.put("query", searchlabel.getText());
-            data.put("userID", UserInfo.getUser().getUser_id());
+            data.put("userID", user.getUser_id());
 
             System.out.println("Sending request: " + data);
 
@@ -218,9 +214,9 @@ private void fetchPendingRequests() {
 
         JSONObject data = new JSONObject();
         data.put("header", "send friend request");
-        data.put("requester_id", UserInfo.getUser().getUser_id());
+        data.put("requester_id", user.getUser_id());
         data.put("receiver_id", selectedUser.getUser_id());
-        data.put("requester_name", UserInfo.getUser().getUsername());
+        data.put("requester_name", user.getUsername());
 
         System.out.println("Sending request: " + data);
 
@@ -261,11 +257,11 @@ private void handleAcceptBtn(ActionEvent event) {
 
     JSONObject data = new JSONObject();
     data.put("header", "accept friend request");
-    data.put("receiver_id", UserInfo.getUser().getUser_id());
+    data.put("receiver_id", user.getUser_id());
     data.put("requester_id", selectedUser.getUser_id());
-    data.put("receiver_name", UserInfo.getUser().getUsername());
+    data.put("receiver_name", user.getUsername());
 
-    System.out.println(UserInfo.getUser().getUsername() + " accepted " + selectedUser.getUsername());
+    System.out.println(user.getUsername() + " accepted " + selectedUser.getUsername());
     System.out.println("Sending request: " + data.toString()); // Debugging
 
     ServerAccess SA = new ServerAccess();
@@ -300,9 +296,9 @@ private void handleDeclineBtn(ActionEvent event) {
     JSONObject data = new JSONObject();
     data.put("header", "decline friend request");
     data.put("requester_id", selectedUser.getUser_id()); 
-    data.put("receiver_id", UserInfo.getUser().getUser_id());
+    data.put("receiver_id", user.getUser_id());
 
-    System.out.println(UserInfo.getUser().getUsername() + " Declined friend request from " + selectedUser.getUsername());
+    System.out.println(user.getUsername() + " Declined friend request from " + selectedUser.getUsername());
     System.out.println("Sending request: " + data.toString()); // Debugging
 
     ServerAccess SA = new ServerAccess();
@@ -320,42 +316,67 @@ private void handleDeclineBtn(ActionEvent event) {
         JOptionPane.showMessageDialog(null, "Failed to decline friend request!", "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
+    private void contributionlistfn(ActionEvent event) {
+        u.switchToContributePopupScene(event, user);
+
+    }
+
     @FXML
     private void addbalancefn(ActionEvent event) {
-        Utilities.ChangeScene("Addbalance.fxml",event);
+        u.switchToAddbalanceScene(event, user);
 
     }
 
     @FXML
     private void notificationfn(ActionEvent event) {
-       Utilities.ChangeScene("Notifications.fxml",event);
+        u.switchToNotificationScene(event, user);
 
     }
 
     @FXML
     private void logoutfn(ActionEvent event) {
-      Utilities.ChangeScene("SignIn.fxml",event);
+        Utilities.ChangeScene("SignIn.fxml", event);
 
     }
-            @FXML
+
+    @FXML
     private void friendrequestbtn(ActionEvent event) {
 
-                Utilities.ChangeScene("Friendrequest.fxml",event);
+        u.switchToFriendrequestScene(event, user);
     }
 
     @FXML
-   public void refreshWish(ActionEvent event) throws IOException {
-       Utilities.ChangeScene("WishList.fxml", event);
-   }
-    @FXML
-   public void friendlistbtn(ActionEvent event) throws IOException {
-       Utilities.ChangeScene("FriendList.fxml", event);
-   }
-    @FXML
-   public void itemsBtn (ActionEvent event) throws IOException {
-       Utilities.ChangeScene("Item.fxml", event);
+    public void refreshWish(ActionEvent event) throws IOException {
+        u.switchToWishListScene(event, user);
+    }
 
-   }
+    @FXML
+    public void friendlistbtn(ActionEvent event) throws IOException {
+        u.switchToFriendListScene(event, user);
+    }
+
+    @FXML
+    public void itemsBtn(ActionEvent event) throws IOException {
+        u.switchToItemsScene(event, user);
+
+    }
+
+public void setData(UserInfo user2) {
+    this.user = user2;
+    updateUI();  // Now update UI after user is set
+}
+
+    private void updateUI() {
+                addfriendtableUsernameColumn.setCellValueFactory(new PropertyValueFactory<>("Username"));
+        addfriendtableEmailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
+        addfriendtableBirthDateColumn.setCellValueFactory(new PropertyValueFactory<>("Birthdate"));
+        addfriendtable.setItems(searchResults);
+        pendingNameColumn.setCellValueFactory(new PropertyValueFactory<>("Username"));
+        pendingEmailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
+        pendinglist.setItems(pendingRequests); // Bind the list to TableView
+    }
+
+ 
      
 
     

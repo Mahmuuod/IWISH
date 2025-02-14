@@ -46,7 +46,8 @@ import javafx.stage.Stage;
  * @author randa
  */
 public class FriendListController implements Initializable {
-
+    Utilities u=new Utilities();
+    UserInfo user;
     @FXML
     private Button FriendList_btn;
     @FXML
@@ -85,7 +86,7 @@ public class FriendListController implements Initializable {
     private TextArea friend_info_textarea;
     @FXML
     private Tab wishlist_tab;
-    private int currentUserId = UserInfo.getUser().getUser_id();
+    private int currentUserId ;
 
     private FriendInfo selectedFriend;
     @FXML
@@ -95,42 +96,50 @@ public class FriendListController implements Initializable {
     
     
     
+    private void contributionlistfn(ActionEvent event) {
+        u.switchToContributePopupScene(event, user);
+
+    }
+
     @FXML
     private void addbalancefn(ActionEvent event) {
-        Utilities.ChangeScene("Addbalance.fxml",event);
+        u.switchToAddbalanceScene(event, user);
 
     }
 
     @FXML
     private void notificationfn(ActionEvent event) {
-       Utilities.ChangeScene("Notifications.fxml",event);
+        u.switchToNotificationScene(event, user);
 
     }
 
     @FXML
     private void logoutfn(ActionEvent event) {
-      Utilities.ChangeScene("SignIn.fxml",event);
+        Utilities.ChangeScene("SignIn.fxml", event);
 
     }
-            @FXML
+
+    @FXML
     private void friendrequestbtn(ActionEvent event) {
 
-                Utilities.ChangeScene("Friendrequest.fxml",event);
+        u.switchToFriendrequestScene(event, user);
     }
 
     @FXML
-   public void refreshWish(ActionEvent event) throws IOException {
-       Utilities.ChangeScene("WishList.fxml", event);
-   }
-    @FXML
-   public void friendlistbtn(ActionEvent event) throws IOException {
-       Utilities.ChangeScene("FriendList.fxml", event);
-   }
-    @FXML
-   public void itemsBtn (ActionEvent event) throws IOException {
-       Utilities.ChangeScene("Item.fxml", event);
+    public void refreshWish(ActionEvent event) throws IOException {
+        u.switchToWishListScene(event, user);
+    }
 
-   }
+    @FXML
+    public void friendlistbtn(ActionEvent event) throws IOException {
+        u.switchToFriendListScene(event, user);
+    }
+
+    @FXML
+    public void itemsBtn(ActionEvent event) throws IOException {
+        u.switchToItemsScene(event, user);
+
+    }
     @FXML
     private void handleSearchBtn(ActionEvent event) {
         if (!searchlabel.getText().trim().isEmpty()) {
@@ -139,7 +148,7 @@ public class FriendListController implements Initializable {
 
             data.put("header", "search friend");
             data.put("query", searchlabel.getText());
-            data.put("userID", UserInfo.getUser().getUser_id());
+            data.put("userID", user.getUser_id());
 
             System.out.println("Sending request: " + data);
 
@@ -275,7 +284,7 @@ public class FriendListController implements Initializable {
         JSONObject data = new JSONObject();
         ServerAccess SA = new ServerAccess();
         data.put("header", "show friendlist");
-        data.put("user_id", currentUserId);
+        data.put("user_id", user.getUser_id());
 
         SA.ServerInit();
         SA.ServerWrite(data);
@@ -291,7 +300,7 @@ public class FriendListController implements Initializable {
             JSONObject data = new JSONObject();
             ServerAccess SA = new ServerAccess();
             data.put("header", "remove friend");
-            data.put("user_id", currentUserId);
+            data.put("user_id", user.getUser_id());
             data.put("friend_id", selectedFriend.getFriend_id());
 
             SA.ServerInit();
@@ -436,7 +445,7 @@ public class FriendListController implements Initializable {
         contributionData.put("header", "contribute");
         contributionData.put("wish_id", wish.getWish_id());
         contributionData.put("contribution_amount", contributionAmount);
-        contributionData.put("contributor_id", currentUserId);
+        contributionData.put("contributor_id", user.getUser_id());
 
         ServerAccess SA = new ServerAccess();
         SA.ServerInit();
@@ -482,19 +491,30 @@ public class FriendListController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       username_lbl.setText(UserInfo.getUser().getUsername());
-       balance_lbl.setText(String.valueOf(UserInfo.getUser().getUser_balance()));
+if(user!=null)
+    updateUI();
+    }
+
+public void setData(UserInfo user2) {
+    this.user = user2;
+    updateUI();  // Now update UI after user is set
+}
+
+    private void updateUI() {
+       username_lbl.setText(user.getUsername());
+       balance_lbl.setText(String.valueOf(user.getUser_balance()));
         setupTableColumns();
         JSONObject data = new JSONObject();
         ServerAccess SA = new ServerAccess();
         data.put("header", "show friendlist");
-        data.put("user_id", currentUserId);
+        data.put("user_id", user.getUser_id());
 
         SA.ServerInit();
         SA.ServerWrite(data);
         System.out.println(data);
         JSONObject response = SA.ServerRead();
-        loadFriendsList(response);
-    }
+        loadFriendsList(response);    }
+
+
 
 }

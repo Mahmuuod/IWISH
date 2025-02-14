@@ -43,7 +43,7 @@ import javafx.scene.control.TextField;
  * @author osama
  */
 public class SignInController implements Initializable {
-
+Utilities u=new Utilities();
     @FXML
     private TextField UserNameTa;
     @FXML
@@ -74,15 +74,14 @@ public class SignInController implements Initializable {
             JSONObject response = SA.ServerRead();
             //System.out.println(response);
 //    public UserInfo(int User_id, String First_name, String Last_name, String Username, String Password, Date Birthdate, String Email, String Phone, String Bank_card, int User_balance) {
-
             if (response.getString("header").equals("user exists")) {
-                UserInfo.setInstance(new UserInfo(response.getInt("User_id"), response.getString("First_name"), response.getString("Last_name"), response.getString("Username"),
+                user=(new UserInfo(response.getInt("User_id"), response.getString("First_name"), response.getString("Last_name"), response.getString("Username"),
                         String.valueOf(response.get("Password")), Date.valueOf(response.getString("Birthdate")), response.getString("Email"),
                         String.valueOf(response.get("Phone")),
                         String.valueOf(response.get("Bank_card")),
                         response.getInt("User_balance")
                 ));
-                Utilities.ChangeScene("WishList.fxml", event);
+                u.switchToWishListScene(event, user);
 
             } else {
                 JOptionPane.showMessageDialog(null, "User doesn't exists", "Sign In Error", JOptionPane.ERROR_MESSAGE);
@@ -91,23 +90,49 @@ public class SignInController implements Initializable {
         }
 
     }
+    
+ UserInfo user=new UserInfo();
 
-    /*private void switchToFriendRequestScene(ActionEvent event, UserInfo loggedInUser) {
+ 
+ /* public JSONObject ServerReadSearch() {
+            final  CountDownLatch latch = new CountDownLatch(1);
+            JSONObject jsonResponse = new JSONObject();
+        
+            t = new Thread(new Runnable() {
+                public void run() {
+
+                    try {
+                        String msg = dis.readLine();
+                        System.out.println(msg);
+                        JsonData = new JSONObject(msg);
+                          if (msg != null) {
+                jsonResponse.put("response", new JSONObject(msg));
+            }
+
+                    }catch(SocketException sa)
+                    {
+                JOptionPane.showMessageDialog(null, "Please try to re-open the app", "Server Error", JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
+
+                    }
+                    catch (IOException ex) {
+                        Logger.getLogger(ProjectClient.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    finally {
+                    latch.countDown(); 
+                       }
+                }
+            });
+            
+            t.start();
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("WishList.fxml"));
-        Parent root = loader.load();
-
-        // Pass user data to FriendrequestController
-        WishListController controller = loader.getController();
-        controller.setUserData(loggedInUser);
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
+        latch.await(); // Wait for the thread to finish
+    } catch (InterruptedException ex) {
+        Logger.getLogger(ProjectClient.class.getName()).log(Level.SEVERE, null, ex);
     }
-}*/
+        return jsonResponse;
+    }*/
+
     @FXML
     private void handleSignUpButtonAction(ActionEvent event) {
 

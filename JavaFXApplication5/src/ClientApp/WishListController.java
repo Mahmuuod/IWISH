@@ -30,11 +30,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import ClientApp.SignInController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WishListController implements Initializable {
-
+Utilities u=new Utilities();
     ServerAccess SA = new ServerAccess();
-
     @FXML
     private Button wishlistbtn;
     @FXML
@@ -68,7 +70,7 @@ public class WishListController implements Initializable {
     private Label balancelbl;
     @FXML
     private Label usernamelbl;
-
+//big number cant be casted , and handle string in ints
     @FXML
     public void deleteWish(ActionEvent event) throws IOException {
         WishInfo selectedWish = wishlisttable.getSelectionModel().getSelectedItem();
@@ -76,7 +78,7 @@ public class WishListController implements Initializable {
             JSONObject request = new JSONObject();
             request.put("header", "deletewish");
             request.put("wishid", selectedWish.getWish_id());
-            request.put("userid", UserInfo.getUser().getUser_id());
+            request.put("userid", user.getUser_id());
             System.out.println(selectedWish.getWish_id());
             SA.ServerInit();
             SA.ServerWrite(request);
@@ -109,8 +111,70 @@ public class WishListController implements Initializable {
 }*/
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        usernamelbl.setText(UserInfo.getUser().getUsername());
-        balancelbl.setText(String.valueOf(UserInfo.getUser().getUser_balance()));
+    if (user != null) {
+        updateUI();
+    }
+    }
+    WishInfo info;
+
+    /* public void setUserData(UserInfo user) {
+    this.userData = user;
+    System.out.println("Requester ID (Logged-in user): " + userData.getUser_id());
+   
+}*/
+    private void contributionlistfn(ActionEvent event) {
+        u.switchToContributePopupScene(event, user);
+
+    }
+
+    @FXML
+    private void addbalancefn(ActionEvent event) {
+        u.switchToAddbalanceScene(event, user);
+
+    }
+
+    @FXML
+    private void notificationfn(ActionEvent event) {
+        u.switchToNotificationScene(event, user);
+
+    }
+
+    @FXML
+    private void logoutfn(ActionEvent event) {
+        Utilities.ChangeScene("SignIn.fxml", event);
+
+    }
+
+    @FXML
+    private void friendrequestbtn(ActionEvent event) {
+
+        u.switchToFriendrequestScene(event, user);
+    }
+
+    @FXML
+    public void refreshWish(ActionEvent event) throws IOException {
+        u.switchToWishListScene(event, user);
+    }
+
+    @FXML
+    public void friendlistbtn(ActionEvent event) throws IOException {
+        u.switchToFriendListScene(event, user);
+    }
+
+    @FXML
+    public void itemsBtn(ActionEvent event) throws IOException {
+        u.switchToItemsScene(event, user);
+
+    }
+UserInfo user;
+public void setData(UserInfo user2) {
+    this.user = user2;
+    updateUI();  // Now update UI after user is set
+}
+
+    private void updateUI() {
+        usernamelbl.setText(user.getUsername());
+        balancelbl.setText(String.valueOf(user.getUser_balance()));
 
         ObservableList<WishInfo> wishesTable = FXCollections.observableArrayList();
         ItemName.setCellValueFactory(new PropertyValueFactory<>("Item_Name"));
@@ -136,10 +200,10 @@ public class WishListController implements Initializable {
             }
         });
 
-        int user_id = UserInfo.getUser().getUser_id();
+        int user_id = user.getUser_id();
         JSONObject request = new JSONObject();
         request.put("header", "wishlist");
-        request.put("user_id", UserInfo.getUser().getUser_id());
+        request.put("user_id", user.getUser_id());
         SA.ServerInit();
         SA.ServerWrite(request);
         System.out.println(request);
@@ -166,57 +230,7 @@ public class WishListController implements Initializable {
 
             wishlisttable.setItems(wishesTable);
             SA.ServerKill();
-        }
-    }
-    WishInfo info;
-
-    /* public void setUserData(UserInfo user) {
-    this.userData = user;
-    System.out.println("Requester ID (Logged-in user): " + userData.getUser_id());
-   
-}*/
-    private void contributionlistfn(ActionEvent event) {
-        Utilities.ChangeScene("Friendrequest.fxml", event);
-
-    }
-
-    @FXML
-    private void addbalancefn(ActionEvent event) {
-        Utilities.ChangeScene("Addbalance.fxml", event);
-
-    }
-
-    @FXML
-    private void notificationfn(ActionEvent event) {
-        Utilities.ChangeScene("Notifications.fxml", event);
-
-    }
-
-    @FXML
-    private void logoutfn(ActionEvent event) {
-        Utilities.ChangeScene("SignIn.fxml", event);
-
-    }
-
-    @FXML
-    private void friendrequestbtn(ActionEvent event) {
-
-        Utilities.ChangeScene("Friendrequest.fxml", event);
-    }
-
-    @FXML
-    public void refreshWish(ActionEvent event) throws IOException {
-        Utilities.ChangeScene("WishList.fxml", event);
-    }
-
-    @FXML
-    public void friendlistbtn(ActionEvent event) throws IOException {
-        Utilities.ChangeScene("FriendList.fxml", event);
-    }
-
-    @FXML
-    public void itemsBtn(ActionEvent event) throws IOException {
-        Utilities.ChangeScene("Item.fxml", event);
-
-    }
+        }    }
+    
+    
 }
