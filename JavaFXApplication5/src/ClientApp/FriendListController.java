@@ -87,7 +87,13 @@ public class FriendListController implements Initializable {
     private int currentUserId = UserInfo.getUser().getUser_id();
 
     private FriendInfo selectedFriend;
-
+    @FXML
+    private TextField searchlabel;
+    @FXML
+    private Button searchbtn;
+    
+    
+    
     @FXML
     private void addbalancefn(ActionEvent event) {
         Utilities.ChangeScene("Addbalance.fxml",event);
@@ -124,7 +130,29 @@ public class FriendListController implements Initializable {
        Utilities.ChangeScene("Item.fxml", event);
 
    }
+    @FXML
+    private void handleSearchBtn(ActionEvent event) {
+        if (!searchlabel.getText().trim().isEmpty()) {
+            JSONObject data = new JSONObject();
+            ServerAccess SA = new ServerAccess();
 
+            data.put("header", "search friend");
+            data.put("query", searchlabel.getText());
+            data.put("userID", UserInfo.getUser().getUser_id());
+
+            System.out.println("Sending request: " + data);
+
+            SA.ServerInit();
+            SA.ServerWrite(data);
+            JSONObject response = SA.ServerReadSearch();
+            JSONObject responseData = response.getJSONObject("response");
+            System.out.println("Full Server Response: " + responseData.toString());
+
+            loadFriendsList(responseData);
+
+        }
+    }
+    
     private void setupTableColumns() {
 
         // binds objects to rows where each attribute is bound to a column
@@ -191,50 +219,55 @@ public class FriendListController implements Initializable {
             friends_list.setOnMouseClicked(event -> {
                 if (friends_list.getSelectionModel().getSelectedItem() != null
                         && friends_list.getSelectionModel().getSelectedItem().getFriend_id() == -1) {
-                    Utilities.ChangeScene("AddFriend.fxml", event);
+                    Utilities.ChangeScene("Friendrequest.fxml", event);
                 }
             });
             return;
-        }
+        } else if (response.getString("header").equals("friendlist") || response.getString("header").equals("friend search result")) {
 
-        JSONArray friendsArray = response.getJSONArray("friends");
+            JSONArray friendsArray = response.getJSONArray("friends");
 
-        for (int i = 0; i < friendsArray.length(); i++) {
-            JSONObject friendJson = friendsArray.getJSONObject(i);
-            FriendInfo friend = new FriendInfo(
-                    friendJson.getInt("friend_id"),
-                    friendJson.getString("firstname"),
-                    friendJson.getString("lastname"),
-                    friendJson.getString("username"),
-                    Date.valueOf(friendJson.getString("birthdate")),
-                    friendJson.getString("email")
-            );
-            friendObjects.add(friend);
-        }
+            for (int i = 0; i < friendsArray.length(); i++) {
+                JSONObject friendJson = friendsArray.getJSONObject(i);
+                FriendInfo friend = new FriendInfo(
+                        friendJson.getInt("friend_id"),
+                        friendJson.getString("firstname"),
+                        friendJson.getString("lastname"),
+                        friendJson.getString("username"),
+                        Date.valueOf(friendJson.getString("birthdate")),
+                        friendJson.getString("email")
+                );
+                friendObjects.add(friend);
+            }
 
-        friends_list.setItems(friendObjects);
+            friends_list.setItems(friendObjects);
 
-        // Set a custom cell factory to display the friend's name
-        friends_list.setCellFactory(lv -> new ListCell<FriendInfo>() {
-            @Override
-            protected void updateItem(FriendInfo item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(item.getFirst_name() + " " + item.getLast_name());
+            // Set a custom cell factory to display the friend's name
+            friends_list.setCellFactory(lv -> new ListCell<FriendInfo>() {
+                @Override
+                protected void updateItem(FriendInfo item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                    } else {
+                        setText(item.getFirst_name() + " " + item.getLast_name());
+                    }
                 }
-            }
-        });
+            });
 
-        // Handle selection
-        friends_list.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal != null && newVal.getFriend_id() != -1) { // Ignore the "no friends" message
-                selectedFriend = newVal;
-                handleSelectFriend(selectedFriend);
-                handleShowFriendWishlist(selectedFriend);
-            }
-        });
+            // Handle selection
+            friends_list.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal != null && newVal.getFriend_id() != -1) { // Ignore the "no friends" message
+                    selectedFriend = newVal;
+                    handleSelectFriend(selectedFriend);
+                    handleShowFriendWishlist(selectedFriend);
+                }
+            });
+        } else {
+            System.out.println("No friends to show!");
+            friendObjects.clear();
+            friends_list.refresh();
+        }
     }
 
     private void reloadFriendsList() {

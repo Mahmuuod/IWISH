@@ -544,6 +544,40 @@ class HandleClients extends Thread {
                             ps.println(respond.toString());
                             respond.clear();
                             break;
+                            
+                         case "search friend":
+                            String friendquery = request.getString("query");
+                            int user_id = request.getInt("userID");
+
+                            ArrayList<String> friends = req.searchFriends(user_id, friendquery);
+                            respond = new JSONObject();
+                            JSONArray friendsArray = new JSONArray();
+                            if (friends.size() > 0) {
+                                for (String friend : friends) {
+                                    JSONObject friend_as_json = new JSONObject(friend);
+                                    JSONObject friendObject = new JSONObject();
+                                    friendObject.put("friend_id", friend_as_json.getInt("Friend_id"));
+                                    friendObject.put("firstname", friend_as_json.getString("First_name"));
+                                    friendObject.put("lastname", friend_as_json.getString("Last_name"));
+                                    friendObject.put("username", friend_as_json.getString("Username"));
+                                    friendObject.put("birthdate", friend_as_json.getString("Birthdate"));
+                                    friendObject.put("email", friend_as_json.getString("Email"));
+                                    friendsArray.put(friendObject);
+                                }
+
+                                respond.put("header", "friend search result");
+                                respond.put("friends", friendsArray);
+                            } else {
+                                respond = new JSONObject();
+                                respond.put("header", "no friends found");
+                            }
+
+                            System.out.println("Sending response to client: " + respond.toString()); // Debugging
+
+                            ps.println(respond.toString());
+                            respond.clear();
+                            break;
+
                     }
 
                 } else {

@@ -50,16 +50,16 @@ public class DBA {
         con.close();
         return Users;
     }
-  public static ArrayList<UserInfo> searchUsers(int userID,String query) throws SQLException {
+ public static ArrayList<UserInfo> searchUsers(int userID,String query) throws SQLException {
     System.out.println("Executing search for: " + query); // Debugging
     
     ArrayList<UserInfo> users = new ArrayList<>();
     Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
    
-    String sql = "SELECT * FROM Users WHERE (Username LIKE ? OR Email LIKE ? )and user_id != ? ";
+    String sql = "SELECT * FROM Users WHERE ( lower(Username)  LIKE lower(?)  OR lower(Email) LIKE lower(?) )  and user_id != ? ";
     PreparedStatement statement = con.prepareStatement(sql);
-    statement.setString(1,  query + "%");
-    statement.setString(2,  query + "%");
+    statement.setString(1, "%"+ query + "%");
+    statement.setString(2, "%"+ query + "%");
     statement.setInt(3,userID);
 
     System.out.println("Executing SQL: " + sql); // Debugging
@@ -577,7 +577,7 @@ public static boolean areFriends(int requester_id, int receiver_id) throws SQLEx
         PreparedStatement statement = con.prepareStatement("select f.FRIEND_ID as FRIEND_ID, u.FIRST_NAME as FIRST_NAME, u.LAST_NAME as LAST_NAME, u.USERNAME as USERNAME, u.BIRTHDATE as BIRTHDATE, u.EMAIL as EMAIL from FRIENDLIST f JOIN USERS u ON f.friend_id = u.user_id where f.user_id = ?"); //edit
         statement.setInt(1, User_id);
         ResultSet rs = statement.executeQuery();
-        if (rs.next()) {
+        while (rs.next()) {
             friend = new FriendInfo(rs.getInt("FRIEND_ID"), rs.getString("FIRST_NAME"),
                     rs.getString("LAST_NAME"), rs.getString("USERNAME"), rs.getDate("BIRTHDATE"), rs.getString("EMAIL"));
             friends.add(friend);
@@ -1041,6 +1041,32 @@ public static boolean areFriends(int requester_id, int receiver_id) throws SQLEx
         return notifications;
     }
 
+    public static ArrayList<FriendInfo> searchFriends(int userID,String query) throws SQLException {
+        System.out.println("Executing search for: " + query); // Debugging
+        
+        ArrayList<FriendInfo> friends = new ArrayList<>();
+        FriendInfo friend = null;
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+       
+        String sql = "select f.FRIEND_ID as FRIEND_ID, u.FIRST_NAME as FIRST_NAME, u.LAST_NAME as LAST_NAME, u.USERNAME as USERNAME, u.BIRTHDATE as BIRTHDATE, u.EMAIL as EMAIL from FRIENDLIST f JOIN USERS u ON f.friend_id = u.user_id  where ( lower(u.Username)  LIKE lower(?)  OR lower(u.Email) LIKE lower(?)  ) AND f.user_id =? ";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setString(1, "%"+ query + "%");
+        statement.setString(2,  "%"+ query + "%");
+        statement.setInt(3,userID);
+    
+        System.out.println("Executing SQL: " + sql); // Debugging
+    
+        ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                friend = new FriendInfo(rs.getInt("FRIEND_ID"), rs.getString("FIRST_NAME"),
+                        rs.getString("LAST_NAME"), rs.getString("USERNAME"), rs.getDate("BIRTHDATE"), rs.getString("EMAIL"));
+                friends.add(friend);
+            }
+    
+            statement.close();
+            con.close();
+            return friends;
+}
     
     
 
