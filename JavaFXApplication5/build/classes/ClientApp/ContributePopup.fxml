@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="10" stylesheets="@ContributepopupStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.ContributePopupController">
+    <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="Contribute to Wish" />
+    <Label fx:id="wishNameLabel" style="-fx-font-size: 14;" text="Wish Name" />
+    <Label fx:id="remainingAmountLabel" style="-fx-font-size: 14;" text="Remaining Amount: $0.00" />
+
+    <HBox alignment="CENTER" spacing="10">
+        <Label style="-fx-font-size: 14;" text="Amount:" />
+        <TextField fx:id="amountField" promptText="Enter amount" style="-fx-font-size: 14;" />
+    </HBox>
+
+    <Label fx:id="errorLabel" style="-fx-text-fill: red; -fx-font-size: 12;" text="" />
+
+    <Button onAction="#handleContribute" text="Contribute" />
+    <Button onAction="#handleCancel" style="-fx-font-size: 14; -fx-background-color: #f44336; -fx-text-fill: white;" text="Cancel" />
+
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+</VBox>
