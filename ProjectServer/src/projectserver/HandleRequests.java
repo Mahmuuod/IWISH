@@ -339,6 +339,22 @@ boolean state=true;
         return friends_as_string;
     }
 
+    public JSONArray searchItems(String query)
+    {
+        JSONArray itemsArray = new JSONArray();
+        try {
+            ArrayList<ItemsInfo> items=DBA.searchItems(query);
+            
+                for (ItemsInfo item : items) {
+                    JSONObject item_as_json = new JSONObject(item.toString());
+                    itemsArray.put(item_as_json);
+                                }
+                
+        } catch (SQLException ex) {
+            Logger.getLogger(HandleRequests.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return itemsArray;
+    }
 
 
 }

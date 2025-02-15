@@ -35,16 +35,12 @@ import org.json.JSONObject;
  */
 public class NotificationsController implements Initializable {
 
-    @FXML
     private Label balance_lbl;
-    @FXML
     private Label username_lbl;
     @FXML
     private TableView<NotificationInfo> notifi_table;
     @FXML
     private TableColumn<NotificationInfo, ?> notifi_col;
-    @FXML
-    private ScrollBar notifi_scroll;
     @FXML
     private Button FriendList_btn;
     @FXML
@@ -54,6 +50,18 @@ public class NotificationsController implements Initializable {
     @FXML
     private Button NotificatioList_btn;
     Utilities u=new Utilities();
+    @FXML
+    private Button addbalancebtn;
+    @FXML
+    private Button friendrequestbtn;
+    @FXML
+    private Button logoutBtn;
+    @FXML
+    private Label username_lbl1;
+    @FXML
+    private Label balance_lbl1;
+    @FXML
+    private TableColumn<?, ?> pendingNameColumn;
     private void contributionlistfn(ActionEvent event) {
         u.switchToContributePopupScene(event, user);
 
@@ -93,7 +101,6 @@ public class NotificationsController implements Initializable {
         u.switchToFriendListScene(event, user);
     }
 
-    @FXML
     public void itemsBtn(ActionEvent event) throws IOException {
         u.switchToItemsScene(event, user);
 
@@ -170,8 +177,8 @@ public void setData(UserInfo user2) {
 }
 
     private void updateUI() {
-       username_lbl.setText(user.getUsername());
-       balance_lbl.setText(String.valueOf(user.getUser_balance()));
+       username_lbl1.setText(user.getUsername());
+       balance_lbl1.setText(String.valueOf(user.getUser_balance()));
         setupTableColumns();
         JSONObject data = new JSONObject();
         ServerAccess SA = new ServerAccess();

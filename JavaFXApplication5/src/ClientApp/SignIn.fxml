@@ -30,7 +30,7 @@
          </children>
       </Pane>
       
-      <!-- Login Form -->
+      
       <Label layoutX="234.0" layoutY="100.0" prefHeight="55.0" prefWidth="565.0" text="Welcome to i-Wish" textFill="#3f418d">
          <font>
             <Font name="Arial Bold" size="48.0" />
@@ -72,4 +72,4 @@
          </font>
       </Button>
    </children>
-</AnchorPane>
+    </AnchorPane>

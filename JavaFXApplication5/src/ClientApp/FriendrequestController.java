@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -39,8 +40,6 @@ public class FriendrequestController implements Initializable {
     private Button friendrequestbtn;
     @FXML
     private Button friendlistbtn;
-    @FXML
-    private Button contributionlistbtn;
     @FXML
     private Button addbalancebtn;
     @FXML
@@ -71,12 +70,14 @@ public class FriendrequestController implements Initializable {
     private Button searchbtn;
     @FXML
     private Button addfriendbtn;
-    @FXML
     private ObservableList<UserInfo> searchResults = FXCollections.observableArrayList();
-    @FXML
     private ObservableList<UserInfo> pendingRequests = FXCollections.observableArrayList();
     @FXML
-    private UserInfo userData;
+    private Label username_lbl;
+    @FXML
+    private Label balance_lbl;
+    @FXML
+    private Button refreshbtn;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -85,7 +86,6 @@ public class FriendrequestController implements Initializable {
            updateUI();
           
     }
-        @FXML
 private void fetchPendingRequests() {
     System.out.println("Fetching pending friend requests...");
 
@@ -355,7 +355,6 @@ private void handleDeclineBtn(ActionEvent event) {
         u.switchToFriendListScene(event, user);
     }
 
-    @FXML
     public void itemsBtn(ActionEvent event) throws IOException {
         u.switchToItemsScene(event, user);
 
@@ -367,13 +366,16 @@ public void setData(UserInfo user2) {
 }
 
     private void updateUI() {
-                addfriendtableUsernameColumn.setCellValueFactory(new PropertyValueFactory<>("Username"));
+        
+        addfriendtableUsernameColumn.setCellValueFactory(new PropertyValueFactory<>("Username"));
         addfriendtableEmailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
         addfriendtableBirthDateColumn.setCellValueFactory(new PropertyValueFactory<>("Birthdate"));
         addfriendtable.setItems(searchResults);
         pendingNameColumn.setCellValueFactory(new PropertyValueFactory<>("Username"));
         pendingEmailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
         pendinglist.setItems(pendingRequests); // Bind the list to TableView
+        balance_lbl.setText(String.valueOf(user.getUser_balance()));
+        username_lbl.setText(String.valueOf(user.getUsername()));
     }
 
  

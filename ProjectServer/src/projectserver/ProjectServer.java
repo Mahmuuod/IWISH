@@ -577,6 +577,24 @@ class HandleClients extends Thread {
                             ps.println(respond.toString());
                             respond.clear();
                             break;
+                                                    case "search item":
+                            String query3 = request.getString("query");
+
+                            JSONArray items2 = req.searchItems(query3);
+
+                            respond = new JSONObject();
+                            if (items2.length() > 0) {
+                                respond.put("header", "item search result");
+                                respond.put("items", items2);
+                            } else {
+                                respond.put("header", "no items found");
+                            }
+
+                            System.out.println("Sending response to client: " + respond.toString()); // Debugging
+
+                            ps.println(respond.toString());
+                            respond.clear();
+                            break;
 
                     }
 

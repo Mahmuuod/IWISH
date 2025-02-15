@@ -5,8 +5,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
@@ -25,12 +23,12 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="friendlistbtn" contentDisplay="CENTER" layoutX="65.0" layoutY="670.0" mnemonicParsing="false" onAction="#friendlistbtn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Friend List">
+            <Button fx:id="friendlistbtn" contentDisplay="CENTER" layoutX="65.0" layoutY="757.0" mnemonicParsing="false" onAction="#friendlistbtn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Friend List">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="friendrequestbtn" contentDisplay="CENTER" layoutX="65.0" layoutY="590.0" mnemonicParsing="false" onAction="#friendrequestbtn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Add Friend">
+            <Button fx:id="friendrequestbtn" contentDisplay="CENTER" layoutX="65.0" layoutY="679.0" mnemonicParsing="false" onAction="#friendrequestbtn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Add Friend">
                <font>
                   <Font size="15.0" />
                </font>
@@ -40,17 +38,14 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="addbalancebtn" contentDisplay="CENTER" layoutX="65.0" layoutY="750.0" mnemonicParsing="false" onAction="#addbalancefn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Add Balance">
+            <Button fx:id="addbalancebtn" contentDisplay="CENTER" layoutX="65.0" layoutY="592.0" mnemonicParsing="false" onAction="#addbalancefn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Add Balance">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Label alignment="CENTER" layoutX="35.0" layoutY="210.0" prefHeight="82.0" prefWidth="234.0" style="-fx-text-fill: #F9EDED; -fx-font-weight: bold; -fx-font-size: 56;" text="i-Wish" textAlignment="RIGHT" />
-            <ImageView fitHeight="133.0" fitWidth="144.0" layoutX="88.0" layoutY="77.0" style="color: white;">
-               <image>
-                  <Image url="@../../../../../Downloads/gd2UOJ01.png" />
-               </image>
-            </ImageView>
+            <Label alignment="CENTER" layoutX="31.0" layoutY="95.0" prefHeight="82.0" prefWidth="234.0" style="-fx-text-fill: #F9EDED; -fx-font-weight: bold; -fx-font-size: 56;" text="i-Wish" textAlignment="RIGHT" />
+            <Label fx:id="username_lbl" alignment="CENTER" layoutX="4.0" layoutY="302.0" prefHeight="51.0" prefWidth="313.0" style="-fx-text-fill: white; -fx-font-size: 35;" text="Username" />
+            <Label fx:id="balance_lbl" alignment="CENTER" layoutX="4.0" layoutY="360.0" prefHeight="36.0" prefWidth="313.0" style="-fx-font-size: 25; -fx-text-fill: white;" text="Balance" />
             </children>
         </AnchorPane>
     </left>
@@ -71,7 +66,7 @@
                     </font>
                 </Label>
                 <TextField fx:id="searchlabel" layoutX="73.0" layoutY="178.0" prefHeight="31.0" prefWidth="293.0" />
-                <Button fx:id="searchbtn" layoutX="388.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleSearchBtn" prefHeight="35.0" prefWidth="82.0" style="-fx-background-color: #3F418D; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-border-color: transparent; -fx-border-width: 2; -fx-border-radius: 25; -fx-background-radius: 25;" text="Search" />
+                <Button fx:id="searchbtn" defaultButton="true" layoutX="388.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleSearchBtn" prefHeight="35.0" prefWidth="82.0" style="-fx-background-color: #3F418D; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-border-color: transparent; -fx-border-width: 2; -fx-border-radius: 25; -fx-background-radius: 25;" text="Search" />
             <Button fx:id="addfriendbtn" layoutX="219.0" layoutY="841.0" mnemonicParsing="false" onAction="#handleAddFriendBtn" prefHeight="40.0" prefWidth="113.0" style="-fx-background-color: #3F418D; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-border-color: transparent; -fx-border-width: 2; -fx-border-radius: 25; -fx-background-radius: 25;" text="Add Friend" />
             </children>
         </AnchorPane>

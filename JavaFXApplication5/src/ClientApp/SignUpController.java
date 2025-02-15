@@ -72,27 +72,38 @@ public class SignUpController implements Initializable {
                     if (phoneField.getText().matches("^(010|011|012|015)\\d{8}$")) {
                         if (emailField.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
                             if (firstNameField.getText().matches("^[a-zA-Z]+$") && lastNameField.getText().matches("^[a-zA-Z]+$")) {
-                                if (Integer.parseInt(balanceField.getText()) >= 0 && Integer.parseInt(balanceField.getText()) <= 10000) {
-                                    UserInfo user = new UserInfo(firstNameField.getText(), lastNameField.getText(), usernameField.getText(), passwordField.getText(),
-                                            Date.valueOf(dobPicker.getValue()), emailField.getText(),
-                                            phoneField.getText(), CardNumberField.getText(), Integer.parseInt(balanceField.getText()));
-                                    req = new JSONObject(user.toString());
-                                    req.put("header", "sign up");
-                                    ServerAccess sa = new ServerAccess();
-                                    sa.ServerInit();
-                                    sa.ServerWrite(req);
-                                    data = sa.ServerRead();
-                                    if (data.getString("header").equals("added")) {
-                                        JOptionPane.showMessageDialog(null, "Sign Up Successfully you can now login", "Signed Up", JOptionPane.INFORMATION_MESSAGE);
-                                        Utilities.ChangeScene("SignIn.fxml", event);
 
-                                    } else if (data.getString("header").equals("duplicated")) {
-                                        JOptionPane.showMessageDialog(null, "dublicated username or email", "Dublication", JOptionPane.ERROR_MESSAGE);
+                                try {
+                                    if (Integer.parseInt(balanceField.getText()) >= 0 && Integer.parseInt(balanceField.getText()) <= 10000) {
+                                        UserInfo user = new UserInfo(firstNameField.getText(), lastNameField.getText(), usernameField.getText(), passwordField.getText(),
+                                                Date.valueOf(dobPicker.getValue()), emailField.getText(),
+                                                phoneField.getText(), CardNumberField.getText(), Integer.parseInt(balanceField.getText()));
+                                        req = new JSONObject(user.toString());
+                                        req.put("header", "sign up");
+                                        ServerAccess sa = new ServerAccess();
+                                        sa.ServerInit();
+                                        sa.ServerWrite(req);
+                                        data = sa.ServerRead();
+                                        if (data.getString("header").equals("added")) {
+                                            JOptionPane.showMessageDialog(null, "Sign Up Successfully you can now login", "Signed Up", JOptionPane.INFORMATION_MESSAGE);
+                                            Utilities.ChangeScene("SignIn.fxml", event);
+
+                                        } else if (data.getString("header").equals("duplicated")) {
+                                            JOptionPane.showMessageDialog(null, "dublicated username or email", "Dublication", JOptionPane.ERROR_MESSAGE);
+                                        }
+                                        sa.ServerKill();
+
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Balance must be positive and less than 10000", "Balance Error", JOptionPane.ERROR_MESSAGE);
                                     }
-                                    sa.ServerKill();
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "Balance must be positive and less than 10000", "Balance Error", JOptionPane.ERROR_MESSAGE);
+                                } catch (NumberFormatException e) {
+                                    if (balanceField.getText() == null) {
+                                        JOptionPane.showMessageDialog(null, "enter a number before clicking confirm", "Balance Error", JOptionPane.ERROR_MESSAGE);
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "plz enter value between 0 and 10000", "Balance Error", JOptionPane.ERROR_MESSAGE);
+                                    }
                                 }
+
                             } else {
                                 JOptionPane.showMessageDialog(null, "First and Last name must be characters only", "Name Error", JOptionPane.ERROR_MESSAGE);
                             }

@@ -38,38 +38,44 @@ public class WishListController implements Initializable {
 Utilities u=new Utilities();
     ServerAccess SA = new ServerAccess();
     @FXML
-    private Button wishlistbtn;
-    @FXML
     private Button friendrequestbtn;
-    @FXML
-    private Button friendlistbtn;
     @FXML
     private Button addbalancebtn;
     @FXML
-    private Button notificationbtn;
-    @FXML
-    private Button logoutbtn;
-    @FXML
     private TableView<WishInfo> wishlisttable;
     @FXML
-    private Button Deletebtn;
-    @FXML
     private Button items;
-    @FXML
     private TableColumn<WishInfo, String> ItemName;
-    @FXML
     private TableColumn<WishInfo, Integer> PriceCol;
-    @FXML
     private TableColumn<WishInfo, Integer> LeftCol;
     @FXML
     private Button refreshbtn;
-    @FXML
     private TableColumn<WishInfo, Date> wishdateCol;
     private UserInfo userData;
-    @FXML
     private Label balancelbl;
-    @FXML
     private Label usernamelbl;
+    @FXML
+    private TableColumn<?, ?> itemNameColumn;
+    @FXML
+    private TableColumn<?, ?> priceColumn;
+    @FXML
+    private TableColumn<?, ?> categoryColumn;
+    @FXML
+    private TableColumn<?, ?> categoryColumn1;
+    @FXML
+    private Button deletebtn;
+    private Label username_lbl;
+    public Label balance_lbl;
+    @FXML
+    private Button NotificatioList_btn;
+    @FXML
+    private Button FriendList_btn;
+    @FXML
+    private Button logoutBtn;
+    @FXML
+    private Label username_lbl1;
+    @FXML
+    private Label balance_lbl1;
 //big number cant be casted , and handle string in ints
     @FXML
     public void deleteWish(ActionEvent event) throws IOException {
@@ -173,14 +179,14 @@ public void setData(UserInfo user2) {
 }
 
     private void updateUI() {
-        usernamelbl.setText(user.getUsername());
-        balancelbl.setText(String.valueOf(user.getUser_balance()));
+        username_lbl1.setText(user.getUsername());
+        balance_lbl1.setText(String.valueOf(user.getUser_balance()));
 
         ObservableList<WishInfo> wishesTable = FXCollections.observableArrayList();
-        ItemName.setCellValueFactory(new PropertyValueFactory<>("Item_Name"));
-        PriceCol.setCellValueFactory(new PropertyValueFactory<>("Item_Price"));
-        wishdateCol.setCellValueFactory(new PropertyValueFactory<>("WISH_DATE"));
-        LeftCol.setCellValueFactory(new PropertyValueFactory<>("contribution_amount"));
+        itemNameColumn.setCellValueFactory(new PropertyValueFactory<>("Item_Name"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("Item_Price"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("WISH_DATE"));
+        categoryColumn1.setCellValueFactory(new PropertyValueFactory<>("contribution_amount"));
 //WishId.setCellValueFactory(new PropertyValueFactory<>("wish_id") );
 
         wishlisttable.setRowFactory(tv -> new TableRow<WishInfo>() {

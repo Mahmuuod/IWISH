@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="ProjectClient.jnlp">
+  <information>
+    <title>ProjectClient</title>
+    <vendor>osama</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="ProjectClient.jar" size="71291" download="eager" />
+    <jar href="lib\json-20250107.jar" size="81363" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="ProjectClient" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="ClientApp.ProjectClient"  name="ProjectClient" />
+  <update check="always"/>
+</jnlp>

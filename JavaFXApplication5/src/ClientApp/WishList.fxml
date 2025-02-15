@@ -4,61 +4,66 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F3EFF8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.WishListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F9EDED;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.WishListController">
     <children>
-        <AnchorPane prefHeight="1024.0" prefWidth="320.0" style="-fx-background-color: #C0B8CA;">
+        <AnchorPane prefHeight="1024.0" prefWidth="320.0" style="-fx-background-color: #3F418D;">
             <children>
-                <Label fx:id="balancelbl" alignment="CENTER" layoutX="112.0" layoutY="379.0" text="balance" AnchorPane.leftAnchor="112.0">
-                    <font>
-                        <Font name="System Bold" size="24.0" />
-                    </font>
-                </Label>
-                <Label fx:id="usernamelbl" alignment="CENTER" layoutX="99.0" layoutY="315.0" text="Username" AnchorPane.leftAnchor="99.0">
-                    <font>
-                        <Font name="System Bold" size="24.0" />
-                    </font>
-                </Label>
-                <ImageView fitHeight="127.0" fitWidth="155.0" layoutX="78.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" style="-fx-blend-mode: B479BC;">
-                    <image>
-                        <Image url="@../../../../../../../Downloads/i-Wish.png" />
-                    </image>
-                </ImageView>
                 <Label alignment="CENTER" layoutX="108.0" layoutY="468.0">
                     <font>
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
-                <ImageView fitHeight="170.0" fitWidth="266.0" layoutX="33.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../../../../../Downloads/100_Homemade_Gifts_hero-4ae166376b9748098fe29d06f3ba3e22.jpg" />
-                    </image>
-                </ImageView>
-                <Button fx:id="wishlistbtn" layoutX="79.0" layoutY="504.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="142.0" text="My Wish List" AnchorPane.leftAnchor="79.0" />
-                <Button fx:id="friendrequestbtn" layoutX="76.0" layoutY="632.0" mnemonicParsing="false" onAction="#friendrequestbtn" prefHeight="31.0" prefWidth="149.0" text="Friend Request" AnchorPane.leftAnchor="76.0" />
-                <Button fx:id="friendlistbtn" layoutX="78.0" layoutY="568.0" mnemonicParsing="false" onAction="#friendlistbtn" prefHeight="31.0" prefWidth="144.0" text="Freinds List " AnchorPane.leftAnchor="78.0" />
-                <Button fx:id="addbalancebtn" layoutX="75.0" layoutY="697.0" mnemonicParsing="false" onAction="#addbalancefn" prefHeight="31.0" prefWidth="151.0" text="Add Balance" AnchorPane.leftAnchor="75.0" />
-                <Button fx:id="notificationbtn" layoutX="78.0" layoutY="758.0" mnemonicParsing="false" onAction="#notificationfn" prefHeight="31.0" prefWidth="128.0" text="Notification" AnchorPane.leftAnchor="78.0" />
-                <Button fx:id="logoutbtn" layoutX="93.0" layoutY="820.0" mnemonicParsing="false" onAction="#logoutfn" text="Log Out" AnchorPane.leftAnchor="93.0" />
             </children>
         </AnchorPane>
-        <TableView fx:id="wishlisttable" layoutX="597.0" layoutY="219.0" prefHeight="558.0" prefWidth="464.0">
+        
+
+        <TableView fx:id="wishlisttable" layoutX="367.0" layoutY="252.0" prefHeight="610.0" prefWidth="1034.0">
             <columns>
-                <TableColumn fx:id="ItemName" minWidth="116.0" prefWidth="75.0" text="ItemName" />
-                <TableColumn fx:id="PriceCol" minWidth="116.0" prefWidth="88.0" text="Price" />
-            <TableColumn fx:id="wishdateCol" minWidth="116.0" prefWidth="122.0" text="  Wish_Date" />
-            <TableColumn fx:id="LeftCol" minWidth="116.0" prefWidth="64.0" text="Collected" />
+                <TableColumn fx:id="itemNameColumn" prefWidth="236.7999267578125" text="Item Name" />
+                <TableColumn fx:id="priceColumn" prefWidth="214.39990234375" text="Price" />
+                <TableColumn fx:id="categoryColumn" prefWidth="284.00006103515625" text="Date" />
+            <TableColumn fx:id="categoryColumn1" prefWidth="368.800048828125" text="Collected" />
             </columns>
-            <columnResizePolicy>
-                
-            </columnResizePolicy>
         </TableView>
-        <Button fx:id="refreshbtn" layoutX="487.0" layoutY="835.0" mnemonicParsing="false" onAction="#refreshWish" text="Refresh" />
-        <Button fx:id="Deletebtn" layoutX="1137.0" layoutY="835.0" mnemonicParsing="false" onAction="#deleteWish" text="Delete" />
-      <Button fx:id="items" layoutX="801.0" layoutY="835.0" mnemonicParsing="false" onAction="#itemsBtn" text="items" />
+      <Label alignment="CENTER" layoutX="427.0" layoutY="111.0" prefHeight="83.0" prefWidth="921.0" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 56;" text="Wishlist Today, Reality Tomorrow!" textAlignment="RIGHT" />
+      <Button fx:id="refreshbtn" layoutX="519.0" layoutY="920.0" mnemonicParsing="false" onAction="#refreshWish" prefHeight="56.0" prefWidth="160.0" style="-fx-background-color: #3F418D; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-border-color: transparent; -fx-border-width: 2; -fx-background-radius: 25; -fx-background-radius: 25; -fx-font-size: 24; -fx-font-family: &quot;Arial&quot;;" text="Refresh" />
+      <Button fx:id="deletebtn" layoutX="1094.0" layoutY="920.0" mnemonicParsing="false" onAction="#deleteWish" prefHeight="56.0" prefWidth="160.0" style="-fx-background-color: #3F418D; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-border-color: transparent; -fx-border-width: 2; -fx-background-radius: 25; -fx-background-radius: 25; -fx-font-size: 24; -fx-font-family: &quot;Arial&quot;;" text="Delete" />
+      <Button fx:id="NotificatioList_btn" contentDisplay="CENTER" layoutX="75.0" layoutY="452.0" mnemonicParsing="false" onAction="#notificationfn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Notifications">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button contentDisplay="CENTER" layoutX="75.0" layoutY="532.0" mnemonicParsing="false" onAction="#refreshWish" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="WishList">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="addbalancebtn" contentDisplay="CENTER" layoutX="75.0" layoutY="612.0" mnemonicParsing="false" onAction="#addbalancefn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Add Balance">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="friendrequestbtn" contentDisplay="CENTER" layoutX="75.0" layoutY="692.0" mnemonicParsing="false" onAction="#friendrequestbtn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Add Friend">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="FriendList_btn" contentDisplay="CENTER" layoutX="75.0" layoutY="772.0" mnemonicParsing="false" onAction="#friendlistbtn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Friend List">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="logoutBtn" contentDisplay="CENTER" layoutX="75.0" layoutY="884.0" mnemonicParsing="false" onAction="#logoutfn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #F9EDED; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 24; -fx-background-radius: 25; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); padding: 10 20; -fx-border-width: 2;" text="Log out">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" layoutX="45.0" layoutY="112.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="82.0" prefWidth="234.0" style="-fx-text-fill: #F9EDED; -fx-font-weight: bold; -fx-font-size: 56;" text="i-Wish" textAlignment="RIGHT" />
+      <Button fx:id="items" layoutX="820.0" layoutY="920.0" mnemonicParsing="false" onAction="#itemsBtn" prefHeight="56.0" prefWidth="160.0" style="-fx-background-color: #3F418D; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-border-color: transparent; -fx-border-width: 2; -fx-background-radius: 25; -fx-background-radius: 25; -fx-font-size: 24; -fx-font-family: &quot;Arial&quot;;" text="New Item" />
+      <Label fx:id="username_lbl1" alignment="CENTER" layoutX="14.0" layoutY="312.0" prefHeight="51.0" prefWidth="313.0" style="-fx-text-fill: white; -fx-font-size: 35;" text="Username" />
+      <Label fx:id="balance_lbl1" alignment="CENTER" layoutX="14.0" layoutY="370.0" prefHeight="36.0" prefWidth="313.0" style="-fx-font-size: 25; -fx-text-fill: white;" text="Balance" />
     </children>
 </AnchorPane>

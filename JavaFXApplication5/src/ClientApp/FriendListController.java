@@ -50,19 +50,7 @@ public class FriendListController implements Initializable {
     UserInfo user;
     @FXML
     private Button FriendList_btn;
-    @FXML
-    private Button WishList_btn;
-    @FXML
-    private Button AddFriend_btn;
-    @FXML
-    private Button AddBalance_btn;
-    @FXML
-    private Button Notifications_btn;
-    @FXML
-    private Button Logout_btn;
-    @FXML
     private Label balance_lbl;
-    @FXML
     private Label username_lbl;
     @FXML
     private ListView<FriendInfo> friends_list;
@@ -93,6 +81,18 @@ public class FriendListController implements Initializable {
     private TextField searchlabel;
     @FXML
     private Button searchbtn;
+    @FXML
+    private Button NotificatioList_btn;
+    @FXML
+    private Button addbalancebtn;
+    @FXML
+    private Button friendrequestbtn;
+    @FXML
+    private Button logoutBtn;
+    @FXML
+    private Label username_lbl1;
+    @FXML
+    private Label balance_lbl1;
     
     
     
@@ -135,7 +135,6 @@ public class FriendListController implements Initializable {
         u.switchToFriendListScene(event, user);
     }
 
-    @FXML
     public void itemsBtn(ActionEvent event) throws IOException {
         u.switchToItemsScene(event, user);
 
@@ -501,8 +500,8 @@ public void setData(UserInfo user2) {
 }
 
     private void updateUI() {
-       username_lbl.setText(user.getUsername());
-       balance_lbl.setText(String.valueOf(user.getUser_balance()));
+       username_lbl1.setText(user.getUsername());
+       balance_lbl1.setText(String.valueOf(user.getUser_balance()));
         setupTableColumns();
         JSONObject data = new JSONObject();
         ServerAccess SA = new ServerAccess();

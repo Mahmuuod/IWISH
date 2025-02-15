@@ -23,6 +23,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -85,6 +86,7 @@ public class Utilities {
         controller.setData(loggedInUser);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle("WishList");
         stage.setScene(new Scene(root));
         stage.show();
     } catch (IOException e) {
@@ -101,6 +103,7 @@ public class Utilities {
         controller.setData(loggedInUser);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle("Notifications");
         stage.setScene(new Scene(root));
         stage.show();
     } catch (IOException e) {
@@ -117,6 +120,7 @@ public class Utilities {
         controller.setData(loggedInUser);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle("Item");
         stage.setScene(new Scene(root));
         stage.show();
     } catch (IOException e) {
@@ -133,6 +137,8 @@ public class Utilities {
         controller.setData(loggedInUser);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setTitle("Friendrequest");
+
         stage.setScene(new Scene(root));
         stage.show();
     } catch (IOException e) {
@@ -149,6 +155,8 @@ public class Utilities {
         controller.setData(loggedInUser);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        stage.setTitle("FriendList");
+
         stage.setScene(new Scene(root));
         stage.show();
     } catch (IOException e) {
@@ -165,6 +173,8 @@ public class Utilities {
         controller.setData(loggedInUser);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                stage.setTitle("ContributePopup");
+
         stage.setScene(new Scene(root));
         stage.show();
     } catch (IOException e) {
@@ -172,17 +182,20 @@ public class Utilities {
     }
 } 
           public  void switchToAddbalanceScene(ActionEvent event, UserInfo loggedInUser) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/Addbalance.fxml"));
-        Parent root = loader.load();
+    try {       
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/Addbalance.fxml"));
+    Parent root = loader.load();
 
-        // Pass user data to FriendrequestController
-        AddbalanceController controller =  loader.getController();
-        controller.setData(loggedInUser);
+    // Pass user data to AddbalanceController
+    AddbalanceController controller = loader.getController();
+    controller.setData(loggedInUser); // Set the data BEFORE showing the stage
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+    // Create and configure the stage
+    Stage stage = new Stage();
+    stage.setTitle("Addbalance");
+    stage.setScene(new Scene(root));
+    stage.initModality(Modality.APPLICATION_MODAL); // Ensure this window is modal
+    stage.showAndWait();
     } catch (IOException e) {
         e.printStackTrace();
     }
