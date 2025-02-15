@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F9EDED;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.SignUpController">
+   <children>
+      <Label layoutX="457.0" layoutY="112.0" prefHeight="55.0" prefWidth="434.0" text="Welcome to i-Wish" textFill="#3f418d">
+         <font>
+            <Font name="Arial Bold" size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="517.0" layoutY="196.0" style="-fx-font-size: 18; -fx-font-weight: bold;" text="Sign up to Make Wishes Come True" />
+      <Label layoutX="200.0" layoutY="270.0" text="First Name" textFill="#3f418d">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="firstNameField" layoutX="200.0" layoutY="300.0" prefHeight="50.0" prefWidth="450.0" />
+      <Label layoutX="710.0" layoutY="270.0" text="Last Name" textFill="#3f418d">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="lastNameField" layoutX="710.0" layoutY="300.0" prefHeight="50.0" prefWidth="450.0" />
+      <Label layoutX="200.0" layoutY="370.0" text="Username" textFill="#3f418d">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="usernameField" layoutX="200.0" layoutY="400.0" prefHeight="50.0" prefWidth="450.0" />
+      <Label layoutX="710.0" layoutY="370.0" text="Email" textFill="#3f418d">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="emailField" layoutX="710.0" layoutY="400.0" prefHeight="50.0" prefWidth="450.0" />
+      <Label layoutX="200.0" layoutY="470.0" text="Password" textFill="#3f418d">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="passwordField" layoutX="200.0" layoutY="500.0" prefHeight="50.0" prefWidth="450.0" />
+      <Label layoutX="710.0" layoutY="470.0" text="Confirm Password" textFill="#3f418d">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="confirmPasswordField" layoutX="710.0" layoutY="500.0" prefHeight="50.0" prefWidth="450.0" />
+      <Label layoutX="200.0" layoutY="570.0" text="Date of Birth" textFill="#3f418d">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="dobPicker" layoutX="200.0" layoutY="600.0" prefHeight="50.0" prefWidth="450.0" />
+      <Label layoutX="710.0" layoutY="570.0" text="Phone Number" textFill="#3f418d">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="phoneField" layoutX="710.0" layoutY="600.0" prefHeight="50.0" prefWidth="450.0" />
+      <Label layoutX="200.0" layoutY="670.0" text="Starting Balance" textFill="#3f418d">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="balanceField" layoutX="200.0" layoutY="700.0" prefHeight="50.0" prefWidth="450.0" />
+      <Label layoutX="710.0" layoutY="670.0" text="Card Number" textFill="#3f418d">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="CardNumberField" layoutX="710.0" layoutY="700.0" prefHeight="50.0" prefWidth="450.0" />
+      <Label alignment="BOTTOM_LEFT" contentDisplay="TOP" layoutX="538.0" layoutY="889.0" prefHeight="30.0" prefWidth="182.0" text="Already a Member?">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Hyperlink layoutX="718.0" layoutY="885.0" onAction="#handleSignInButtonAction" prefHeight="25.0" prefWidth="90.0" text="Log In">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Hyperlink>
+      <Button fx:id="SignUpBTN" layoutX="583.0" layoutY="798.0" onAction="#handleSignUpnButtonAction" prefHeight="53.0" prefWidth="166.0" style="-fx-font-size: 20; -fx-background-color: #3F418D; -fx-font-weight: bold; -fx-background-radius: 25px; -fx-border-radius: 25px; -fx-border-color: transparent; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-text-fill: white;" text="Sign Up" />
+   </children>
+</AnchorPane>
