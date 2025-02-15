@@ -173,6 +173,10 @@ public class AddbalanceController implements Initializable {
 
     private void updateUI() {
         balanceLabel.setText("Current Balance: $" + user.getUser_balance());
+        ObservableList<String> items = FXCollections.observableArrayList("Credit Card", "Phone Wallet");
+        PaymenChoice.setItems(items);
+        PaymenChoice.setValue("Credit Card");
+        
 
     }
 

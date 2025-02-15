@@ -458,6 +458,7 @@ public class FriendListController implements Initializable {
             wish.setCollected(wish.getCollected() + contributionAmount);
 
             // Refresh the table to reflect the updated state
+            user.setUser_balance((int) (user.getUser_balance()-(int)contributionAmount));
             friend_wishlist_table.refresh();
 
             // If the wish is fully funded, notify the server

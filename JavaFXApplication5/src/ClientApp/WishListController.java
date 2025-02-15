@@ -33,7 +33,8 @@ import org.json.JSONObject;
 import ClientApp.SignInController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import Utilities.Utilities;
+import javax.swing.JOptionPane;
 public class WishListController implements Initializable {
 Utilities u=new Utilities();
     ServerAccess SA = new ServerAccess();
@@ -81,7 +82,9 @@ Utilities u=new Utilities();
     public void deleteWish(ActionEvent event) throws IOException {
         WishInfo selectedWish = wishlisttable.getSelectionModel().getSelectedItem();
         if (selectedWish != null) {
-            JSONObject request = new JSONObject();
+            if(selectedWish.getItem_Price()!=selectedWish.getContribution_amount())
+            {
+                        JSONObject request = new JSONObject();
             request.put("header", "deletewish");
             request.put("wishid", selectedWish.getWish_id());
             request.put("userid", user.getUser_id());
@@ -89,8 +92,15 @@ Utilities u=new Utilities();
             SA.ServerInit();
             SA.ServerWrite(request);
             SA.ServerRead();
-            Utilities.ChangeScene("WishList.fxml", event);
+            u.switchToWishListScene(event, user);
             SA.ServerKill();
+            }
+            else
+            {
+  JOptionPane.showMessageDialog(null, "you cant delete completed wish", "Delete Wish Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+
         }
 
         //  request.put("Wish_id", selectedWish.getWishId());

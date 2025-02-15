@@ -140,10 +140,13 @@ public class DBA {
 
 
         PreparedStatement statement = con.prepareStatement(
-            "INSERT INTO FriendRequest (Request_id, Requester_id, Reciever_id, Status) VALUES (FriendRequest_seq.NEXTVAL, ?, ?, 'Pending')"
+            "INSERT INTO FriendRequest (Request_id, Requester_id, Reciever_id, Status) VALUES (?, ?, ?, 'Pending')"
         );
-        statement.setInt(1, requester_id);
-        statement.setInt(2, receiver_id);
+      
+            statement.setInt(1, getrequestMAXID());
+        
+        statement.setInt(2, requester_id);
+        statement.setInt(3, receiver_id);
         int us = statement.executeUpdate();
 
         if (us <= 0) {
@@ -442,7 +445,26 @@ public static boolean areFriends(int requester_id, int receiver_id) throws SQLEx
         }
         return User_id;
     }
+ public static int getrequestMAXID() throws SQLException {
+        int User_id = -1;
+        try {
+            /* this works as a sequence in database */
 
+            Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+            PreparedStatement statement = con.prepareStatement("select max(REQUEST_ID)+1 as REQUEST_ID from FRIENDREQUEST"); //edit
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                User_id = rs.getInt("REQUEST_ID");
+            }
+
+            statement.close();
+            con.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return User_id;
+    }
     public static int getWishMAXID() throws SQLException {
         int Wish_id = -1;
         try {
@@ -739,6 +761,8 @@ public static boolean areFriends(int requester_id, int receiver_id) throws SQLEx
         // Returns true if at least one row was deleted
         Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
         String query = "DELETE FROM FRIENDLIST WHERE (USER_ID = ? AND FRIEND_ID = ?) OR (USER_ID = ? AND FRIEND_ID = ?)";
+        String query2 = "DELETE FROM FriendRequest WHERE (REQUESTER_ID = ? AND RECIEVER_ID = ?) OR (RECIEVER_ID = ? AND REQUESTER_ID = ?)";
+
         PreparedStatement statement = con.prepareStatement(query);
         statement.setInt(1, user_id);
         statement.setInt(2, friend_id);
@@ -746,8 +770,15 @@ public static boolean areFriends(int requester_id, int receiver_id) throws SQLEx
         statement.setInt(4, user_id);
 
         int rowsAffected = statement.executeUpdate();
+        PreparedStatement statement2 = con.prepareStatement(query2);
+        statement2.setInt(1, user_id);
+        statement2.setInt(2, friend_id);
+        statement2.setInt(3, friend_id);
+        statement2.setInt(4, user_id);
 
+        int rowsAffected2 = statement2.executeUpdate();
         statement.close();
+        statement2.close();
         con.close();
 
         return rowsAffected > 0;
