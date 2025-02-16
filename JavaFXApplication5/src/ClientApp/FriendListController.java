@@ -228,7 +228,7 @@ public class FriendListController implements Initializable {
             friends_list.setOnMouseClicked(event -> {
                 if (friends_list.getSelectionModel().getSelectedItem() != null
                         && friends_list.getSelectionModel().getSelectedItem().getFriend_id() == -1) {
-                    Utilities.ChangeScene("Friendrequest.fxml", event);
+                    u.switchToFriendrequestScene(event, user);
                 }
             });
             return;

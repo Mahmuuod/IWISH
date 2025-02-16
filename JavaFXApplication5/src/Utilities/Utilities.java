@@ -32,20 +32,20 @@ import javafx.stage.Stage;
  */
 public class Utilities {
 
-    public static void ChangeScene(String url,ActionEvent event) {
+    public static void ChangeScene(String url, ActionEvent event) {
 
         Platform.runLater(new Runnable() {
-            
+
             @Override
             public void run() {
                 try {
 
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    
-                    Parent root = FXMLLoader.load(getClass().getResource("/ClientApp/"+url));
+
+                    Parent root = FXMLLoader.load(getClass().getResource("/ClientApp/" + url));
 
                     Scene scene = new Scene(root);
-                        
+
                     stage.setScene(scene);
                     stage.centerOnScreen();
                     stage.show();
@@ -55,7 +55,8 @@ public class Utilities {
             }
         });
     }
-       public static void ChangeScene(String url, MouseEvent event) {
+
+    public static void ChangeScene(String url, MouseEvent event) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -76,131 +77,156 @@ public class Utilities {
             }
         });
     }
-   public  void switchToWishListScene(ActionEvent event, UserInfo loggedInUser) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/WishList.fxml"));
-        Parent root = loader.load();
 
-        // Pass user data to FriendrequestController
-        WishListController controller =  loader.getController();
-        controller.setData(loggedInUser);
+    public void switchToWishListScene(ActionEvent event, UserInfo loggedInUser) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/WishList.fxml"));
+            Parent root = loader.load();
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setTitle("WishList");
-        stage.setScene(new Scene(root));
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
+            // Pass user data to FriendrequestController
+            WishListController controller = loader.getController();
+            controller.setData(loggedInUser);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("WishList");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
-     public  void switchToNotificationScene(ActionEvent event, UserInfo loggedInUser) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/Notifications.fxml"));
-        Parent root = loader.load();
 
-        // Pass user data to FriendrequestController
-        NotificationsController controller =  loader.getController();
-        controller.setData(loggedInUser);
+    public void switchToNotificationScene(ActionEvent event, UserInfo loggedInUser) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/Notifications.fxml"));
+            Parent root = loader.load();
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setTitle("Notifications");
-        stage.setScene(new Scene(root));
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
+            // Pass user data to FriendrequestController
+            NotificationsController controller = loader.getController();
+            controller.setData(loggedInUser);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("Notifications");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
-     public  void switchToItemsScene(ActionEvent event, UserInfo loggedInUser) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/Item.fxml"));
-        Parent root = loader.load();
 
-        // Pass user data to FriendrequestController
-        ItemController controller =  loader.getController();
-        controller.setData(loggedInUser);
+    public void switchToItemsScene(ActionEvent event, UserInfo loggedInUser) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/Item.fxml"));
+            Parent root = loader.load();
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setTitle("Item");
-        stage.setScene(new Scene(root));
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
+            // Pass user data to FriendrequestController
+            ItemController controller = loader.getController();
+            controller.setData(loggedInUser);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("Item");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-} 
-     public  void switchToFriendrequestScene(ActionEvent event, UserInfo loggedInUser) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/Friendrequest.fxml"));
-        Parent root = loader.load();
 
-        // Pass user data to FriendrequestController
-        FriendrequestController controller =  loader.getController();
-        controller.setData(loggedInUser);
+    public void switchToFriendrequestScene(ActionEvent event, UserInfo loggedInUser) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/Friendrequest.fxml"));
+            Parent root = loader.load();
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setTitle("Friendrequest");
+            // Pass user data to FriendrequestController
+            FriendrequestController controller = loader.getController();
+            controller.setData(loggedInUser);
 
-        stage.setScene(new Scene(root));
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("Friendrequest");
+
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
-          public  void switchToFriendListScene(ActionEvent event, UserInfo loggedInUser) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/FriendList.fxml"));
-        Parent root = loader.load();
 
-        // Pass user data to FriendrequestController
-        FriendListController controller =  loader.getController();
-        controller.setData(loggedInUser);
+    public void switchToFriendListScene(ActionEvent event, UserInfo loggedInUser) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/FriendList.fxml"));
+            Parent root = loader.load();
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        stage.setTitle("FriendList");
+            // Pass user data to FriendrequestController
+            FriendListController controller = loader.getController();
+            controller.setData(loggedInUser);
 
-        stage.setScene(new Scene(root));
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("FriendList");
+
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-} 
-          public  void switchToContributePopupScene(ActionEvent event, UserInfo loggedInUser) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/ContributePopup.fxml"));
-        Parent root = loader.load();
 
-        // Pass user data to FriendrequestController
-        ContributePopupController controller =  loader.getController();
-        controller.setData(loggedInUser);
+    public void switchToContributePopupScene(ActionEvent event, UserInfo loggedInUser) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/ContributePopup.fxml"));
+            Parent root = loader.load();
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                                stage.setTitle("ContributePopup");
+            // Pass user data to FriendrequestController
+            ContributePopupController controller = loader.getController();
+            controller.setData(loggedInUser);
 
-        stage.setScene(new Scene(root));
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("ContributePopup");
+
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-} 
-          public  void switchToAddbalanceScene(ActionEvent event, UserInfo loggedInUser) {
-    try {       
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/Addbalance.fxml"));
-    Parent root = loader.load();
 
-    // Pass user data to AddbalanceController
-    AddbalanceController controller = loader.getController();
-    controller.setData(loggedInUser); // Set the data BEFORE showing the stage
+    public void switchToAddbalanceScene(ActionEvent event, UserInfo loggedInUser) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/Addbalance.fxml"));
+            Parent root = loader.load();
 
-    // Create and configure the stage
-    Stage stage = new Stage();
-    stage.setTitle("Addbalance");
-    stage.setScene(new Scene(root));
-    stage.initModality(Modality.APPLICATION_MODAL); // Ensure this window is modal
-    stage.showAndWait();
-    } catch (IOException e) {
-        e.printStackTrace();
+            // Pass user data to AddbalanceController
+            AddbalanceController controller = loader.getController();
+            controller.setData(loggedInUser); // Set the data BEFORE showing the stage
+
+            // Create and configure the stage
+            Stage stage = new Stage();
+            stage.setTitle("Addbalance");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL); // Ensure this window is modal
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-} 
-        /*public static void ChangeScene(String url,ActionEvent event) {
+    public void switchToFriendrequestScene(MouseEvent event, UserInfo loggedInUser) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ClientApp/Friendrequest.fxml"));
+            Parent root = loader.load();
+
+            // Pass user data to FriendrequestController
+            FriendrequestController controller = loader.getController();
+            controller.setData(loggedInUser);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("Friendrequest");
+
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    /*public static void ChangeScene(String url,ActionEvent event) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
