@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F9EDED;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.ItemController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F9EDED;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.ItemController">
    <left>
       <AnchorPane prefHeight="1024.0" prefWidth="350.0" style="-fx-background-color: #3F418D;" BorderPane.alignment="CENTER">
          <children>
@@ -25,20 +25,20 @@
    <center>
       <AnchorPane fx:id="Item_id" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="searchlabel" layoutX="383.0" layoutY="191.0" prefHeight="31.0" prefWidth="293.0" promptText="Search by name or category." />
+            <TextField fx:id="searchlabel" layoutX="392.0" layoutY="191.0" prefHeight="31.0" prefWidth="293.0" promptText="Search by name or category." />
             <Button fx:id="searchbtn" defaultButton="true" layoutX="698.0" layoutY="191.0" mnemonicParsing="false" onAction="#handleSearchBtn" prefHeight="35.0" prefWidth="82.0" style="-fx-background-color: #3F418D; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-border-color: transparent; -fx-border-width: 2; -fx-border-radius: 25; -fx-background-radius: 25;" text="Search" />
-            <TableView fx:id="itemTable" layoutX="301.0" layoutY="292.0" prefHeight="558.0" prefWidth="659.0">
+            <TableView fx:id="itemTable" layoutX="164.0" layoutY="244.0" prefHeight="606.0" prefWidth="772.0">
                <columns>
                   <TableColumn fx:id="Name" minWidth="154.0" prefWidth="237.59988403320312" text="Name" />
-                  <TableColumn fx:id="Category" minWidth="154.0" prefWidth="206.4000244140625" text="Category" />
-                  <TableColumn fx:id="Price" minWidth="154.0" prefWidth="215.199951171875" text="Price" />
+                  <TableColumn fx:id="Category" minWidth="154.0" prefWidth="291.0" text="Category" />
+                  <TableColumn fx:id="Price" minWidth="132.0" prefWidth="242.0" text="Price" />
                </columns>
                <columnResizePolicy>
                
                </columnResizePolicy>
             </TableView>
-            <Button fx:id="RefreshBtn" layoutX="739.0" layoutY="888.0" mnemonicParsing="false" onAction="#handleItemsBtn" style="-fx-background-color: #3F418D; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-border-color: transparent; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-radius: 25; -fx-font-size: 24; -fx-font-family: &quot;Arial&quot;;" text="Refresh" />
-            <Button fx:id="AddItembtn1" layoutX="397.0" layoutY="888.0" mnemonicParsing="false" onAction="#addItemToWishList" style="-fx-background-color: #3F418D; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-border-color: transparent; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-radius: 25; -fx-font-size: 24; -fx-font-family: &quot;Arial&quot;;" text="Add Item" />
+            <Button fx:id="RefreshBtn" layoutX="676.0" layoutY="892.0" mnemonicParsing="false" onAction="#handleItemsBtn" style="-fx-background-color: #3F418D; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-border-color: transparent; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-radius: 25; -fx-font-size: 24; -fx-font-family: &quot;Arial&quot;;" text="Refresh" />
+            <Button fx:id="AddItembtn1" layoutX="310.0" layoutY="889.0" mnemonicParsing="false" onAction="#addItemToWishList" style="-fx-background-color: #3F418D; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); -fx-border-color: transparent; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-radius: 25; -fx-font-size: 24; -fx-font-family: &quot;Arial&quot;;" text="Add Item" />
          </children>
       </AnchorPane>
    </center>

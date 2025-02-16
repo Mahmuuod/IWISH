@@ -60,8 +60,6 @@ public class NotificationsController implements Initializable {
     private Label username_lbl1;
     @FXML
     private Label balance_lbl1;
-    @FXML
-    private TableColumn<?, ?> pendingNameColumn;
     private void contributionlistfn(ActionEvent event) {
         u.switchToContributePopupScene(event, user);
 

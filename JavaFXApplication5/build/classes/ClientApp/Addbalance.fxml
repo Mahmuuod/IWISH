@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane alignment="CENTER" hgap="20" style="-fx-background-color: #F9EDED; -fx-background-size: cover; -fx-padding: 30px; -fx-font-family: 'Arial';" vgap="20" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.AddbalanceController">
+<GridPane alignment="CENTER" hgap="20" style="-fx-background-color: #F9EDED; -fx-background-size: cover; -fx-padding: 30px; -fx-font-family: 'Arial';" stylesheets="@style.css" vgap="20" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.AddbalanceController">
 
     <!-- Main Section -->
     <VBox alignment="CENTER" spacing="20" style="-fx-border-color: transparent; -fx-background-color: #F9EDED; -fx-padding: 25px; -fx-border-radius: 15px; -fx-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);" GridPane.columnIndex="1">

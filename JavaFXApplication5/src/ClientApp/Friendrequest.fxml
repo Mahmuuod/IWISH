@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F9EDED;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.FriendrequestController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F9EDED;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.FriendrequestController">
     <left>
         <AnchorPane prefHeight="1024.0" prefWidth="320.0" style="-fx-background-color: #3F418D;" BorderPane.alignment="CENTER">
             <children>
@@ -43,7 +43,7 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Label alignment="CENTER" layoutX="31.0" layoutY="95.0" prefHeight="82.0" prefWidth="234.0" style="-fx-text-fill: #F9EDED; -fx-font-weight: bold; -fx-font-size: 56;" text="i-Wish" textAlignment="RIGHT" />
+            <Label alignment="CENTER" layoutX="48.0" layoutY="94.0" prefHeight="82.0" prefWidth="234.0" style="-fx-text-fill: #F9EDED; -fx-font-weight: bold; -fx-font-size: 56;" text="i-Wish" textAlignment="RIGHT" />
             <Label fx:id="username_lbl" alignment="CENTER" layoutX="4.0" layoutY="302.0" prefHeight="51.0" prefWidth="313.0" style="-fx-text-fill: white; -fx-font-size: 35;" text="Username" />
             <Label fx:id="balance_lbl" alignment="CENTER" layoutX="4.0" layoutY="360.0" prefHeight="36.0" prefWidth="313.0" style="-fx-font-size: 25; -fx-text-fill: white;" text="Balance" />
             </children>
@@ -54,9 +54,9 @@
             <children>
                 <TableView fx:id="addfriendtable" layoutX="57.0" layoutY="239.0" prefHeight="567.0" prefWidth="425.0">
                     <columns>
-                        <TableColumn fx:id="addfriendtableUsernameColumn" prefWidth="150.0" style="color: gray;" text="Username" />
-                        <TableColumn fx:id="addfriendtableEmailColumn" prefWidth="150.0" text="Email" />
-                  <TableColumn fx:id="addfriendtableBirthDateColumn" prefWidth="150.0" text="Birth Date" />
+                        <TableColumn fx:id="addfriendtableUsernameColumn" prefWidth="123.0" style="color: gray;" text="Username" />
+                        <TableColumn fx:id="addfriendtableEmailColumn" prefWidth="164.0" text="Email" />
+                  <TableColumn fx:id="addfriendtableBirthDateColumn" prefWidth="136.0" text="Birth Date" />
                     </columns>
                 </TableView>
 

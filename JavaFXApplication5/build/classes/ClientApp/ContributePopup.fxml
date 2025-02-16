@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="10" stylesheets="@ContributepopupStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.ContributePopupController">
+<VBox alignment="CENTER" spacing="10" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientApp.ContributePopupController">
     <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="Contribute to Wish" />
     <Label fx:id="wishNameLabel" style="-fx-font-size: 14;" text="Wish Name" />
     <Label fx:id="remainingAmountLabel" style="-fx-font-size: 14;" text="Remaining Amount: $0.00" />

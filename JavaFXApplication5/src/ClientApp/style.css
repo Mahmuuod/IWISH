@@ -1,0 +1,148 @@
+/* Style.css */
+
+/* Root and general settings */
+.root {
+    -fx-background-color: #F9EDED; /* Background color matching the FXML */
+    -fx-font-family: "Roboto";
+    
+}
+
+/* Sidebar styling */
+.anchor-pane {
+    -fx-background-color: #3F418D; /* Sidebar background color */
+}
+
+/* Button styling */
+.button {
+    -fx-background-color: #F9EDED; /* Button background color */
+    -fx-text-fill: black; /* Text color */
+    -fx-font-weight: bold;
+    
+    -fx-background-radius: 25px; /* Rounded corners */
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); /* Shadow effect */
+   
+    
+}
+
+/* Button hover effect */
+.button:hover {
+    -fx-background-color: #D1C4E9; /* Lighter shade on hover */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 3); /* Enhanced shadow on hover */
+}
+
+/* Button click effect */
+.button:pressed {
+    -fx-background-color: #B39DDB; /* Darker shade on click */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 12, 0.5, 0, 4); /* Stronger shadow on click */
+}
+
+/* Label styling */
+.label {
+    -fx-text-fill: #3F418D; /* Text color for labels in the sidebar */
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+/* ListView styling */
+.list-view {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    -fx-border-color: rgba(255, 255, 255, 0.3); /* Border color */
+    -fx-border-radius: 5px; /* Rounded corners */
+}
+
+/* ListView cell styling */
+.list-cell {
+    -fx-background-color: transparent; /* Transparent background for cells */
+    -fx-text-fill: black; /* Text color */
+    -fx-font-size: 16px;
+}
+
+/* ListView cell hover effect */
+.list-cell:hover {
+    -fx-background-color: #f2e6e6; /* Light background on hover */
+}
+
+/* ListView selected cell styling */
+.list-cell:selected {
+    -fx-background-color: #3F418D; /* Selected cell background color */
+    -fx-text-fill: white; /* Selected cell text color */
+}
+
+/* TableView styling */
+.table-view {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    -fx-border-color: rgba(255, 255, 255, 0.3); /* Border color */
+    -fx-border-radius: 5px; /* Rounded corners */
+}
+
+/* TableView column header styling */
+.table-view .column-header-background {
+    -fx-background-color: transparent; /* Header background color */
+    -fx-text-fill: white; /* Header text color */
+    -fx-font-weight: bold;
+    -fx-font-size: 16px; /* Maintain the current font size */
+}
+
+/* TableView cell styling */
+.table-row-cell {
+    -fx-background-color: transparent; /* Transparent background for cells */
+    -fx-text-fill: #3F418D; /* Text color */
+    
+}
+
+/* TableView cell hover effect */
+.table-row-cell:hover {
+    -fx-background-color: #f2e6e6; /* Light background on hover */
+}
+
+/* TableView selected cell styling */
+.table-row-cell:selected {
+    -fx-background-color: #3F418D; /* Selected cell background color */
+    -fx-text-fill: white; /* Selected cell text color */
+}
+
+/* TextArea styling */
+.text-area {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    -fx-border-color: rgba(255, 255, 255, 0.3); /* Border color */
+    -fx-text-fill: #3F418D; /* Text color */
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* TextArea focused styling */
+.text-area:focused {
+    -fx-border-color: #3F418D; /* Border color when focused */
+    -fx-text-fill: #3F418D;
+}
+
+/* TabPane styling */
+.tab-pane {
+    -fx-background-color: transparent; /* Transparent background */
+}
+
+/* Tab styling */
+.tab {
+    -fx-background-color: #3F418D; /* Tab background color */
+    -fx-text-fill: white; /* Tab text color */
+    -fx-font-weight: bold;
+    -fx-font-size: 16px; /* Maintain the current font size */
+}
+
+/* Selected tab styling */
+.tab:selected {
+    -fx-background-color: #F9EDED; /* Selected tab background color */
+    -fx-text-fill: black; /* Selected tab text color */
+}
+
+/* ImageView styling */
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 3); /* Shadow effect for images */
+}
+
+/* Resolution and frame size */
+.border-pane {
+    -fx-pref-width: 1440px; /* Desktop application width */
+    -fx-pref-height: 1024px; /* Desktop application height */
+}
