@@ -424,6 +424,20 @@ public static boolean areFriends(int requester_id, int receiver_id) throws SQLEx
         con.close();
         return User_id;
     }
+    public static int getItemCont(int wishid) throws SQLException {
+        int cont = -1;
+        Connection con = DriverManager.getConnection(connectionString, "iwish", "1234");
+        PreparedStatement statement = con.prepareStatement("select Contribution_amount from CONTRIBUTION where Wish_id=?"); //edit
+        statement.setInt(1, wishid);
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            cont = rs.getInt("Contribution_amount");
+        }
+
+        statement.close();
+        con.close();
+        return cont;
+    }
 
     public static int getUsersMAXID() throws SQLException {
         int User_id = -1;

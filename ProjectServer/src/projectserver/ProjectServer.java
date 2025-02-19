@@ -137,6 +137,13 @@ class HandleClients extends Thread {
                         case "add item":
                             req.insertWish(request);
                             break;
+                        case "delete wish":
+                            int contribution2= req.getWishCont(request);
+                            respond=new JSONObject();
+                            respond.put("header", "contribution");
+                            respond.put("amount",contribution2 );
+                            ps.println(respond.toString());
+                            break;
                         case "deletewish":
                             req.deleteWish(request);
                             ps.println("{header:deleted}");

@@ -144,18 +144,33 @@ boolean state=true;
         }
     
     }
-    public void deleteWish(JSONObject wish)
+    public int deleteWish(JSONObject wish)
     {
+        int contribution =-1;
         try {
             int wish_id=wish.getInt("wishid");
             int user_id=wish.getInt("userid");
+            contribution=DBA.getItemCont(wish_id);
             DBA.DeleteWish(wish_id,user_id);
         } catch (SQLException ex) {
             Logger.getLogger(HandleRequests.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return contribution;
     
     }
+    public int getWishCont(JSONObject wish)
+    {
+        int contribution =-1;
+        try {
+            int wish_id=wish.getInt("wishid");
+            int user_id=wish.getInt("userid");
+            contribution=DBA.getItemCont(wish_id);
+        } catch (SQLException ex) {
+            Logger.getLogger(HandleRequests.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return contribution;
     
+    }    
      public boolean checkEmail(String email)
     {
         boolean exists=false;

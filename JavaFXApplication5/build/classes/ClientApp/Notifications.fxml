@@ -54,8 +54,7 @@
             <TableView fx:id="notifi_table" layoutX="50.0" layoutY="187.0" prefHeight="747.0" prefWidth="1028.0">
                <columns>
                   <TableColumn fx:id="date_col" prefWidth="156.800048828125" text="Date" />
-                  <TableColumn fx:id="notifi_col" prefWidth="905.5999145507812" text="Notifications" />
-                  <TableColumn fx:id="pendingNameColumn" prefWidth="173.60004234313965" text="Name" />
+                  <TableColumn fx:id="notifi_col" prefWidth="869.0" text="Notifications" />
                </columns>
             </TableView>
             <Label alignment="CENTER" layoutX="-19.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="82.0" prefWidth="1132.0" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 45;" text="Whispers of Wishes: Your Notifications Await!" textAlignment="RIGHT" />

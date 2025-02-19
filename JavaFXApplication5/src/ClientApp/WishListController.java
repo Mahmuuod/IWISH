@@ -81,8 +81,17 @@ Utilities u=new Utilities();
     @FXML
     public void deleteWish(ActionEvent event) throws IOException {
         WishInfo selectedWish = wishlisttable.getSelectionModel().getSelectedItem();
+        JSONObject request2=new JSONObject();
+        request2.put("header", "delete wish");
+                    request2.put("wishid", selectedWish.getWish_id());
+            request2.put("userid", user.getUser_id());
+        SA.ServerInit();
+        SA.ServerWrite(request2);
+        JSONObject respond = SA.ServerRead();
+        int contribution=respond.getInt("amount");
+        
         if (selectedWish != null) {
-            if(selectedWish.getItem_Price()!=selectedWish.getContribution_amount())
+            if(selectedWish.getItem_Price()!=contribution)
             {
                         JSONObject request = new JSONObject();
             request.put("header", "deletewish");
