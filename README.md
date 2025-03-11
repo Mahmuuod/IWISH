@@ -22,6 +22,29 @@ IWish is a desktop application that allows users to add friends, create wishlist
   - Manage available wishlist items.
 - **Client Request Handling**: Process user actions and interactions.
 - **Gift Completion Handling**: Ensure proper notifications and transactions when wishlist items are fully funded.
+  
+## Architecture
+
+IWish application follows a **client-server architecture** with a structured interaction between the user interface and backend services. 
+Requests are send between clinet and server as Json messages using print stream. Json messages then recieved and converted to Json objects and processed as required.
+
+### **Client-Side (JavaFX GUI Application)**
+
+- The client interacts with the user through an intuitive **JavaFX-based graphical interface**.
+- Controllers handle user interactions and communicate with the server.
+- FXML files define the UI structure, and CSS is used for styling.
+
+### **Server-Side (Java Backend with Database Support)**
+
+- The **server (ProjectServer.java)** handles client connections and manages multi-user requests.
+- **HandleRequests.java** processes client requests and routes them to appropriate services.
+- **DBA.java** manages the database, executing queries for user authentication, wishlist management, and friend interactions.
+- **Utilities.java** provides helper functions for data processing and application logic.
+
+### **Database (Oracle Database)**
+
+- Stores user information, wishlists, friend relationships, and transactions.
+- Ensures data consistency and integrity with relational tables.
 
 ## Installation
 ### Prerequisites
@@ -36,21 +59,46 @@ IWish is a desktop application that allows users to add friends, create wishlist
 4. Launch the client application.
 
 ## File Structure
+### Server-side Files
+
 - `DBA.java`: Handles database interactions.
 - `HandleRequests.java`: Processes client requests.
 - `ProjectServer.java`: Manages server operations and client connections.
 - `Utilities.java`: Provides helper functions.
-- **Client files**: (To be documented)
+- #### Database Access Layer:
+  `FriendInfo.java`, `FriendWishInfo.java`, `ItemDTO.java`, `ItemsInfo.java`, `NotificationInfo.java`, `ServerAccess.java`, `UserInfo.java`, `Utilities.java`, `WishInfo.java`
+  
+### Client-side Files
 
+- **FXML Files (UI Layouts)**:
+    
+    - `SignIn.fxml`, `SignUp.fxml`: Login and registration screens.
+    - `FriendList.fxml`, `Friendrequest.fxml`: Friend management screens.
+    - `WishList.fxml`, `Item.fxml`: Wishlist and item-related UI.
+    - `Addbalance.fxml`, `ContributePopup.fxml`: Contribution and balance-related screens.
+    - `Notifications.fxml`: Notification UI.
+- **Controller Files (Logic Handling)**:
+    
+    - `SignInController.java`, `SignUpController.java`: Handles authentication.
+    - `FriendListController.java`, `FriendrequestController.java`: Manages friend-related actions.
+    - `WishListController.java`, `ItemController.java`: Handles wishlist operations.
+    - `AddbalanceController.java`, `ContributePopupController.java`: Handles balance and contributions.
+    - `NotificationsController.java`: Manages notifications.
+-- **Data Transfer Objects (DTOs) & Other Files**:
+    
+    - `FriendInfo.java`, `FriendWishInfo.java`, `ItemDTO.java`, `ItemsInfo.java`, `NotificationInfo.java`, `ServerAccess.java`, `UserInfo.java`, `Utilities.java`, `WishInfo.java`
+    - `ProjectClient.java`: Main client application entry point.
+    - `style.css`: UI styling.
+ 
 ## Future Work
-- Ingest items by web scraping.
+- Ingest items in databaase using web scraping.
 - Improve UI and user experience.
 
 ## Contributors
-- Mahmoud Osama
-- Mohamed Hazem Sakr
-- Randa Yasser Yousif
-- Rodina Ashraf
+- [Mahmoud Osama](https://github.com/Mahmuuod)
+- [Mohamed Hazem Sakr](https://github.com/mohamedsakr9)
+- [Randa Yasser](https://github.com/RandaYasser)
+- [Rodina Ashraf]()
 
 ## License
 This project is licensed under the MIT License.
