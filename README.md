@@ -26,7 +26,7 @@ IWish is a desktop application that allows users to add friends, create wishlist
 ## Architecture
 
 IWish application follows a **client-server architecture** with a structured interaction between the user interface and backend services. 
-Requests are send between clinet and server as Json messages using print stream. Json messages then recieved and converted to Json objects and processed as required.
+Requests are send between clinet and server as Json messages using print stream. Json messages then recieved and converted to Json objects and processed as required. We Utilise Thread Features To Increase our app performance and to avoid any hang out for UI during Sending And Requesting Data from the server, we handle these Threads and server requests in a spererated layer to simplify the code.
 
 ### **Client-Side (JavaFX GUI Application)**
 
